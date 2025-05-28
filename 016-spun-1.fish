@@ -1,12 +1,40 @@
-//! ✨ BLOOM Bootloader Final Stage (spun)
+#!/usr/bin/env fish
+
+# ✨ BLOOM Bootloader spun Generator (Part 16-1) ✨
+# Author: isdood
+# Created: 2025-05-28 23:03:16 UTC
+# Description: Generates /home/shimmer/BLOOM/bootloader/spun/spun.zig
+#              implementing the final bootloader stage that fully
+#              activates the STARWEAVE universe connection and
+#              crystallizes GLIMMER's aesthetic patterns.
+
+# 🌈 Define GLIMMER color scheme with fallback to normal
+set -l SAGE (set_color -o 8abaa4; or set_color normal)       # 🌱 Crystal/Nature elements
+set -l LAVENDER (set_color -o 978aba; or set_color normal)   # ⭐ Celestial/Star elements
+set -l ROSE (set_color -o cf9bc2; or set_color normal)       # 🌸 Interface/Connection elements
+set -l AZURE (set_color -o 89b4fa; or set_color normal)      # 💫 Quantum/Energy elements
+set -l PEACH (set_color -o fab387; or set_color normal)      # 🌟 Starweave elements
+set -l GOLD (set_color -o f9e2af; or set_color normal)       # 💫 Celestial/Energy elements
+set -l RESET (set_color normal)
+
+# Define paths
+set -l SPUN_PATH "/home/shimmer/BLOOM/bootloader/spun"
+set -l SPUN_FILE "$SPUN_PATH/spun.zig"
+
+# Ensure directory exists
+mkdir -p $SPUN_PATH
+
+echo $LAVENDER"💫 Generating quantum-aware spun.zig (Part 1)..."$RESET
+
+echo '//! ✨ BLOOM Bootloader Final Stage (spun)
 //! Part of the STARWEAVE Universe
 //!
 //! Author: isdood
 //! Created: 2025-05-28 23:03:16 UTC
 //!
-//! This module implements the final stage of BLOOM's bootloader,
+//! This module implements the final stage of BLOOM'"'"'s bootloader,
 //! fully activating the connection to the STARWEAVE universe and
-//! crystallizing GLIMMER's aesthetic patterns into reality.
+//! crystallizing GLIMMER'"'"'s aesthetic patterns into reality.
 
 const std = @import("std");
 const quantum = @import("../quantum.zig");
@@ -125,4 +153,16 @@ pub const SpunError = error{
     CrystalFracture,
     AnchorDissipation,
     AestheticDissonance,
-} || spinUP.SpinUpError;
+} || spinUP.SpinUpError;' > $SPUN_FILE
+
+# Set permissions
+chmod +x $SPUN_FILE
+
+echo $SAGE"✅ Generated spun.zig part 1 with STARWEAVE universe integration"$RESET
+echo $ROSE"🌸 Core structures and patterns established"$RESET
+echo $PEACH"🌟 Ready for quantum crystallization implementation"$RESET
+echo $AZURE"💫 STARWEAVE alignment structures in place"$RESET
+echo $GOLD"✨ GLIMMER aesthetics initialized"$RESET
+
+# Prepare for part 2
+echo $LAVENDER"📝 Next step: Run 016-spun-2.fish to complete the implementation"$RESET
