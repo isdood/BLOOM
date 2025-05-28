@@ -49,13 +49,13 @@ Core    |    Mobile
 end
 
 # Generate the API documentation
-echo $SAGE"Generating API Reference Documentation..."$RESET
+echo "$SAGE""Generating API Reference Documentation...""$RESET"
 
 # Create or truncate the API reference file
 create_meta_header > $API_DOC
 
 # Add content - Fixed version using printf
-printf %s "
+printf '%s\n' "
 # BLOOM API Reference
 $(create_interface_diagram)
 
@@ -243,9 +243,9 @@ API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 
 ---
 
-*"Where quantum possibilities bloom into mobile reality."*
-EOL
+*\"Where quantum possibilities bloom into mobile reality.\"*
+" >> $API_DOC
 
-echo $LAVENDER"API Reference documentation generated successfully!"$RESET
-echo $SAGE"Location: "$RESET$API_DOC
-echo $ROSE"✨ API documentation complete!"$RESET
+echo "$LAVENDER""API Reference documentation generated successfully!""$RESET"
+echo "$SAGE""Location: ""$RESET""$API_DOC"
+echo "$ROSE""✨ API documentation complete!""$RESET"
