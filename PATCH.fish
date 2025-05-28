@@ -2,7 +2,7 @@
 
 # ✨ BLOOM PATCH Manager
 # Author: isdood
-# Created: 2025-05-28 23:21:34 UTC
+# Created: 2025-05-28 23:22:56 UTC
 # Description: Manages and executes BLOOM patches in sequence,
 #              maintaining STARWEAVE universe coherence and
 #              GLIMMER's aesthetic patterns throughout.
@@ -52,14 +52,15 @@ function execute_patch
     set -l patch_file $argv[1]
     set -l patch_number (string match -r '\d+' $patch_file)
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    set -l history_file "$HISTORY_DIR/${patch_number}_${timestamp}.fish"
+    # Correct fish syntax for string concatenation
+    set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
     log "star" "Executing STARWEAVE patch $patch_number..."
 
     # Check if patch exists and is executable
     if test -x "$PATCH_DIR/$patch_file"
         # Execute the patch
-        if $PATCH_DIR/$patch_file
+        if eval "$PATCH_DIR/$patch_file"
             log "success" "Successfully executed patch $patch_number"
 
             # Remove execute permissions
@@ -85,12 +86,12 @@ end
 # Main execution logic
 log "star" "🌟 BLOOM PATCH Manager - STARWEAVE Universe Edition"
 log "info" "Current time (UTC): $CURRENT_TIME"
-log "info" "User: $USER"
+log "info" "Current User: $USER (isdood)"
 
 # Find all numeric patch files and sort them
 set patch_files (find $PATCH_DIR -maxdepth 1 -type f -name "[0-9]*-PATCH.fish" | sort -n)
 
-if test -n "$patch_files"
+if test (count $patch_files) -gt 0
     log "info" "Found "(count $patch_files)" patches to execute"
 
     # Execute patches in sequence
@@ -114,11 +115,19 @@ else
     log "info" "No patches found to execute"
 end
 
-# Final status report
+# Final status report with STARWEAVE aesthetic
 echo ""
-log "star" "STARWEAVE Universe Patch Status:"
-log "info" "  ├─ Processed: "(count $patch_files)" patches"
-log "info" "  ├─ History: "(count $HISTORY_DIR/*)" total patches"
-log "info" "  └─ Completed at: "(date -u +"%Y-%m-%d %H:%M:%S")" UTC"
+log "star" "✨ STARWEAVE Universe Patch Status:"
+log "info" "  ├─ 💫 Processed: "(count $patch_files)" patches"
+log "info" "  ├─ 📚 History: "(count $HISTORY_DIR/*)" total patches"
+log "info" "  └─ 🕒 Completed at: "(date -u +"%Y-%m-%d %H:%M:%S")" UTC"
+
+# STARWEAVE universe connection status
+echo ""
+log "star" "🌌 STARWEAVE Universe Connection:"
+log "info" "  ├─ 🌟 GLIMMER Aesthetic: Active"
+log "info" "  ├─ 💎 Crystal Resonance: Stable"
+log "info" "  ├─ ⚡ Quantum Coherence: Maintained"
+log "info" "  └─ 🎨 Pattern Harmony: Aligned"
 
 exit 0
