@@ -2,13 +2,15 @@
 
 # BLOOM API Documentation Generator
 # Author: isdood
-# Created: 2025-05-28 19:18:38 UTC
+# Created: 2025-05-28 20:30:02 UTC
 # Description: Generates comprehensive API documentation for the BLOOM project
 
 # GLIMMER-inspired color scheme
-set -l SAGE (set_color '#8abaa4')      # Crystal computing elements
-set -l LAVENDER (set_color '#978aba')   # Quantum computing elements
-set -l ROSE (set_color '#cf9bc2')       # Mobile/UI elements
+set -l SAGE (set_color '#8abaa4')       # Crystal/Nature elements
+set -l LAVENDER (set_color '#978aba')   # Celestial/Star elements
+set -l ROSE (set_color '#cf9bc2')       # Interface/Connection elements
+set -l AZURE (set_color '#7ba4c7')      # Tech/System elements
+set -l GOLD (set_color '#dbb168')       # Accents/Highlights
 set -l RESET (set_color normal)
 
 # API Reference file location
@@ -17,7 +19,7 @@ set -l API_DOC "/home/shimmer/BLOOM/docs/api/REFERENCE.md"
 # Create metadata header
 function create_meta_header
     set -l timestamp (date -u "+%Y-%m-%d %H:%M:%S")
-    echo "<!--
+    printf "%s" "<!--
 BLOOM Pattern:
 {
   \"metadata\": {
@@ -32,7 +34,7 @@ end
 
 # Function to create ASCII diagrams
 function create_interface_diagram
-    echo '```ascii
+    printf "%s" '```ascii
         ⟡ Quantum API Layer
        /|\
       / | \    ⟡ Crystal Interface
@@ -49,13 +51,13 @@ Core    |    Mobile
 end
 
 # Generate the API documentation
-echo "$SAGE""Generating API Reference Documentation...""$RESET"
+printf "%s%s%s\n" $LAVENDER "Generating API Reference Documentation..." $RESET
 
 # Create or truncate the API reference file
 create_meta_header > $API_DOC
 
 # Add content - Fixed version using printf
-printf '%s\n' "
+printf "%s" "
 # BLOOM API Reference
 $(create_interface_diagram)
 
@@ -246,6 +248,6 @@ API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 *\"Where quantum possibilities bloom into mobile reality.\"*
 " >> $API_DOC
 
-echo "$LAVENDER""API Reference documentation generated successfully!""$RESET"
-echo "$SAGE""Location: ""$RESET""$API_DOC"
-echo "$ROSE""✨ API documentation complete!""$RESET"
+printf "%s%s%s\n" $AZURE "API Reference documentation generated successfully!" $RESET
+printf "%s%s%s%s\n" $SAGE "Location: " $RESET $API_DOC
+printf "%s%s%s\n" $GOLD "✨ API documentation complete!" $RESET
