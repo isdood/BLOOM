@@ -9,7 +9,7 @@
 set -euo pipefail
 
 echo "Creating patch directories..."
-mkdir -p .PATCHES/HISTORY
+mkdir -p .PATCH/HISTORY
 
 echo "Checking for Arch Linux dependencies..."
 sudo pacman -S --needed --noconfirm fish zig
