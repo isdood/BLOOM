@@ -57,13 +57,18 @@ function execute_patch
 
     log "star" "Executing STARWEAVE patch $patch_number..."
 
-    # Check if patch exists and is executable
-    if test -x "$PATCH_DIR/$patch_file"
+    # Check if patch exists
+    if test -f "$PATCH_DIR/$patch_file"
+        # Make the patch executable
+        log "info" "🔓 Granting execute permissions to patch $patch_number"
+        chmod +x "$PATCH_DIR/$patch_file"
+
         # Execute the patch
         if eval "$PATCH_DIR/$patch_file"
             log "success" "Successfully executed patch $patch_number"
 
             # Remove execute permissions
+            log "info" "🔒 Revoking execute permissions from patch $patch_number"
             chmod -x "$PATCH_DIR/$patch_file"
 
             # Move to history with timestamp
@@ -74,11 +79,13 @@ function execute_patch
 
             log "info" "Patch $patch_number archived to HISTORY"
         else
+            # Remove execute permissions on failure
+            chmod -x "$PATCH_DIR/$patch_file"
             log "error" "Failed to execute patch $patch_number"
             return 1
         end
     else
-        log "error" "Patch $patch_file not found or not executable"
+        log "error" "Patch $patch_file not found"
         return 1
     end
 end
