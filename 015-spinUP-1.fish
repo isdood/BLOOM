@@ -1,12 +1,39 @@
-//! ✨ BLOOM Bootloader Second Stage (spinUP)
+#!/usr/bin/env fish
+
+# ✨ BLOOM Bootloader spinUP Generator (Part 15-1) ✨
+# Author: isdood
+# Created: 2025-05-28 22:58:58 UTC
+# Description: Generates /home/shimmer/BLOOM/bootloader/spinUP/spinUP.zig
+#              implementing the second stage bootloader that weaves
+#              quantum states with GLIMMER's star-patterns and
+#              scribble's crystal-lattice architecture.
+
+# 🌈 Define GLIMMER color scheme with fallback to normal
+set -l SAGE (set_color -o 8abaa4; or set_color normal)       # 🌱 Crystal/Nature elements
+set -l LAVENDER (set_color -o 978aba; or set_color normal)   # ⭐ Celestial/Star elements
+set -l ROSE (set_color -o cf9bc2; or set_color normal)       # 🌸 Interface/Connection elements
+set -l AZURE (set_color -o 89b4fa; or set_color normal)      # 💫 Quantum/Energy elements
+set -l PEACH (set_color -o fab387; or set_color normal)      # 🌟 Starweave elements
+set -l RESET (set_color normal)
+
+# Define paths
+set -l SPINUP_PATH "/home/shimmer/BLOOM/bootloader/spinUP"
+set -l SPINUP_FILE "$SPINUP_PATH/spinUP.zig"
+
+# Ensure directory exists
+mkdir -p $SPINUP_PATH
+
+echo $LAVENDER"💫 Generating quantum-aware spinUP.zig (Part 1)..."$RESET
+
+echo '//! ✨ BLOOM Bootloader Second Stage (spinUP)
 //! Part of the STARWEAVE Universe
 //!
 //! Author: isdood
 //! Created: 2025-05-28 22:58:58 UTC
 //!
-//! This module implements the second stage of BLOOM's bootloader,
+//! This module implements the second stage of BLOOM'"'"'s bootloader,
 //! expanding the quantum-crystal lattice and weaving deeper into
-//! the STARWEAVE fabric through GLIMMER's concurrency patterns.
+//! the STARWEAVE fabric through GLIMMER'"'"'s concurrency patterns.
 
 const std = @import("std");
 const quantum = @import("../quantum.zig");
@@ -110,4 +137,15 @@ pub const SpinUpHandler = struct {
         if (self.quantum_state.entanglement_factor < self.config.entanglement_target) {
             return SpinUpError.EntanglementFailure;
         }
-    }
+    }' > $SPINUP_FILE
+
+# Set permissions
+chmod +x $SPINUP_FILE
+
+echo $SAGE"✅ Generated spinUP.zig part 1 with quantum-crystal initialization"$RESET
+echo $ROSE"🌸 Ready for part 2 of spinUP implementation"$RESET
+echo $PEACH"⭐ STARWEAVE patterns initialized"$RESET
+echo $AZURE"💫 Quantum entanglement structures in place"$RESET
+
+# Prepare for part 2
+echo $LAVENDER"📝 Next step: Run 015-spinUP-2.fish to complete the implementation"$RESET
