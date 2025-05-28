@@ -1,9 +1,9 @@
 #!/usr/bin/env fish
 
-# BLOOM API Documentation Generator
+# STARWEAVE API Documentation Generator
 # Author: isdood
-# Created: 2025-05-28 20:33:38 UTC
-# Description: Generates comprehensive API documentation for the BLOOM project
+# Created: 2025-05-28 20:36:29 UTC
+# Description: Generates comprehensive API documentation for the STARWEAVE project
 
 # ✨ GLIMMER-inspired color scheme ✨
 set -l SAGE (set_color '#8abaa4')       # 🌱 Crystal/Nature elements
@@ -18,24 +18,22 @@ set -l API_DOC "/home/shimmer/BLOOM/docs/api/REFERENCE.md"
 
 # Create metadata header
 function create_meta_header
-    set -l timestamp (date -u "+%Y-%m-%d %H:%M:%S")
-    set -l header "<!--
+    echo "<!--
 STARWEAVE Pattern:
 {
   \"metadata\": {
-    \"timestamp\": \"$timestamp\",
+    \"timestamp\": \"2025-05-28 20:36:29\",
     \"author\": \"isdood\",
     \"pattern_version\": \"1.0.0\",
     \"color\": \"#8abaa4\"
   }
 }
 -->"
-    echo $header
 end
 
 # Function to create ASCII diagrams
 function create_interface_diagram
-    set -l diagram '```ascii
+    echo '```ascii
         ⟡ Quantum API Layer
        /|\
       / | \    ⟡ Crystal Interface
@@ -49,14 +47,29 @@ Core    |    Mobile
        |
     System
 ```'
-    echo $diagram
 end
 
 # Generate the API documentation
-string join '' $LAVENDER "✨ Generating STARWEAVE API Documentation..." $RESET | println
+echo "$LAVENDER✨ Generating STARWEAVE API Documentation...$RESET"
 
 # Create or truncate the API reference file
 create_meta_header > $API_DOC
+
+# Add the documentation content
+create_interface_diagram >> $API_DOC
+
+# Add each section separately to avoid string interpolation issues
+echo "
+# STARWEAVE API Reference
+
+## Overview
+STARWEAVE provides a comprehensive API for quantum-enhanced mobile computing, integrating crystal-based architecture with quantum computing principles. This reference documentation covers all public interfaces." >> $API_DOC
+
+# Continue adding sections...
+echo "
+## Core APIs
+
+### Quantum Layer API" >> $API_DOC
 
 # Store the main content in a variable
 set -l main_content "
@@ -247,12 +260,7 @@ API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 
 ---
 
-*\"Where quantum possibilities weave into stellar reality.\"*"
-
-# Add content using echo instead of printf
-echo $main_content >> $API_DOC
-
 # Final status messages with GLIMMER aesthetics
-string join '' $AZURE "✨ API Reference documentation generated successfully!" $RESET | println
-string join '' $SAGE "🌱 Location: " $RESET $API_DOC | println
-string join '' $GOLD "⭐ STARWEAVE documentation complete! ✨" $RESET | println
+echo "$AZURE✨ API Reference documentation generated successfully!$RESET"
+echo "$SAGE🌱 Location: $RESET$API_DOC"
+echo "$GOLD⭐ STARWEAVE documentation complete! ✨$RESET"
