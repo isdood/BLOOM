@@ -1,11 +1,11 @@
 #!/usr/bin/env fish
 
-# STARWEAVE API Documentation Generator
+# ✨ STARWEAVE API Documentation Generator ✨
 # Author: isdood
-# Created: 2025-05-28 20:36:29 UTC
+# Created: 2025-05-28 20:40:25 UTC
 # Description: Generates comprehensive API documentation for the STARWEAVE project
 
-# ✨ GLIMMER-inspired color scheme ✨
+# 🌈 GLIMMER-inspired color scheme
 set -l SAGE (set_color '#8abaa4')       # 🌱 Crystal/Nature elements
 set -l LAVENDER (set_color '#978aba')   # ⭐ Celestial/Star elements
 set -l ROSE (set_color '#cf9bc2')       # 🌸 Interface/Connection elements
@@ -13,22 +13,23 @@ set -l AZURE (set_color '#7ba4c7')      # 💫 Tech/System elements
 set -l GOLD (set_color '#dbb168')       # ✨ Accents/Highlights
 set -l RESET (set_color normal)
 
-# API Reference file location
+# 📝 API Reference file location
 set -l API_DOC "/home/shimmer/BLOOM/docs/api/REFERENCE.md"
 
 # Create metadata header
 function create_meta_header
-    echo "<!--
+    echo '<!--
 STARWEAVE Pattern:
 {
-  \"metadata\": {
-    \"timestamp\": \"2025-05-28 20:36:29\",
-    \"author\": \"isdood\",
-    \"pattern_version\": \"1.0.0\",
-    \"color\": \"#8abaa4\"
+  "metadata": {
+    "timestamp": "2025-05-28 20:40:25",
+    "author": "isdood",
+    "pattern_version": "1.0.0",
+    "color_scheme": "GLIMMER",
+    "primary_color": "#8abaa4"
   }
 }
--->"
+-->'
 end
 
 # Function to create ASCII diagrams
@@ -49,27 +50,34 @@ Core    |    Mobile
 ```'
 end
 
-# Generate the API documentation
-echo "$LAVENDER✨ Generating STARWEAVE API Documentation...$RESET"
+# Start documentation generation with GLIMMER aesthetics
+echo $LAVENDER"✨ Generating STARWEAVE API Documentation..."$RESET
 
-# Create or truncate the API reference file
+# Initialize the API reference file
 create_meta_header > $API_DOC
 
-# Add the documentation content
-create_interface_diagram >> $API_DOC
-
-# Add each section separately to avoid string interpolation issues
+# Add documentation sections
 echo "
-# STARWEAVE API Reference
+# ✨ STARWEAVE API Reference
 
-## Overview
-STARWEAVE provides a comprehensive API for quantum-enhanced mobile computing, integrating crystal-based architecture with quantum computing principles. This reference documentation covers all public interfaces." >> $API_DOC
+$(create_interface_diagram)
 
-# Continue adding sections...
+## 🌟 Overview
+STARWEAVE provides a comprehensive API for quantum-enhanced mobile computing, integrating crystal-based architecture with quantum computing principles." >> $API_DOC
+
+# Continue with core documentation sections
 echo "
-## Core APIs
+## 💫 Core APIs
 
-### Quantum Layer API" >> $API_DOC
+### ⚡ Quantum Layer API
+\`\`\`zig
+pub const QuantumInterface = struct {
+    // Quantum State Management
+    pub fn initQuantumState() !void {}
+    pub fn entangle(node: *QuantumNode) !void {}
+    pub fn measureCoherence() f64 {}
+};
+\`\`\`" >> $API_DOC
 
 # Store the main content in a variable
 set -l main_content "
@@ -260,7 +268,7 @@ API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 
 ---
 
-# Final status messages with GLIMMER aesthetics
-echo "$AZURE✨ API Reference documentation generated successfully!$RESET"
-echo "$SAGE🌱 Location: $RESET$API_DOC"
-echo "$GOLD⭐ STARWEAVE documentation complete! ✨$RESET"
+# Final success messages with GLIMMER colors
+echo $AZURE"✨ API Reference documentation generated successfully!"$RESET
+echo $SAGE"🌱 Location: "$RESET$API_DOC
+echo $GOLD"⭐ STARWEAVE documentation complete!"$RESET
