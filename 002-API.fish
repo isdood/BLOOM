@@ -54,14 +54,13 @@ echo $SAGE"Generating API Reference Documentation..."$RESET
 # Create or truncate the API reference file
 create_meta_header > $API_DOC
 
-# Add content
-cat >> $API_DOC << EOL
-
+# Add content - Fixed version using printf
+printf %s "
 # BLOOM API Reference
 $(create_interface_diagram)
 
 ## Overview
-BLOOM provides a comprehensive API for quantum-enhanced mobile computing, integrating crystal-based architecture with quantum computing principles. This reference documentation covers all public interfaces, their usage, and integration points.
+BLOOM provides a comprehensive API for quantum-enhanced mobile computing, integrating crystal-based architecture with quantum computing principles. This reference documentation covers all public interfaces.
 
 ## Core APIs
 
