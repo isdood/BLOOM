@@ -2,7 +2,7 @@
 
 # ✨ STARWEAVE API Documentation Generator ✨
 # Author: isdood
-# Created: 2025-05-28 20:43:28 UTC
+# Created: 2025-05-28 20:47:11 UTC
 # Description: Generates comprehensive API documentation for the STARWEAVE project
 
 # 🌈 GLIMMER-inspired color scheme
@@ -22,7 +22,7 @@ function create_meta_header
 STARWEAVE Pattern:
 {
   "metadata": {
-    "timestamp": "2025-05-28 20:43:28",
+    "timestamp": "2025-05-28 20:47:11",
     "author": "isdood",
     "pattern_version": "1.0.0",
     "color_scheme": "GLIMMER",
@@ -50,8 +50,12 @@ Core    |    Mobile
 ```'
 end
 
-# Start documentation generation with GLIMMER aesthetics
-echo "$LAVENDER✨ Generating STARWEAVE API Documentation...$RESET"
+# Start documentation generation
+begin
+    set_color $LAVENDER
+    echo "✨ Generating STARWEAVE API Documentation..."
+    set_color normal
+end
 
 # Initialize the API reference file
 create_meta_header > $API_DOC
@@ -64,6 +68,20 @@ $(create_interface_diagram)
 
 ## 🌟 Overview
 STARWEAVE provides a comprehensive API for quantum-enhanced mobile computing, integrating crystal-based architecture with quantum computing principles." >> $API_DOC
+
+# Continue with core documentation sections
+echo "
+## 💫 Core APIs
+
+### ⚡ Quantum Layer API
+\`\`\`zig
+pub const QuantumInterface = struct {
+    // Quantum State Management
+    pub fn initQuantumState() !void {}
+    pub fn entangle(node: *QuantumNode) !void {}
+    pub fn measureCoherence() f64 {}
+};
+\`\`\`" >> $API_DOC
 
 # Continue with core documentation sections
 echo "
@@ -266,9 +284,13 @@ For common issues and solutions, refer to the [Troubleshooting Guide](../trouble
 ### Updates
 API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 
----
-
-# Final success messages with GLIMMER colors - Fixed quoting
-echo "$AZURE✨ API Reference documentation generated successfully!$RESET"
-echo "$SAGE🌱 Location: $API_DOC$RESET"
-echo "$GOLD⭐ STARWEAVE documentation complete!$RESET"
+# Final success messages
+begin
+    set_color $AZURE
+    echo "✨ API Reference documentation generated successfully!"
+    set_color $SAGE
+    echo "🌱 Location: $API_DOC"
+    set_color $GOLD
+    echo "⭐ STARWEAVE documentation complete!"
+    set_color normal
+end
