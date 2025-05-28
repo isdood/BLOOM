@@ -4,7 +4,8 @@
 # Author: isdood
 # Created: 2025-05-28 23:05:00 UTC
 # Description: Populates /home/shimmer/BLOOM/docs/mobile/BLACKBERRY-PASSPORT.md
-#              with relevant device-specific info aligned with STARWEAVE + GLIMMER.
+#              with relevant device-specific info aligned with STARWEAVE + GLIMMER,
+#              fixing syntax issues for fish by appropriately escaping braces.
 
 # 🌈 Define GLIMMER color scheme with fallback to normal
 set -l SAGE (set_color -o 8abaa4; or set_color normal)       # 🌱 Crystal/Nature elements
@@ -54,17 +55,19 @@ echo '- **Crystal-Lattice GPU**: Adaptable usage of the device’s GPU pipeline 
 echo '' >> $BB_DOC
 echo '## Quantum Anchoring per Passport' >> $BB_DOC
 echo 'Each Passport device runs a localized quantum anchoring mechanism, ensuring minimal decoherence. When bridging with BLOOM’s OS layer, the synergy yields stable background tasks and a fluid user experience.' >> $BB_DOC
-echo '' >> $BB_DOC
-echo '```zig
-pub const PassportQuantumAnchor = struct {
-    anchor_id: u32,
-    anchor_power: f32,
-    pub fn stabilize() !void {
-        // Link the Passport's hardware ID to a quantum anchor
-        // Manage real-time concurrency constraints
-    }
-};
-```' >> $BB_DOC
+
+# Use double quotes and escape curly braces inside the Zig code snippet
+echo '```zig' >> $BB_DOC
+echo 'pub const PassportQuantumAnchor = struct \{' >> $BB_DOC
+echo '    anchor_id: u32,' >> $BB_DOC
+echo '    anchor_power: f32,' >> $BB_DOC
+echo '    pub fn stabilize() !void \{' >> $BB_DOC
+echo '        // Link the Passport'"'"'s hardware ID to a quantum anchor' >> $BB_DOC
+echo '        // Manage real-time concurrency constraints' >> $BB_DOC
+echo '    \}' >> $BB_DOC
+echo '\};' >> $BB_DOC
+echo '```' >> $BB_DOC
+
 echo '' >> $BB_DOC
 echo '## Recovery & Bootloader Ties' >> $BB_DOC
 echo '- **Bootloader**: Modified to load quantum anchor references and preserve certain Passport hardware states.' >> $BB_DOC
