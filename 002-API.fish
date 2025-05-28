@@ -2,7 +2,7 @@
 
 # ✨ STARWEAVE API Documentation Generator ✨
 # Author: isdood
-# Created: 2025-05-28 20:40:25 UTC
+# Created: 2025-05-28 20:43:28 UTC
 # Description: Generates comprehensive API documentation for the STARWEAVE project
 
 # 🌈 GLIMMER-inspired color scheme
@@ -22,7 +22,7 @@ function create_meta_header
 STARWEAVE Pattern:
 {
   "metadata": {
-    "timestamp": "2025-05-28 20:40:25",
+    "timestamp": "2025-05-28 20:43:28",
     "author": "isdood",
     "pattern_version": "1.0.0",
     "color_scheme": "GLIMMER",
@@ -51,7 +51,7 @@ Core    |    Mobile
 end
 
 # Start documentation generation with GLIMMER aesthetics
-echo $LAVENDER"✨ Generating STARWEAVE API Documentation..."$RESET
+echo "$LAVENDER✨ Generating STARWEAVE API Documentation...$RESET"
 
 # Initialize the API reference file
 create_meta_header > $API_DOC
@@ -268,7 +268,7 @@ API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 
 ---
 
-# Final success messages with GLIMMER colors
-echo $AZURE"✨ API Reference documentation generated successfully!"$RESET
-echo $SAGE"🌱 Location: "$RESET$API_DOC
-echo $GOLD"⭐ STARWEAVE documentation complete!"$RESET
+# Final success messages with GLIMMER colors - Fixed quoting
+echo "$AZURE✨ API Reference documentation generated successfully!$RESET"
+echo "$SAGE🌱 Location: $API_DOC$RESET"
+echo "$GOLD⭐ STARWEAVE documentation complete!$RESET"
