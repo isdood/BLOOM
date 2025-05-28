@@ -2,15 +2,15 @@
 
 # BLOOM API Documentation Generator
 # Author: isdood
-# Created: 2025-05-28 20:30:02 UTC
+# Created: 2025-05-28 20:33:38 UTC
 # Description: Generates comprehensive API documentation for the BLOOM project
 
-# GLIMMER-inspired color scheme
-set -l SAGE (set_color '#8abaa4')       # Crystal/Nature elements
-set -l LAVENDER (set_color '#978aba')   # Celestial/Star elements
-set -l ROSE (set_color '#cf9bc2')       # Interface/Connection elements
-set -l AZURE (set_color '#7ba4c7')      # Tech/System elements
-set -l GOLD (set_color '#dbb168')       # Accents/Highlights
+# ✨ GLIMMER-inspired color scheme ✨
+set -l SAGE (set_color '#8abaa4')       # 🌱 Crystal/Nature elements
+set -l LAVENDER (set_color '#978aba')   # ⭐ Celestial/Star elements
+set -l ROSE (set_color '#cf9bc2')       # 🌸 Interface/Connection elements
+set -l AZURE (set_color '#7ba4c7')      # 💫 Tech/System elements
+set -l GOLD (set_color '#dbb168')       # ✨ Accents/Highlights
 set -l RESET (set_color normal)
 
 # API Reference file location
@@ -19,8 +19,8 @@ set -l API_DOC "/home/shimmer/BLOOM/docs/api/REFERENCE.md"
 # Create metadata header
 function create_meta_header
     set -l timestamp (date -u "+%Y-%m-%d %H:%M:%S")
-    printf "%s" "<!--
-BLOOM Pattern:
+    set -l header "<!--
+STARWEAVE Pattern:
 {
   \"metadata\": {
     \"timestamp\": \"$timestamp\",
@@ -30,11 +30,12 @@ BLOOM Pattern:
   }
 }
 -->"
+    echo $header
 end
 
 # Function to create ASCII diagrams
 function create_interface_diagram
-    printf "%s" '```ascii
+    set -l diagram '```ascii
         ⟡ Quantum API Layer
        /|\
       / | \    ⟡ Crystal Interface
@@ -48,17 +49,18 @@ Core    |    Mobile
        |
     System
 ```'
+    echo $diagram
 end
 
 # Generate the API documentation
-printf "%s%s%s\n" $LAVENDER "Generating API Reference Documentation..." $RESET
+string join '' $LAVENDER "✨ Generating STARWEAVE API Documentation..." $RESET | println
 
 # Create or truncate the API reference file
 create_meta_header > $API_DOC
 
-# Add content - Fixed version using printf
-printf "%s" "
-# BLOOM API Reference
+# Store the main content in a variable
+set -l main_content "
+# STARWEAVE API Reference
 $(create_interface_diagram)
 
 ## Overview
@@ -245,9 +247,12 @@ API updates are announced in the [CHANGELOG.md](../CHANGELOG.md) file.
 
 ---
 
-*\"Where quantum possibilities bloom into mobile reality.\"*
-" >> $API_DOC
+*\"Where quantum possibilities weave into stellar reality.\"*"
 
-printf "%s%s%s\n" $AZURE "API Reference documentation generated successfully!" $RESET
-printf "%s%s%s%s\n" $SAGE "Location: " $RESET $API_DOC
-printf "%s%s%s\n" $GOLD "✨ API documentation complete!" $RESET
+# Add content using echo instead of printf
+echo $main_content >> $API_DOC
+
+# Final status messages with GLIMMER aesthetics
+string join '' $AZURE "✨ API Reference documentation generated successfully!" $RESET | println
+string join '' $SAGE "🌱 Location: " $RESET $API_DOC | println
+string join '' $GOLD "⭐ STARWEAVE documentation complete! ✨" $RESET | println
