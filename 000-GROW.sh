@@ -3,9 +3,13 @@
 # 000-GROW.sh
 # A script to:
 # 1) Install fish & zig on Arch Linux using pacman if not already installed
-# 2) Execute all numeric .fish scripts in ascending order
+# 2) Create .PATCHES and .PATCHES/HISTORY directories
+# 3) Execute all numeric .fish scripts in ascending order
 
 set -euo pipefail
+
+echo "Creating patch directories..."
+mkdir -p .PATCHES/HISTORY
 
 echo "Checking for Arch Linux dependencies..."
 sudo pacman -S --needed --noconfirm fish zig
