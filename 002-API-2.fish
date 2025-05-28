@@ -36,8 +36,6 @@ pub const QuantumInterface = struct {
 # Success message for first section
 echo $ROSE'🌸 Quantum interface documented...'$RESET
 
-# [Rest of the script continues with the same pattern...]
-
 # Final success messages
 echo $AZURE'✨ API Reference documentation completed!'$RESET
 echo $SAGE'🌱 Location: '$API_DOC$RESET
