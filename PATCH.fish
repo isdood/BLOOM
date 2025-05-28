@@ -52,40 +52,41 @@ function execute_patch
     set -l patch_file $argv[1]
     set -l patch_number (string match -r '\d+' $patch_file)
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    # Correct fish syntax for string concatenation
+    set -l patch_path "$PATCH_DIR/$patch_file"
     set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
     log "star" "Executing STARWEAVE patch $patch_number..."
 
     # Check if patch exists
-    if test -f "$PATCH_DIR/$patch_file"
+    if test -f $patch_path
         # Make the patch executable
         log "info" "🔓 Granting execute permissions to patch $patch_number"
-        chmod +x "$PATCH_DIR/$patch_file"
+        chmod +x $patch_path
 
         # Execute the patch
-        if eval "$PATCH_DIR/$patch_file"
+        if $patch_path
             log "success" "Successfully executed patch $patch_number"
 
             # Remove execute permissions
             log "info" "🔒 Revoking execute permissions from patch $patch_number"
-            chmod -x "$PATCH_DIR/$patch_file"
+            chmod -x $patch_path
 
             # Move to history with timestamp
-            mv "$PATCH_DIR/$patch_file" $history_file
+            mv $patch_path $history_file
 
             # Ensure history file is not executable
             chmod -x $history_file
 
             log "info" "Patch $patch_number archived to HISTORY"
+            return 0
         else
             # Remove execute permissions on failure
-            chmod -x "$PATCH_DIR/$patch_file"
+            chmod -x $patch_path
             log "error" "Failed to execute patch $patch_number"
             return 1
         end
     else
-        log "error" "Patch $patch_file not found"
+        log "error" "Patch $patch_file not found at $patch_path"
         return 1
     end
 end
