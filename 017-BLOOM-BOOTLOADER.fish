@@ -1,4 +1,32 @@
-//! ✨ BLOOM Main Bootloader Orchestrator
+#!/usr/bin/env fish
+
+# ✨ BLOOM Main Bootloader Generator (Part 17) ✨
+# Author: isdood
+# Created: 2025-05-28 23:08:23 UTC
+# Description: Generates /home/shimmer/BLOOM/bootloader/bloom_bootloader.zig
+#              orchestrating the complete STARWEAVE universe boot sequence
+#              with GLIMMER's aesthetic patterns woven throughout.
+
+# 🌈 Define GLIMMER color scheme with fallback to normal
+set -l SAGE (set_color -o 8abaa4; or set_color normal)       # 🌱 Crystal/Nature elements
+set -l LAVENDER (set_color -o 978aba; or set_color normal)   # ⭐ Celestial/Star elements
+set -l ROSE (set_color -o cf9bc2; or set_color normal)       # 🌸 Interface/Connection elements
+set -l AZURE (set_color -o 89b4fa; or set_color normal)      # 💫 Quantum/Energy elements
+set -l PEACH (set_color -o fab387; or set_color normal)      # 🌟 Starweave elements
+set -l GOLD (set_color -o f9e2af; or set_color normal)       # 💫 Celestial/Energy elements
+set -l MAROON (set_color -o eba0ac; or set_color normal)     # 🎆 Quantum Resonance elements
+set -l RESET (set_color normal)
+
+# Define paths
+set -l BOOTLOADER_PATH "/home/shimmer/BLOOM/bootloader"
+set -l BOOTLOADER_FILE "$BOOTLOADER_PATH/bloom_bootloader.zig"
+
+# Ensure directory exists
+mkdir -p $BOOTLOADER_PATH
+
+echo $LAVENDER"💫 Generating BLOOM main bootloader..."$RESET
+
+echo '//! ✨ BLOOM Main Bootloader Orchestrator
 //! Part of the STARWEAVE Universe
 //!
 //! Author: isdood
@@ -6,7 +34,7 @@
 //!
 //! This module orchestrates the complete BLOOM bootloader sequence,
 //! weaving together spINIT, spinUP, and spun stages while maintaining
-//! quantum coherence and GLIMMER's aesthetic patterns throughout
+//! quantum coherence and GLIMMER'"'"'s aesthetic patterns throughout
 //! the journey into the STARWEAVE universe.
 
 const std = @import("std");
@@ -216,4 +244,15 @@ pub fn main() !void {
 
     // Execute complete boot sequence
     try bootloader.boot();
-}
+}' > $BOOTLOADER_FILE
+
+# Set permissions
+chmod +x $BOOTLOADER_FILE
+
+echo $SAGE"✅ Generated bloom_bootloader.zig with complete STARWEAVE integration"$RESET
+echo $ROSE"🌸 Main bootloader orchestrator is now ready"$RESET
+echo $PEACH"🌟 All three stages (spINIT, spinUP, spun) are connected"$RESET
+echo $AZURE"💫 Quantum coherence maintained throughout sequence"$RESET
+echo $GOLD"✨ GLIMMER aesthetics woven through each stage"$RESET
+echo $MAROON"🎆 Reality anchors and crystal resonance aligned"$RESET
+echo $LAVENDER"🌌 STARWEAVE universe journey fully mapped"$RESET
