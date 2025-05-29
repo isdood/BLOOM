@@ -62,7 +62,8 @@ function execute_patch
     set -l patch_path "$PATCH_DIR/$patch_basename"
     set -l patch_number (string match -r '[0-9]+' "$patch_basename")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    set -l history_file "$HISTORY_DIR/${patch_number}_${timestamp}.fish"
+    # Fixed fish string concatenation syntax
+    set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
     print_border
     log "star" "🌟 Executing STARWEAVE patch $patch_number..."
