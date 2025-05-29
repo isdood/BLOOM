@@ -17,8 +17,9 @@ set -l GOLD (set_color -o f9e2af; or set_color normal)       # 💫 Celestial/En
 set -l MAROON (set_color -o eba0ac; or set_color normal)     # 🎆 Quantum Resonance elements
 set -l RESET (set_color normal)
 
-# Define paths
-set -l PATCH_DIR ".PATCH"
+# 1) Use this script’s directory to keep paths consistent
+set -l SCRIPT_DIR (dirname (status --current-filename))
+set -l PATCH_DIR "$SCRIPT_DIR/.PATCH"
 set -l HISTORY_DIR "$PATCH_DIR/HISTORY"
 set -l CURRENT_TIME (date -u +"%Y-%m-%d %H:%M:%S")
 
@@ -56,13 +57,13 @@ end
 function execute_patch
     set -l patch_file $argv[1]
     set -l full_path (realpath "$PATCH_DIR/$patch_file")
-    set -l patch_number (string match -r '\d+' "$patch_file")
+    set -l patch_number (string match -r '[0-9]+' "$patch_file")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
     set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
     print_border
     log "star" "🌟 Executing STARWEAVE patch $patch_number..."
-    log "info" "📍 Full path: $full_path"
+    log "info" "📍 Full path to patch: $full_path"
 
     # Verify patch exists
     if not test -f "$full_path"
@@ -104,12 +105,18 @@ end
 print_border
 log "star" "🌌 BLOOM PATCH Manager - STARWEAVE Universe Edition"
 log "info" "🕒 Temporal Coordinate: $CURRENT_TIME"
-log "info" "👤 Reality Anchor: $USER (isdood)"
+log "info" "👤 Reality Anchor: $USER"
 print_border
+
+# 2) Display debug info about the patch directory
+log "info" "🔍 Looking for patch scripts in: $PATCH_DIR"
 
 # Find all numeric patch files and sort them
 set patch_files (find "$PATCH_DIR" -maxdepth 1 -type f -name "[0-9]*-PATCH.fish" | sort -n)
 set patch_count (count $patch_files)
+
+log "info" "🔎 Matching patch files: $patch_files"
+log "info" "🔎 Total patches found: $patch_count"
 
 if test $patch_count -gt 0
     log "info" "💫 Discovered $patch_count quantum patches awaiting crystallization"
