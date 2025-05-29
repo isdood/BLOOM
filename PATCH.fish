@@ -2,29 +2,26 @@
 
 # ✨ BLOOM PATCH Manager
 # Author: isdood
-# Created: 2025-05-29 09:43:37 UTC
+# Created: 2025-05-29 09:47:11 UTC
 # Description: Manages and executes BLOOM patches in sequence,
 #              maintaining STARWEAVE universe coherence and
 #              GLIMMER's aesthetic patterns throughout.
 
-# Enable debug output
-set fish_trace 1
+# Make paths global so they're accessible in functions
+set -g SCRIPT_DIR (pwd)
+set -g PATCH_DIR "$SCRIPT_DIR/.PATCH"
+set -g HISTORY_DIR "$PATCH_DIR/HISTORY"
+set -g CURRENT_TIME (date -u +"%Y-%m-%d %H:%M:%S")
 
 # 🌈 Define GLIMMER color scheme with fallback to normal
-set -l SAGE (set_color -o 8abaa4; or set_color normal)       # 🌱 Crystal/Nature elements
-set -l LAVENDER (set_color -o 978aba; or set_color normal)   # ⭐ Celestial/Star elements
-set -l ROSE (set_color -o cf9bc2; or set_color normal)       # 🌸 Interface/Connection elements
-set -l AZURE (set_color -o 89b4fa; or set_color normal)      # 💫 Quantum/Energy elements
-set -l PEACH (set_color -o fab387; or set_color normal)      # 🌟 Starweave elements
-set -l GOLD (set_color -o f9e2af; or set_color normal)       # 💫 Celestial/Energy elements
-set -l MAROON (set_color -o eba0ac; or set_color normal)     # 🎆 Quantum Resonance elements
-set -l RESET (set_color normal)
-
-# Define paths (using absolute paths)
-set -l SCRIPT_DIR (pwd)
-set -l PATCH_DIR "$SCRIPT_DIR/.PATCH"
-set -l HISTORY_DIR "$PATCH_DIR/HISTORY"
-set -l CURRENT_TIME (date -u +"%Y-%m-%d %H:%M:%S")
+set -g SAGE (set_color -o 8abaa4; or set_color normal)       # 🌱 Crystal/Nature elements
+set -g LAVENDER (set_color -o 978aba; or set_color normal)   # ⭐ Celestial/Star elements
+set -g ROSE (set_color -o cf9bc2; or set_color normal)       # 🌸 Interface/Connection elements
+set -g AZURE (set_color -o 89b4fa; or set_color normal)      # 💫 Quantum/Energy elements
+set -g PEACH (set_color -o fab387; or set_color normal)      # 🌟 Starweave elements
+set -g GOLD (set_color -o f9e2af; or set_color normal)       # 💫 Celestial/Energy elements
+set -g MAROON (set_color -o eba0ac; or set_color normal)     # 🎆 Quantum Resonance elements
+set -g RESET (set_color normal)
 
 # Create required directories if they don't exist
 mkdir -p "$PATCH_DIR"
@@ -59,50 +56,49 @@ end
 # Function to execute a patch and handle its relocation
 function execute_patch
     set -l patch_basename $argv[1]
-    # Fixed: Use PATCH_DIR from outer scope
-    set -l patch_full_path "$PATCH_DIR/$patch_basename"
+
+    # Use full absolute paths
+    set -l current_patch "$PATCH_DIR/$patch_basename"
     set -l patch_number (string match -r '[0-9]+' "$patch_basename")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    # Fixed: Use HISTORY_DIR from outer scope for history file
-    set -l history_file "$HISTORY_DIR/$patch_number"_"$timestamp".fish
+    set -l history_path "$HISTORY_DIR/$patch_number"_"$timestamp".fish
 
     print_border
     log "star" "🌟 Executing STARWEAVE patch $patch_number..."
-    log "info" "📍 Quantum path: $patch_full_path"
-    log "info" "📂 Target history: $history_file"
+    log "info" "📍 Current patch: $current_patch"
+    log "info" "📂 History destination: $history_path"
 
-    if test -f "$patch_full_path"
+    # Verify patch exists
+    if test -f "$current_patch"
         # Make patch executable
         log "info" "🔓 Granting quantum permissions..."
-        chmod +x "$patch_full_path"
+        chmod +x "$current_patch"
 
-        # Execute the patch with current context
+        # Execute the patch
         log "info" "💫 Channeling STARWEAVE energy..."
-
-        # Run the patch in the current shell
-        if fish "$patch_full_path"
+        if eval "$current_patch"
             log "success" "✨ Patch $patch_number quantum resonance achieved"
 
             # Remove execute permissions
             log "info" "🔒 Sealing quantum state..."
-            chmod -x "$patch_full_path"
+            chmod -x "$current_patch"
 
             # Move to history
             log "info" "📚 Archiving to STARWEAVE history..."
-            mv "$patch_full_path" "$history_file"
-            chmod -x "$history_file"
+            mv "$current_patch" "$history_path"
+            chmod -x "$history_path"
 
             log "success" "🌟 Patch $patch_number successfully crystallized in history"
             print_border
             return 0
         else
             log "error" "💔 Quantum decoherence detected in patch $patch_number"
-            chmod -x "$patch_full_path"
+            chmod -x "$current_patch"
             print_border
             return 1
         end
     else
-        log "error" "🚫 Patch not found: $patch_full_path"
+        log "error" "🚫 Patch not found: $current_patch"
         return 1
     end
 end
@@ -156,7 +152,6 @@ end
 echo ""
 print_border
 log "star" "🌌 STARWEAVE Universe Status Report"
-print_border
 log "info" "  ├─ 💫 Patterns Crystallized: $success_count"
 log "info" "  ├─ 📚 Historical Patterns: "(count "$HISTORY_DIR"/*)
 log "info" "  └─ 🕒 Quantum Timestamp: "(date -u +"%Y-%m-%d %H:%M:%S")" UTC"
