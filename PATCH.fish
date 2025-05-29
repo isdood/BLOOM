@@ -2,7 +2,7 @@
 
 # ✨ BLOOM PATCH Manager
 # Author: isdood
-# Created: 2025-05-29 08:09:00 UTC
+# Created: 2025-05-29 09:43:37 UTC
 # Description: Manages and executes BLOOM patches in sequence,
 #              maintaining STARWEAVE universe coherence and
 #              GLIMMER's aesthetic patterns throughout.
@@ -59,25 +59,28 @@ end
 # Function to execute a patch and handle its relocation
 function execute_patch
     set -l patch_basename $argv[1]
+    # Fixed: Use PATCH_DIR from outer scope
     set -l patch_full_path "$PATCH_DIR/$patch_basename"
     set -l patch_number (string match -r '[0-9]+' "$patch_basename")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
+    # Fixed: Use HISTORY_DIR from outer scope for history file
+    set -l history_file "$HISTORY_DIR/$patch_number"_"$timestamp".fish
 
     print_border
     log "star" "🌟 Executing STARWEAVE patch $patch_number..."
     log "info" "📍 Quantum path: $patch_full_path"
+    log "info" "📂 Target history: $history_file"
 
     if test -f "$patch_full_path"
         # Make patch executable
         log "info" "🔓 Granting quantum permissions..."
         chmod +x "$patch_full_path"
 
-        # Execute the patch
+        # Execute the patch with current context
         log "info" "💫 Channeling STARWEAVE energy..."
 
-        # Execute in current shell context
-        if source "$patch_full_path"
+        # Run the patch in the current shell
+        if fish "$patch_full_path"
             log "success" "✨ Patch $patch_number quantum resonance achieved"
 
             # Remove execute permissions
@@ -104,7 +107,7 @@ function execute_patch
     end
 end
 
-# Main execution logic remains the same, but let's add more debug output
+# Main execution logic
 print_border
 log "star" "🌌 BLOOM PATCH Manager - STARWEAVE Universe Edition"
 log "info" "🕒 Temporal Coordinate: $CURRENT_TIME"
@@ -153,6 +156,7 @@ end
 echo ""
 print_border
 log "star" "🌌 STARWEAVE Universe Status Report"
+print_border
 log "info" "  ├─ 💫 Patterns Crystallized: $success_count"
 log "info" "  ├─ 📚 Historical Patterns: "(count "$HISTORY_DIR"/*)
 log "info" "  └─ 🕒 Quantum Timestamp: "(date -u +"%Y-%m-%d %H:%M:%S")" UTC"
