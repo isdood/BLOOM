@@ -3,6 +3,9 @@
 # Enable Fish debugging
 set -x
 
+# Debugging
+set fish_trace 1
+
 # ✨ BLOOM PATCH Manager
 # Author: isdood
 # Created: 2025-05-29 06:49:16 UTC
