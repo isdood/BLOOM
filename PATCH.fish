@@ -59,10 +59,9 @@ end
 # Function to execute a patch and handle its relocation
 function execute_patch
     set -l patch_basename $argv[1]
-    set -l patch_path "$PATCH_DIR/$patch_basename"
+    set -l patch_path (realpath "$PATCH_DIR/$patch_basename")
     set -l patch_number (string match -r '[0-9]+' "$patch_basename")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    # Fixed fish string concatenation syntax
     set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
     print_border
@@ -71,26 +70,27 @@ function execute_patch
 
     # Debug output
     log "info" "🔍 Verifying patch existence..."
-    log "info" "   Path: $patch_path"
-    log "info" "   History: $history_file"
 
-    if test -f "$patch_path"
+    # Verify patch exists and is a file
+    if test -f "$PATCH_DIR/$patch_basename"
         # Make patch executable
         log "info" "🔓 Granting quantum permissions..."
-        chmod +x "$patch_path"
+        chmod +x "$PATCH_DIR/$patch_basename"
 
-        # Execute the patch
+        # Execute the patch with the full path
         log "info" "💫 Channeling STARWEAVE energy..."
-        if env fish "$patch_path"
+
+        # Use source instead of env fish for better execution context
+        if source "$PATCH_DIR/$patch_basename"
             log "success" "✨ Patch $patch_number quantum resonance achieved"
 
             # Remove execute permissions
             log "info" "🔒 Sealing quantum state..."
-            chmod -x "$patch_path"
+            chmod -x "$PATCH_DIR/$patch_basename"
 
             # Move to history
             log "info" "📚 Archiving to STARWEAVE history..."
-            mv "$patch_path" "$history_file"
+            mv "$PATCH_DIR/$patch_basename" "$history_file"
             chmod -x "$history_file"
 
             log "success" "🌟 Patch $patch_number successfully crystallized in history"
@@ -98,12 +98,12 @@ function execute_patch
             return 0
         else
             log "error" "💔 Quantum decoherence detected in patch $patch_number"
-            chmod -x "$patch_path"
+            chmod -x "$PATCH_DIR/$patch_basename"
             print_border
             return 1
         end
     else
-        log "error" "🚫 Patch not found: $patch_path"
+        log "error" "🚫 Patch not found: $PATCH_DIR/$patch_basename"
         return 1
     end
 end
