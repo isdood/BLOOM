@@ -1,5 +1,8 @@
 #!/usr/bin/env fish
 
+# Enable Fish debugging
+set -x
+
 # ✨ BLOOM PATCH Manager
 # Author: isdood
 # Created: 2025-05-29 06:49:16 UTC
