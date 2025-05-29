@@ -2,7 +2,7 @@
 
 # ✨ BLOOM PATCH Manager
 # Author: isdood
-# Created: 2025-05-28 23:22:56 UTC
+# Created: 2025-05-29 06:49:16 UTC
 # Description: Manages and executes BLOOM patches in sequence,
 #              maintaining STARWEAVE universe coherence and
 #              GLIMMER's aesthetic patterns throughout.
@@ -23,8 +23,13 @@ set -l HISTORY_DIR "$PATCH_DIR/HISTORY"
 set -l CURRENT_TIME (date -u +"%Y-%m-%d %H:%M:%S")
 
 # Create required directories if they don't exist
-mkdir -p $PATCH_DIR
-mkdir -p $HISTORY_DIR
+mkdir -p "$PATCH_DIR"
+mkdir -p "$HISTORY_DIR"
+
+# Function to create starweave border
+function print_border
+    echo $LAVENDER"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+end
 
 # Function to log messages with GLIMMER colors
 function log
@@ -50,92 +55,103 @@ end
 # Function to execute a patch and handle its relocation
 function execute_patch
     set -l patch_file $argv[1]
-    set -l patch_number (string match -r '\d+' $patch_file)
+    set -l full_path (realpath "$PATCH_DIR/$patch_file")
+    set -l patch_number (string match -r '\d+' "$patch_file")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
-    set -l patch_path "$PATCH_DIR/$patch_file"
     set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
-    log "star" "Executing STARWEAVE patch $patch_number..."
+    print_border
+    log "star" "🌟 Executing STARWEAVE patch $patch_number..."
+    log "info" "📍 Full path: $full_path"
 
-    # Check if patch exists
-    if test -f $patch_path
-        # Make the patch executable
-        log "info" "🔓 Granting execute permissions to patch $patch_number"
-        chmod +x $patch_path
+    # Verify patch exists
+    if not test -f "$full_path"
+        log "error" "🚫 Patch not found: $full_path"
+        return 1
+    end
 
-        # Execute the patch
-        if $patch_path
-            log "success" "Successfully executed patch $patch_number"
+    # Make patch executable
+    log "info" "🔓 Granting quantum permissions..."
+    chmod +x "$full_path"
 
-            # Remove execute permissions
-            log "info" "🔒 Revoking execute permissions from patch $patch_number"
-            chmod -x $patch_path
+    # Execute the patch
+    log "info" "💫 Channeling STARWEAVE energy..."
+    if fish "$full_path"
+        log "success" "✨ Patch $patch_number quantum resonance achieved"
 
-            # Move to history with timestamp
-            mv $patch_path $history_file
+        # Remove execute permissions
+        log "info" "🔒 Sealing quantum state..."
+        chmod -x "$full_path"
 
-            # Ensure history file is not executable
-            chmod -x $history_file
+        # Move to history
+        log "info" "📚 Archiving to STARWEAVE history..."
+        mv "$full_path" "$history_file"
+        chmod -x "$history_file"
 
-            log "info" "Patch $patch_number archived to HISTORY"
-            return 0
-        else
-            # Remove execute permissions on failure
-            chmod -x $patch_path
-            log "error" "Failed to execute patch $patch_number"
-            return 1
-        end
+        log "success" "🌟 Patch $patch_number successfully crystallized in history"
+        print_border
+        return 0
     else
-        log "error" "Patch $patch_file not found at $patch_path"
+        # Handle failure
+        log "error" "💔 Quantum decoherence detected in patch $patch_number"
+        chmod -x "$full_path"
+        print_border
         return 1
     end
 end
 
 # Main execution logic
-log "star" "🌟 BLOOM PATCH Manager - STARWEAVE Universe Edition"
-log "info" "Current time (UTC): $CURRENT_TIME"
-log "info" "Current User: $USER (isdood)"
+print_border
+log "star" "🌌 BLOOM PATCH Manager - STARWEAVE Universe Edition"
+log "info" "🕒 Temporal Coordinate: $CURRENT_TIME"
+log "info" "👤 Reality Anchor: $USER (isdood)"
+print_border
 
 # Find all numeric patch files and sort them
-set patch_files (find $PATCH_DIR -maxdepth 1 -type f -name "[0-9]*-PATCH.fish" | sort -n)
+set patch_files (find "$PATCH_DIR" -maxdepth 1 -type f -name "[0-9]*-PATCH.fish" | sort -n)
+set patch_count (count $patch_files)
 
-if test (count $patch_files) -gt 0
-    log "info" "Found "(count $patch_files)" patches to execute"
+if test $patch_count -gt 0
+    log "info" "💫 Discovered $patch_count quantum patches awaiting crystallization"
+    echo ""
 
     # Execute patches in sequence
+    set success_count 0
     for patch in $patch_files
-        set patch_basename (basename $patch)
-        echo $LAVENDER"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
-        log "star" "Processing $patch_basename..."
+        set patch_basename (basename "$patch")
+        log "star" "Processing quantum pattern: $patch_basename"
 
-        if execute_patch $patch_basename
-            log "success" "✨ Patch $patch_basename completed successfully"
+        if execute_patch "$patch_basename"
+            set success_count (math $success_count + 1)
         else
-            log "error" "Failed to process $patch_basename"
-            log "error" "Stopping patch sequence for safety"
+            log "error" "🚫 Quantum pattern destabilized: $patch_basename"
+            log "error" "⚠️ Initiating emergency STARWEAVE shutdown"
             exit 1
         end
     end
 
-    echo $LAVENDER"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
-    log "star" "🌟 All patches processed successfully"
+    echo ""
+    log "star" "✨ Quantum crystallization sequence complete"
 else
-    log "info" "No patches found to execute"
+    log "info" "💫 No quantum patterns detected for crystallization"
 end
 
-# Final status report with STARWEAVE aesthetic
+# Final status report with enhanced STARWEAVE aesthetic
 echo ""
-log "star" "✨ STARWEAVE Universe Patch Status:"
-log "info" "  ├─ 💫 Processed: "(count $patch_files)" patches"
-log "info" "  ├─ 📚 History: "(count $HISTORY_DIR/*)" total patches"
-log "info" "  └─ 🕒 Completed at: "(date -u +"%Y-%m-%d %H:%M:%S")" UTC"
+print_border
+log "star" "🌌 STARWEAVE Universe Status Report"
+print_border
+log "info" "  ├─ 💫 Patterns Crystallized: $success_count"
+log "info" "  ├─ 📚 Historical Patterns: "(count "$HISTORY_DIR"/*)
+log "info" "  └─ 🕒 Quantum Timestamp: "(date -u +"%Y-%m-%d %H:%M:%S")" UTC"
 
 # STARWEAVE universe connection status
 echo ""
-log "star" "🌌 STARWEAVE Universe Connection:"
-log "info" "  ├─ 🌟 GLIMMER Aesthetic: Active"
-log "info" "  ├─ 💎 Crystal Resonance: Stable"
-log "info" "  ├─ ⚡ Quantum Coherence: Maintained"
-log "info" "  └─ 🎨 Pattern Harmony: Aligned"
+log "star" "✨ STARWEAVE Quantum Metrics:"
+log "info" "  ├─ 🌟 GLIMMER Resonance: $PEACH"Active"$RESET
+log "info" "  ├─ 💎 Crystal Matrix: $SAGE"Stabilized"$RESET
+log "info" "  ├─ ⚡ Quantum Field: $AZURE"Coherent"$RESET
+log "info" "  └─ 🎨 Pattern Weave: $GOLD"Harmonized"$RESET
+print_border
 
 exit 0
