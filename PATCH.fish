@@ -2,7 +2,7 @@
 
 # ✨ BLOOM PATCH Manager
 # Author: isdood
-# Created: 2025-05-29 07:50:10 UTC
+# Created: 2025-05-29 08:09:00 UTC
 # Description: Manages and executes BLOOM patches in sequence,
 #              maintaining STARWEAVE universe coherence and
 #              GLIMMER's aesthetic patterns throughout.
@@ -59,38 +59,34 @@ end
 # Function to execute a patch and handle its relocation
 function execute_patch
     set -l patch_basename $argv[1]
-    set -l patch_path (realpath "$PATCH_DIR/$patch_basename")
+    set -l patch_full_path "$PATCH_DIR/$patch_basename"
     set -l patch_number (string match -r '[0-9]+' "$patch_basename")
     set -l timestamp (date -u +"%Y%m%d_%H%M%S")
     set -l history_file "$HISTORY_DIR"/"$patch_number"_"$timestamp".fish
 
     print_border
     log "star" "🌟 Executing STARWEAVE patch $patch_number..."
-    log "info" "📍 Patch path: $patch_path"
+    log "info" "📍 Quantum path: $patch_full_path"
 
-    # Debug output
-    log "info" "🔍 Verifying patch existence..."
-
-    # Verify patch exists and is a file
-    if test -f "$PATCH_DIR/$patch_basename"
+    if test -f "$patch_full_path"
         # Make patch executable
         log "info" "🔓 Granting quantum permissions..."
-        chmod +x "$PATCH_DIR/$patch_basename"
+        chmod +x "$patch_full_path"
 
-        # Execute the patch with the full path
+        # Execute the patch
         log "info" "💫 Channeling STARWEAVE energy..."
 
-        # Use source instead of env fish for better execution context
-        if source "$PATCH_DIR/$patch_basename"
+        # Execute in current shell context
+        if source "$patch_full_path"
             log "success" "✨ Patch $patch_number quantum resonance achieved"
 
             # Remove execute permissions
             log "info" "🔒 Sealing quantum state..."
-            chmod -x "$PATCH_DIR/$patch_basename"
+            chmod -x "$patch_full_path"
 
             # Move to history
             log "info" "📚 Archiving to STARWEAVE history..."
-            mv "$PATCH_DIR/$patch_basename" "$history_file"
+            mv "$patch_full_path" "$history_file"
             chmod -x "$history_file"
 
             log "success" "🌟 Patch $patch_number successfully crystallized in history"
@@ -98,26 +94,26 @@ function execute_patch
             return 0
         else
             log "error" "💔 Quantum decoherence detected in patch $patch_number"
-            chmod -x "$PATCH_DIR/$patch_basename"
+            chmod -x "$patch_full_path"
             print_border
             return 1
         end
     else
-        log "error" "🚫 Patch not found: $PATCH_DIR/$patch_basename"
+        log "error" "🚫 Patch not found: $patch_full_path"
         return 1
     end
 end
 
-# Main execution logic
+# Main execution logic remains the same, but let's add more debug output
 print_border
 log "star" "🌌 BLOOM PATCH Manager - STARWEAVE Universe Edition"
 log "info" "🕒 Temporal Coordinate: $CURRENT_TIME"
-log "info" "👤 Reality Anchor: $USER"
+log "info" "👤 Reality Anchor: $USER (isdood)"
+log "info" "📍 Current Directory: $SCRIPT_DIR"
 print_border
 
 # Debug directory contents
-log "info" "🔍 PATCH directory: $PATCH_DIR"
-log "info" "📂 Current contents:"
+log "info" "🔍 PATCH directory contents:"
 ls -la "$PATCH_DIR"
 
 # Find all numeric patch files and sort them
@@ -126,6 +122,12 @@ set patch_count (count $patch_files)
 
 if test $patch_count -gt 0
     log "info" "💫 Discovered $patch_count quantum patches awaiting crystallization"
+
+    # Show found patches
+    for patch in $patch_files
+        log "info" "  └─ Found: $patch"
+    end
+    echo ""
 
     # Execute patches in sequence
     set success_count 0
