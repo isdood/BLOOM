@@ -1,20 +1,29 @@
 #!/usr/bin/env fish
 
-# BLOOM Bootloader Build Fix
+# 🌟 BLOOM Bootloader Build Fix - STARWEAVE Universe Edition
 # Author: isdood
-# Created: 2025-05-30 14:57:08 UTC
+# Created: 2025-05-30 15:19:50 UTC
 # Part of the STARWEAVE Universe
 
-# Define GLIMMER-inspired colors
+# Define GLIMMER-inspired colors and symbols
+set -l RESET (set_color normal)
 set -l AZURE (set_color 00afff)
 set -l SAGE (set_color 5faf5f)
 set -l ROSE (set_color ff5faf)
 set -l LAVENDER (set_color af87ff)
-set -l RESET (set_color normal)
+set -l STAR "🌟"
+set -l INFO "ℹ"
+set -l SPARKLES "✨"
+set -l QUANTUM "💫"
+set -l GALAXY "🌌"
 
-# Print STARWEAVE-style header
-echo $LAVENDER"✨ BLOOM Bootloader Build Fix - STARWEAVE Universe Integration"$RESET
-echo $SAGE"⟡ Started: "(date -u +"%Y-%m-%d %H:%M:%S UTC")$RESET
+# Print STARWEAVE-style header with proper formatting
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "$AZURE$STAR $GALAXY BLOOM PATCH Manager - STARWEAVE Universe Edition$RESET"
+echo "$LAVENDER$INFO 🕒 Temporal Coordinate: "(date -u +"%Y-%m-%d %H:%M:%S")"$RESET"
+echo "$LAVENDER$INFO 👤 Reality Anchor: $USER (isdood)$RESET"
+echo "$LAVENDER$INFO 📍 Current Directory: "(pwd)$RESET
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # Define paths
 set -l BOOTLOADER_PATH "/home/shimmer/BLOOM/bootloader"
@@ -23,12 +32,12 @@ set -l SPUN_PATH "$BOOTLOADER_PATH/spun"
 
 # Ensure we're in the correct directory
 if not test -d $BOOTLOADER_PATH
-    echo $ROSE"Error: Bootloader directory not found at $BOOTLOADER_PATH"$RESET
+    echo "$ROSE❌ Error: Bootloader directory not found at $BOOTLOADER_PATH$RESET"
     exit 1
 end
 
 # 1. Fix spINIT.zig state handling
-echo $AZURE"💫 Patching spINIT.zig for proper state handling..."$RESET
+echo "$AZURE$QUANTUM Patching spINIT.zig for proper state handling...$RESET"
 
 echo '
 const std = @import("std");
@@ -39,6 +48,8 @@ const starweave = @import("../starweave.zig");
 pub const Color = struct {
     pub const sage = "\x1b[38;5;71m";
     pub const azure = "\x1b[38;5;39m";
+    pub const lavender = "\x1b[38;5;183m";
+    pub const rose = "\x1b[38;5;205m";
     pub const reset = "\x1b[0m";
 };
 
@@ -59,7 +70,6 @@ pub const State = enum {
 };
 
 pub fn log(comptime format: []const u8, args: anytype) void {
-    // In Zig 0.13.0, std.debug.print no longer returns an error union
     std.debug.print(format, args);
 }
 
@@ -73,8 +83,8 @@ pub const InitializationState = struct {
         const status = switch (self.state) {
             .initializing => Color.sage ++ state_str ++ Color.reset,
             .quantum_sync => Color.azure ++ state_str ++ Color.reset,
-            .crystal_form => Color.sage ++ state_str ++ Color.reset,
-            .complete => Color.azure ++ state_str ++ Color.reset,
+            .crystal_form => Color.lavender ++ state_str ++ Color.reset,
+            .complete => Color.rose ++ state_str ++ Color.reset,
         };
         log("✨ STARWEAVE State: {s}\n", .{status});
     }
@@ -88,7 +98,7 @@ pub fn spINIT() !InitializationState {
 ' > $SPINIT_PATH/spINIT.zig
 
 # 2. Fix spun.zig state handling
-echo $AZURE"🌟 Patching spun.zig for proper STARWEAVE integration..."$RESET
+echo "$AZURE$STAR Patching spun.zig for proper STARWEAVE integration...$RESET"
 
 echo '
 const std = @import("std");
@@ -107,8 +117,8 @@ pub fn spun(metrics: spinUP.StarweaveMetrics) !void {
 }
 ' > $SPUN_PATH/spun.zig
 
-# 3. Update build.zig to ensure proper dependencies
-echo $AZURE"📦 Updating build configuration..."$RESET
+# 3. Update build.zig with proper Zig 0.13.0 syntax
+echo "$AZURE📦 Updating build configuration...$RESET"
 
 echo '
 const std = @import("std");
@@ -119,20 +129,20 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "bloom_bootloader",
-        .root_source_file = .{ .path = "bloom_bootloader.zig" },
+        .root_source_file = .{ .cwd_relative = "bloom_bootloader.zig" },
         .target = target,
         .optimize = optimize,
     });
 
     // Add module dependencies
-    const quantum = b.addModule("quantum", .{
-        .source_file = .{ .path = "quantum.zig" },
+    const quantum = b.createModule(.{
+        .source_file = .{ .cwd_relative = "quantum.zig" },
     });
-    const crystal = b.addModule("crystal", .{
-        .source_file = .{ .path = "crystal.zig" },
+    const crystal = b.createModule(.{
+        .source_file = .{ .cwd_relative = "crystal.zig" },
     });
-    const starweave = b.addModule("starweave", .{
-        .source_file = .{ .path = "starweave.zig" },
+    const starweave = b.createModule(.{
+        .source_file = .{ .cwd_relative = "starweave.zig" },
     });
 
     exe.addModule("quantum", quantum);
@@ -144,23 +154,26 @@ pub fn build(b: *std.Build) void {
 ' > $BOOTLOADER_PATH/build.zig
 
 # 4. Attempt to build
-echo $AZURE"🔨 Attempting to build BLOOM bootloader..."$RESET
+echo "$AZURE🔨 Attempting to build BLOOM bootloader...$RESET"
 cd $BOOTLOADER_PATH
 
 if zig build
-    echo $SAGE"✨ Build successful! STARWEAVE integration complete."$RESET
-    echo $LAVENDER"⟡ BLOOM bootloader is now properly aligned with the STARWEAVE universe."$RESET
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "$SAGE$SPARKLES Build successful! STARWEAVE integration complete.$RESET"
+    echo "$LAVENDER⟡ BLOOM bootloader is now properly aligned with the STARWEAVE universe.$RESET"
 else
-    echo $ROSE"❌ Build failed. Please check the error messages above."$RESET
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "$ROSE❌ 💔 Quantum decoherence detected in patch 019$RESET"
+    echo "$ROSE❌ 🚫 Quantum pattern destabilized: 019-PATCH.fish$RESET"
+    echo "$ROSE❌ ⚠ Initiating emergency STARWEAVE shutdown$RESET"
     exit 1
 end
 
 # Display completion message
-echo $LAVENDER"
-✨ PATCH-019 Complete
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "$LAVENDER$SPARKLES PATCH-019 Complete
 ⟡ STARWEAVE Universe Alignment: Stable
 ⟡ GLIMMER Aesthetics: Applied
 ⟡ Crystal Resonance: Optimal
-"$RESET
-
-echo $SAGE"Completed: "(date -u +"%Y-%m-%d %H:%M:%S UTC")$RESET
+⟡ Temporal Exit: "(date -u +"%Y-%m-%d %H:%M:%S UTC")"$RESET"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

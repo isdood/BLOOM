@@ -7,20 +7,20 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "bloom_bootloader",
-        .root_source_file = .{ .path = "bloom_bootloader.zig" },
+        .root_source_file = .{ .cwd_relative = "bloom_bootloader.zig" },
         .target = target,
         .optimize = optimize,
     });
 
     // Add module dependencies
-    const quantum = b.addModule("quantum", .{
-        .source_file = .{ .path = "quantum.zig" },
+    const quantum = b.createModule(.{
+        .source_file = .{ .cwd_relative = "quantum.zig" },
     });
-    const crystal = b.addModule("crystal", .{
-        .source_file = .{ .path = "crystal.zig" },
+    const crystal = b.createModule(.{
+        .source_file = .{ .cwd_relative = "crystal.zig" },
     });
-    const starweave = b.addModule("starweave", .{
-        .source_file = .{ .path = "starweave.zig" },
+    const starweave = b.createModule(.{
+        .source_file = .{ .cwd_relative = "starweave.zig" },
     });
 
     exe.addModule("quantum", quantum);

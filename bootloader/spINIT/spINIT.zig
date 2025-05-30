@@ -7,6 +7,8 @@ const starweave = @import("../starweave.zig");
 pub const Color = struct {
     pub const sage = "\x1b[38;5;71m";
     pub const azure = "\x1b[38;5;39m";
+    pub const lavender = "\x1b[38;5;183m";
+    pub const rose = "\x1b[38;5;205m";
     pub const reset = "\x1b[0m";
 };
 
@@ -27,7 +29,6 @@ pub const State = enum {
 };
 
 pub fn log(comptime format: []const u8, args: anytype) void {
-    // In Zig 0.13.0, std.debug.print no longer returns an error union
     std.debug.print(format, args);
 }
 
@@ -41,8 +42,8 @@ pub const InitializationState = struct {
         const status = switch (self.state) {
             .initializing => Color.sage ++ state_str ++ Color.reset,
             .quantum_sync => Color.azure ++ state_str ++ Color.reset,
-            .crystal_form => Color.sage ++ state_str ++ Color.reset,
-            .complete => Color.azure ++ state_str ++ Color.reset,
+            .crystal_form => Color.lavender ++ state_str ++ Color.reset,
+            .complete => Color.rose ++ state_str ++ Color.reset,
         };
         log("✨ STARWEAVE State: {s}\n", .{status});
     }
