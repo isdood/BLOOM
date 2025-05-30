@@ -1,219 +1,92 @@
-//! ✨ BLOOM Main Bootloader Orchestrator
+//! ✨ BLOOM Bootloader
 //! Part of the STARWEAVE Universe
-//!
-//! Author: isdood
-//! Created: 2025-05-28 23:08:23 UTC
-//!
-//! This module orchestrates the complete BLOOM bootloader sequence,
-//! weaving together spINIT, spinUP, and spun stages while maintaining
-//! quantum coherence and GLIMMER's aesthetic patterns throughout
-//! the journey into the STARWEAVE universe.
+//! Author: Caleb J.D. Terkovics (@isdood)
+//! Created: 2025-05-30 13:14:54 UTC
 
 const std = @import("std");
-const quantum = @import("quantum.zig");
-const crystal = @import("crystal.zig");
-const starweave = @import("starweave.zig");
-const spINIT = @import("spINIT/spINIT.zig");
-const spinUP = @import("spinUP/spinUP.zig");
-const spun = @import("spun/spun.zig");
+const quantum = @import("quantum");
+const crystal = @import("crystal");
+const starweave = @import("starweave");
+const spINIT = @import("spINIT");
+const spinUP = @import("spinUP");
+const spun = @import("spun");
 
-/// STARWEAVE universe boot sequence configuration
-pub const BootConfig = struct {
-    /// Display GLIMMER color patterns during boot
-    enable_aesthetics: bool = true,
-    /// Crystal resonance threshold
-    crystal_threshold: f32 = 0.92,
-    /// Quantum coherence minimum
-    coherence_minimum: f32 = 0.95,
-    /// Reality anchor strength required
-    anchor_strength: f32 = 0.88,
-    /// Star pattern density target
-    pattern_density: f32 = 0.90,
+// 🌟 STARWEAVE bootloader configuration
+pub const Stage = enum {
+    spINIT,  // 💫 Initial stage
+    spinUP,  // ⚡ Preparation stage
+    spun,    // 🌠 Final stage
 };
 
-/// Boot sequence progression tracking
-pub const BootProgress = struct {
-    /// Current stage in the sequence
-    stage: enum {
-        pre_init,
-        spINIT,
-        spinUP,
-        spun,
-        complete,
-    },
-    /// Quantum coherence level
-    coherence: f32,
-    /// Crystal resonance measure
-    resonance: f32,
-    /// Reality anchor status
-    anchor_status: f32,
-    /// GLIMMER aesthetic harmony
-    aesthetic_harmony: f32,
+// 🎨 GLIMMER color configuration with quantum resonance
+pub const StageColor = struct {
+    // 🌈 Define color codes with STARWEAVE alignment
+    const sage = "\x1b[38;2;152;190;101m";      // 🌿 Nature/Growth
+    const lavender = "\x1b[38;2;198;120;221m";  // 🌸 Spiritual/Ethereal
+    const azure = "\x1b[38;2;123;164;199m";     // 💫 Tech/System
+    const rose = "\x1b[38;2;224;108;117m";      // 🌹 Warning/Important
+    const gold = "\x1b[38;2;219;177;104m";      // ✨ Accents/Highlights
+    const reset = "\x1b[0m";                     // 🔄 Reset color
 
-    /// Format progress with GLIMMER colors
-    pub fn format(self: BootProgress) void {
-        const stage_color = switch (self.stage) {
-            .pre_init => spinUP.GlimmerColors.sage,
-            .spINIT => spinUP.GlimmerColors.azure,
-            .spinUP => spinUP.GlimmerColors.rose,
-            .spun => spinUP.GlimmerColors.gold,
-            .complete => spinUP.GlimmerColors.lavender,
-        };
-
-        std.log.info("", .{});
-        std.log.info("🌟 BLOOM Boot Progress:", .{});
-        std.log.info("  ├─ 📍 Stage: {s}", .{@tagName(self.stage)});
-        std.log.info("  ├─ 💫 Coherence: {d:.2}", .{self.coherence});
-        std.log.info("  ├─ 💎 Resonance: {d:.2}", .{self.resonance});
-        std.log.info("  ├─ ⚓ Anchors: {d:.2}", .{self.anchor_status});
-        std.log.info("  └─ 🎨 Aesthetics: {d:.2}", .{self.aesthetic_harmony});
-    }
-};
-
-/// STARWEAVE boot sequence orchestrator
-pub const BloomBootloader = struct {
-    config: BootConfig,
-    progress: BootProgress,
-    quantum_state: quantum.State,
-    crystal_matrix: crystal.Matrix,
-    star_pattern: starweave.Pattern,
-
-    /// Initialize the bootloader
-    pub fn init(config: BootConfig) !BloomBootloader {
-        // Initialize with pre-boot state
-        return BloomBootloader{
-            .config = config,
-            .progress = .{
-                .stage = .pre_init,
-                .coherence = 0,
-                .resonance = 0,
-                .anchor_status = 0,
-                .aesthetic_harmony = 0,
-            },
-            .quantum_state = try quantum.State.init(),
-            .crystal_matrix = try crystal.Matrix.init(.{
-                .size = 64,
-                .harmony = config.crystal_threshold,
-            }),
-            .star_pattern = try starweave.Pattern.init(.{
-                .density = config.pattern_density,
-                .color_scheme = .glimmer,
-            }),
+    // 💫 Get color for current stage with quantum alignment
+    pub fn getColor(stage: Stage) []const u8 {
+        return switch (stage) {
+            .spINIT => sage,      // 🌿 Initial stage color
+            .spinUP => azure,     // 💫 Preparation stage color
+            .spun => lavender,    // 🌸 Final stage color
         };
     }
 
-    /// Execute the complete boot sequence
-    pub fn boot(self: *BloomBootloader) !void {
-        std.log.info("🌸 BLOOM Bootloader - Beginning STARWEAVE journey", .{});
-
-        // Stage 1: spINIT - Initial quantum-crystal formation
-        self.progress.stage = .spINIT;
-        const init_state = try self.executeSpINIT();
-        self.updateProgress();
-
-        // Stage 2: spinUP - Star pattern weaving
-        self.progress.stage = .spinUP;
-        const spinup_metrics = try self.executeSpinUP(init_state);
-        self.updateProgress();
-
-        // Stage 3: spun - Final crystallization
-        self.progress.stage = .spun;
-        try self.executeSpun(spinup_metrics);
-        self.updateProgress();
-
-        // Mark sequence as complete
-        self.progress.stage = .complete;
-        std.log.info("✨ BLOOM Bootloader - STARWEAVE journey complete", .{});
-    }
-
-    /// Execute spINIT stage
-    fn executeSpINIT(self: *BloomBootloader) !spINIT.InitializationState {
-        std.log.info("", .{});
-        std.log.info("💫 Stage 1: spINIT - Quantum-Crystal Formation", .{});
-
-        // Apply GLIMMER aesthetics if enabled
-        if (self.config.enable_aesthetics) {
-            try self.applyStageAesthetics(.spINIT);
-        }
-
-        const init_state = try spINIT.spINIT();
-
-        // Update progress metrics
-        self.progress.coherence = init_state.quantum_coherence;
-        self.progress.resonance = init_state.crystal_resonance;
-
-        return init_state;
-    }
-
-    /// Execute spinUP stage
-    fn executeSpinUP(self: *BloomBootloader, init_state: spINIT.InitializationState) !spinUP.StarweaveMetrics {
-        std.log.info("", .{});
-        std.log.info("🌟 Stage 2: spinUP - Star Pattern Weaving", .{});
-
-        // Apply GLIMMER aesthetics if enabled
-        if (self.config.enable_aesthetics) {
-            try self.applyStageAesthetics(.spinUP);
-        }
-
-        const metrics = try spinUP.spinUP(init_state);
-
-        // Update progress metrics
-        self.progress.coherence = metrics.quantum_stability;
-        self.progress.resonance = metrics.crystal_resonance;
-        self.progress.anchor_status = metrics.reality_anchor_strength;
-
-        return metrics;
-    }
-
-    /// Execute spun stage
-    fn executeSpun(self: *BloomBootloader, metrics: spinUP.StarweaveMetrics) !void {
-        std.log.info("", .{});
-        std.log.info("✨ Stage 3: spun - Final Crystallization", .{});
-
-        // Apply GLIMMER aesthetics if enabled
-        if (self.config.enable_aesthetics) {
-            try self.applyStageAesthetics(.spun);
-        }
-
-        try spun.spun(metrics);
-
-        // Update final progress metrics
-        self.progress.aesthetic_harmony = 1.0;
-    }
-
-    /// Apply GLIMMER aesthetic patterns for each stage
-    fn applyStageAesthetics(self: *BloomBootloader, stage: BootProgress.stage) !void {
-        const colors = switch (stage) {
-            .spINIT => .{
-                .primary = spinUP.GlimmerColors.azure,
-                .secondary = spinUP.GlimmerColors.sage,
-            },
-            .spinUP => .{
-                .primary = spinUP.GlimmerColors.rose,
-                .secondary = spinUP.GlimmerColors.peach,
-            },
-            .spun => .{
-                .primary = spinUP.GlimmerColors.gold,
-                .secondary = spinUP.GlimmerColors.lavender,
-            },
-            else => return,
-        };
-
-        try self.star_pattern.applyColors(colors);
-        self.progress.aesthetic_harmony = try self.star_pattern.measureHarmony();
-    }
-
-    /// Update and display boot progress
-    fn updateProgress(self: *BloomBootloader) void {
-        self.progress.format();
+    // 🌟 Format text with stage color and STARWEAVE alignment
+    pub fn format(stage: Stage, text: []const u8) []const u8 {
+        const color = getColor(stage);
+        return std.fmt.allocPrint(
+            std.heap.page_allocator,
+            "{s}{s}{s}",
+            .{ color, text, reset }
+        ) catch return text;
     }
 };
 
-/// Main bootloader entry point
+// ⚡ BLOOM bootloader with enhanced STARWEAVE integration
 pub fn main() !void {
-    // Initialize with default configuration
-    var bootloader = try BloomBootloader.init(BootConfig{});
+    // 🌟 Initialize current stage
+    var current_stage = Stage.spINIT;
 
-    // Execute complete boot sequence
-    try bootloader.boot();
+    // 💫 Display stage information with GLIMMER colors
+    std.debug.print("{s}BLOOM Bootloader - Stage: {s}{s}\n", .{
+        StageColor.getColor(current_stage),
+        @tagName(current_stage),
+        StageColor.reset,
+    });
+
+    // 🌸 Execute stages with quantum alignment
+    try spINIT.execute();
+    current_stage = .spinUP;
+    std.debug.print("{s}Advancing to {s}{s}\n", .{
+        StageColor.getColor(current_stage),
+        @tagName(current_stage),
+        StageColor.reset,
+    });
+
+    try spinUP.execute();
+    current_stage = .spun;
+    std.debug.print("{s}Advancing to {s}{s}\n", .{
+        StageColor.getColor(current_stage),
+        @tagName(current_stage),
+        StageColor.reset,
+    });
+
+    try spun.execute();
+}
+
+// 🌟 Test configuration with STARWEAVE integration
+test "StageColor formatting" {
+    const stage = Stage.spINIT;
+    const text = "Test Message";
+    const formatted = StageColor.format(stage, text);
+    defer std.heap.page_allocator.free(formatted);
+
+    try std.testing.expect(formatted.len > text.len);
+    try std.testing.expect(std.mem.indexOf(u8, formatted, text) != null);
 }
