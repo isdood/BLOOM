@@ -2,7 +2,7 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 12:01:01 UTC
+# Date: 2025-05-30 12:03:05 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
@@ -32,48 +32,59 @@ end
 set_glimmer_colors
 
 # 🌟 Path quantum alignment
-function normalize_quantum_path --description "Normalize paths within the STARWEAVE universe"
-    set -l path $argv[1]
-    # Remove any duplicate .PATCH segments
-    string replace -r '(^|/)\.PATCH/\.PATCH/' '$1.PATCH/' $path
-end
-
-function get_quantum_paths --description "Align quantum paths with STARWEAVE universe"
-    # Get the absolute path of the script
-    set -l script_path (status filename)
-    if test -L $script_path
-        set script_path (readlink -f $script_path)
+function find_bloom_root --description "Find the BLOOM repository root through quantum resonance"
+    set -l current_path (pwd)
+    while test ! -f "$current_path/README.md"; and test "$current_path" != "/"
+        set current_path (dirname $current_path)
     end
 
-    # Get the root directory (BLOOM repository root)
-    set -g BLOOM_ROOT (realpath (dirname $script_path))
-    while test ! -f "$BLOOM_ROOT/README.md"; and test "$BLOOM_ROOT" != "/"
-        set BLOOM_ROOT (dirname $BLOOM_ROOT)
-    end
-
-    if test "$BLOOM_ROOT" = "/"
+    if test ! -f "$current_path/README.md"
         echo $crystal_alert"❌ Fatal: Could not locate BLOOM repository root"$crystal_reset >&2
         return 1
     end
 
+    echo $current_path
+end
+
+function normalize_quantum_path --description "Normalize paths within the STARWEAVE universe"
+    set -l path $argv[1]
+    # Remove any duplicate .PATCH segments and normalize path
+    echo (string replace -r '(^|/)\.PATCH/\.PATCH/' '$1.PATCH/' $path | string replace -r '/+' '/')
+end
+
+function get_quantum_paths --description "Align quantum paths with STARWEAVE universe"
+    # Find BLOOM repository root first
+    set -l bloom_root (find_bloom_root)
+    if test $status -ne 0
+        return 1
+    end
+
     # Set up quantum paths with normalization
-    set -g PATCH_DIR (normalize_quantum_path "$BLOOM_ROOT/.PATCH")
-    set -g HISTORY_DIR (normalize_quantum_path "$PATCH_DIR/HISTORY")
+    set -g BLOOM_ROOT $bloom_root
+    set -g PATCH_DIR "$BLOOM_ROOT/.PATCH"
+    set -g HISTORY_DIR "$PATCH_DIR/HISTORY"
     set -g RECOVERY_PATH "$BLOOM_ROOT/src/recovery"
-    set -g CURRENT_PATCH (basename $script_path)
+
+    # Get the current patch name
+    if test -n "$argv[1]"
+        set -g CURRENT_PATCH (basename $argv[1])
+    else
+        set -g CURRENT_PATCH "008-PATCH.fish"
+    end
 
     # Debug path information
     echo $crystal_info"🔮 Quantum Path Alignment:"$crystal_reset
     echo $crystal_secondary" ├─ BLOOM Root: $BLOOM_ROOT"$crystal_reset
     echo $crystal_secondary" ├─ PATCH Dir: $PATCH_DIR"$crystal_reset
     echo $crystal_secondary" ├─ History Dir: $HISTORY_DIR"$crystal_reset
-    echo $crystal_secondary" └─ Recovery Path: $RECOVERY_PATH"$crystal_reset
+    echo $crystal_secondary" ├─ Recovery Path: $RECOVERY_PATH"$crystal_reset
+    echo $crystal_secondary" └─ Current Patch: $CURRENT_PATCH"$crystal_reset
 
     return 0
 end
 
-# Initialize quantum paths
-if not get_quantum_paths
+# Initialize quantum paths with the script name
+if not get_quantum_paths $argv[1]
     echo $crystal_alert"❌ Failed to align quantum paths. Initiating emergency shutdown..."$crystal_reset
     exit 1
 end
@@ -121,9 +132,16 @@ set backup_path (normalize_quantum_path $backup_path)
 echo $crystal_secondary"📚 Archiving patch to STARWEAVE history..."$crystal_reset
 echo $crystal_info"💫 Target quantum state: $backup_path"$crystal_reset
 
+# Determine source patch location
+set source_patch "$PATCH_DIR/$CURRENT_PATCH"
+if not test -f $source_patch
+    # Try current directory if not found in PATCH_DIR
+    set source_patch $CURRENT_PATCH
+end
+
 # Copy with proper error handling
-if test -f $script_path
-    command cp $script_path $backup_path 2>/dev/null
+if test -f $source_patch
+    command cp $source_patch $backup_path 2>/dev/null
     and begin
         echo $crystal_success"✨ Patch archived successfully to: $backup_path"$crystal_reset
 
@@ -131,13 +149,20 @@ if test -f $script_path
         command chmod 644 $backup_path 2>/dev/null
         and echo $crystal_success"🔒 Patch quantum-locked successfully"$crystal_reset
         or echo $crystal_alert"⚠️ Warning: Could not set permissions on backup"$crystal_reset
+
+        # Move the patch to .PATCH directory if it's not already there
+        if test $source_patch = $CURRENT_PATCH
+            command mv $source_patch $PATCH_DIR/ 2>/dev/null
+            and echo $crystal_success"💫 Patch quantum-aligned to STARWEAVE matrix"$crystal_reset
+            or echo $crystal_alert"⚠️ Warning: Could not move patch to STARWEAVE matrix"$crystal_reset
+        end
     end
     or begin
         echo $crystal_alert"❌ Could not archive patch to: $backup_path"$crystal_reset
         exit 1
     end
 else
-    echo $crystal_alert"❌ Could not find source patch for archiving"$crystal_reset
+    echo $crystal_alert"❌ Could not find source patch: $source_patch"$crystal_reset
     exit 1
 end
 
