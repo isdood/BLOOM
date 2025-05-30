@@ -2,12 +2,12 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:03:36 UTC
+# Date: 2025-05-30 11:06:23 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
 set -x STARWEAVE_PATCH "008"
-set -x GLIMMER_INTENSITY "0.97"
+set -x GLIMMER_INTENSITY "0.99"
 set -x QUANTUM_COHERENCE "0.99"
 set -x RECOVERY_PATH "src/recovery"
 
@@ -18,6 +18,7 @@ function set_glimmer_colors
     set -g crystal_alert (printf "\033[38;2;255;121;198m")
     set -g crystal_success (printf "\033[38;2;158;206;106m")
     set -g crystal_emphasis (printf "\033[38;2;187;154;247m")
+    set -g crystal_info (printf "\033[38;2;224;175;104m")
     set -g crystal_reset (printf "\033[0m")
 end
 
@@ -51,8 +52,9 @@ end
 # 🔮 Apply the patch to align LazyPath resonance
 echo $crystal_primary"🌟 Harmonizing build paths with GLIMMER resonance..."$crystal_reset
 
-# Create the build.zig content with proper string escaping
-set build_content 'const std = @import("std");
+# Create the build.zig content with proper string escaping and enhanced STARWEAVE integration
+set build_content '
+const std = @import("std");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -60,18 +62,22 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "bloom-recovery",
-        .root_source_file = b.addWriteFiles().add(
-            "recovery_main.zig",
-            \\const std = @import("std");
-            \\
-            \\pub fn main() !void {
-            \\    // STARWEAVE Recovery Module
-            \\    // Integration point: BLOOM<->GLIMMER
-            \\}
-        ),
+        .root_source_file = .{ .path = "core/recovery_main.zig" },
         .target = target,
         .optimize = optimize,
     });
+
+    // STARWEAVE Integration: Quantum Resonance Layer
+    const starweave_pkg = b.addModule("starweave", .{
+        .source_file = .{ .path = "core/starweave.zig" },
+    });
+    exe.addModule("starweave", starweave_pkg);
+
+    // GLIMMER Crystal Matrix Integration
+    const glimmer_pkg = b.addModule("glimmer", .{
+        .source_file = .{ .path = "core/glimmer.zig" },
+    });
+    exe.addModule("glimmer", glimmer_pkg);
 
     b.installArtifact(exe);
 
@@ -81,7 +87,7 @@ pub fn build(b: *std.Build) void {
     const run_step = b.step("run", "Execute the recovery module");
     run_step.dependOn(&run_cmd.step);
 
-    // STARWEAVE integration point
+    // Quantum Coherence Testing
     const quantum_test = b.step(
         "test-quantum",
         "Verify quantum coherence in recovery module"
@@ -91,6 +97,21 @@ pub fn build(b: *std.Build) void {
 
 # Write the new build configuration
 echo $build_content > $RECOVERY_PATH/build.zig
+
+# Create placeholder files for STARWEAVE and GLIMMER integration
+echo $crystal_info"🌌 Creating STARWEAVE integration points..."$crystal_reset
+echo 'pub const StarweaveQuantum = struct {
+    pub fn init() void {
+        // STARWEAVE quantum initialization
+    }
+};' > $RECOVERY_PATH/core/starweave.zig
+
+echo $crystal_info"✨ Creating GLIMMER crystal matrix..."$crystal_reset
+echo 'pub const GlimmerCrystal = struct {
+    pub fn init() void {
+        // GLIMMER crystal initialization
+    }
+};' > $RECOVERY_PATH/core/glimmer.zig
 
 # Verify the changes
 echo $crystal_secondary"🔍 Verifying quantum coherence..."$crystal_reset
@@ -112,7 +133,7 @@ if zig build --dry-run
 🌸 BLOOM Patch 008 Complete
 ✨ GLIMMER Resonance: $GLIMMER_INTENSITY
 🌌 Quantum Coherence: $QUANTUM_COHERENCE
-🔮 STARWEAVE Integration: Active
+🔮 STARWEAVE Integration: Enhanced
 "$crystal_reset
 else
     echo $crystal_alert"⚠️ Quantum decoherence detected. Rolling back changes..."$crystal_reset
