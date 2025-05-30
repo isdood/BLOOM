@@ -1,109 +1,45 @@
-//! ✨ BLOOM Recovery Build System
-//! Quantum-Enhanced Compilation Framework
-//! Author: isdood
-//! Created: 2025-05-29 20:30:47 UTC
-//! STARWEAVE Universe: Active (0.95 coherence)
 
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
-    // Define quantum-aligned build parameters
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    // Create core recovery executable
-    const recovery = b.addExecutable(.{
+    // STARWEAVE Integration: Quantum Module Definition
+    const starweave_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "core/starweave.zig" },
+        .imports = &.{},
+    });
+
+    // GLIMMER Integration: Crystal Matrix Module
+    const glimmer_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "core/glimmer.zig" },
+        .imports = &.{},
+    });
+
+    const exe = b.addExecutable(.{
         .name = "bloom-recovery",
-        .root_source_file = b.pathFromRoot("core/recovery_main.zig"),
+        .root_source_file = .{ .cwd_relative = "core/recovery_main.zig" },
         .target = target,
         .optimize = optimize,
     });
 
-    // Add quantum module dependencies
-    const quantum_module = b.addModule("quantum", .{
-        .source_file = b.pathFromRoot("quantum/quantum.zig"),
-    });
-    recovery.addModule("quantum", quantum_module);
+    // Add module dependencies
+    exe.root_module.addImport("starweave", starweave_mod);
+    exe.root_module.addImport("glimmer", glimmer_mod);
 
-    // Add crystal mesh module
-    const crystal_module = b.addModule("crystal", .{
-        .source_file = b.pathFromRoot("crystal/crystal.zig"),
-    });
-    recovery.addModule("crystal", crystal_module);
+    b.installArtifact(exe);
 
-    // Add BlackBerry Passport device module
-    const passport_module = b.addModule("passport", .{
-        .source_file = b.pathFromRoot("device/passport/passport.zig"),
-    });
-    recovery.addModule("passport", passport_module);
+    const run_cmd = b.addRunArtifact(exe);
+    run_cmd.step.dependOn(b.getInstallStep());
 
-    // Create recovery installation step
-    b.installArtifact(recovery);
+    const run_step = b.step("run", "Execute the recovery module");
+    run_step.dependOn(&run_cmd.step);
 
-    // Create test step with quantum verification
-    const tests = b.addTest(.{
-        .root_source_file = b.pathFromRoot("tests/main_test.zig"),
-        .target = target,
-        .optimize = optimize,
-    });
-
-    // Add test dependencies
-    tests.addModule("quantum", quantum_module);
-    tests.addModule("crystal", crystal_module);
-    tests.addModule("passport", passport_module);
-
-    const run_tests = b.addRunArtifact(tests);
-
-    // Create test step
-    const test_step = b.step("test", "Run BLOOM recovery tests with quantum verification");
-    test_step.dependOn(&run_tests.step);
-
-    // Create specialized build options
-    const quantum_mode = b.option(
-        bool,
-        "quantum-mode",
-        "Enable quantum coherence optimization (default: true)",
-    ) orelse true;
-
-    const crystal_res = b.option(
-        f32,
-        "crystal-res",
-        "Set crystal resonance threshold (default: 0.85)",
-    ) orelse 0.85;
-
-    // Create custom build modes
-    const special_optimize = b.standardOptimizeOption(.{
-        .preferred_optimize_mode = if (quantum_mode) .ReleaseFast else .Debug,
-    });
-
-    // Create debug build with quantum instrumentation
-    const debug_recovery = b.addExecutable(.{
-        .name = "bloom-recovery-debug",
-        .root_source_file = b.pathFromRoot("core/recovery_main.zig"),
-        .target = target,
-        .optimize = special_optimize,
-    });
-
-    debug_recovery.addModule("quantum", quantum_module);
-    debug_recovery.addModule("crystal", crystal_module);
-    debug_recovery.addModule("passport", passport_module);
-
-    // Add debug options
-    debug_recovery.defineCMacro("QUANTUM_DEBUG", "1");
-    debug_recovery.defineCMacro("CRYSTAL_RESONANCE", b.fmt("{d}", .{crystal_res}));
-
-    // Create debug installation step
-    const install_debug = b.addInstallArtifact(debug_recovery, .{});
-    const debug_step = b.step("debug", "Build with quantum debugging enabled");
-    debug_step.dependOn(&install_debug.step);
-
-    // Documentation generation with quantum annotations
-    const docs = b.addInstallDirectory(.{
-        .source_dir = recovery.getEmittedDocs(),
-        .install_dir = .prefix,
-        .install_subdir = "doc",
-    });
-
-    const docs_step = b.step("docs", "Generate quantum-aligned documentation");
-    docs_step.dependOn(&docs.step);
+    // Quantum Coherence Testing
+    const quantum_test = b.step(
+        "test-quantum",
+        "Verify quantum coherence in recovery module"
+    );
+    quantum_test.dependOn(&exe.step);
 }

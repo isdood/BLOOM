@@ -21,7 +21,11 @@ pub const StarweaveQuantum = struct {
         };
     }
 
-    pub fn alignResonance(self: *StarweaveQuantum) void {
+    pub fn alignResonance(self: *StarweaveQuantum) !void {
+        if (self.quantum_state < 1.0) return error.QuantumDecoherence;
+        if (self.resonance_level < 1.0) return error.ResonanceDisruption;
+        if (self.temporal_stability < 1.0) return error.TemporalInstability;
+
         self.resonance_level = 1.0;
         self.harmonic_frequency = 1.0;
         self.temporal_stability = 1.0;

@@ -21,7 +21,10 @@ pub const GlimmerCrystal = struct {
         };
     }
 
-    pub fn amplifyGlimmer(self: *GlimmerCrystal) void {
+    pub fn amplifyGlimmer(self: *GlimmerCrystal) !void {
+        if (self.matrix_resonance < 1.0) return error.MatrixMisalignment;
+        if (self.nexus_stability < 1.0) return error.NexusDisconnect;
+
         self.intensity = 1.0;
         self.quantum_alignment = 1.0;
         self.crystalline_structure = 1.0;
