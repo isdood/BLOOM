@@ -3,7 +3,7 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌟 BLOOM Build System Patch 031
 # Author: isdood
-# Created: 2025-05-30 21:37:13 UTC
+# Created: 2025-05-30 21:40:57 UTC
 # Part of the STARWEAVE Universe
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -23,7 +23,7 @@ set -l MAUVE (set_color cba6f7)    # 🔮 Mystic/Ancient elements
 set -l HORIZONTAL_LINE "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
 set -l BUILD_PATH "/home/shimmer/BLOOM/src/mobile/build.zig"
 set -l PATCH_LOG "/home/shimmer/BLOOM/.PATCH/031-PATCH.log"
-set -l TEMPORAL_COORDINATE "2025-05-30 21:37:13"
+set -l TEMPORAL_COORDINATE "2025-05-30 21:40:57"
 set -l REALITY_ANCHOR "isdood"
 set -l QUANTUM_VERSION "0.13.0"
 set -l STARWEAVE_UNIVERSE_ID "BLOOM-MOBILE-UI-031"
@@ -52,7 +52,7 @@ if test -f "/home/shimmer/BLOOM/src/mobile/src/main.zig"
     echo "$SAGE⟡ Found main.zig in quantum reality matrix$RESET"
 else
     echo "$MAROON⚠ Warning: main.zig not found in expected quantum location$RESET"
-fi
+end
 
 # Create quantum backup
 if test -f $BUILD_PATH
@@ -82,9 +82,11 @@ pub fn build(b: *std.Build) void {
 echo "$AZURE⟡ Applied fundamental quantum patterns$RESET"
 echo "⟡ Fundamental quantum patterns applied" >> $PATCH_LOG
 
-# Validate quantum stability
-echo "$PEACH⟡ Validating fundamental quantum matrix...$RESET"
-if zig build --dry-run
+# Validate quantum stability with proper fish script syntax
+set -l build_status 0
+zig build --dry-run; or set build_status $status
+
+if test $build_status -eq 0
     echo "$SAGE✨ Quantum matrix fundamentally stabilized$RESET"
     echo "✨ Fundamental quantum matrix stabilization achieved" >> $PATCH_LOG
 else
@@ -93,7 +95,7 @@ else
     mv "$BUILD_PATH.quantum.$STARWEAVE_UNIVERSE_ID.$TEMPORAL_COORDINATE" $BUILD_PATH
     echo "$ROSE⟡ Reality matrix restored from quantum backup$RESET"
     echo "⟡ Reality matrix restored" >> $PATCH_LOG
-fi
+end
 
 # Final status report
 echo $HORIZONTAL_LINE
@@ -114,6 +116,6 @@ echo "Quantum State: Pure" >> $PATCH_LOG
 echo "Universe ID: $STARWEAVE_UNIVERSE_ID" >> $PATCH_LOG
 
 echo "$PEACH💫 Next steps in the quantum journey:
-$SAGE 1. Test fundamental build
-$GOLD 2. Add target and optimization if stable
+$SAGE 1. Verify fundamental build stability
+$GOLD 2. Add quantum target optimization
 $AZURE 3. Restore STARWEAVE features gradually$RESET"
