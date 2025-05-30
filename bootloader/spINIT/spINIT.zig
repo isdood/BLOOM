@@ -42,7 +42,7 @@ pub const InitializationState = struct {
         const status = switch (self.state) {
             .initializing => Color.sage ++ state_str ++ Color.reset,
             .quantum_sync => Color.azure ++ state_str ++ Color.reset,
-            .crystal_form => Color.lavender ++ state_str ++ Color.reset,
+            .crystal_form => Color.lavender ++ Color.reset,
             .complete => Color.rose ++ state_str ++ Color.reset,
         };
         log("✨ STARWEAVE State: {s}\n", .{status});

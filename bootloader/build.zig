@@ -15,17 +15,20 @@ pub fn build(b: *std.Build) void {
     // Add module dependencies
     const quantum = b.addModule("quantum", .{
         .root_source_file = .{ .cwd_relative = "quantum.zig" },
+        .dependencies = &.{},
     });
     const crystal = b.addModule("crystal", .{
         .root_source_file = .{ .cwd_relative = "crystal.zig" },
+        .dependencies = &.{},
     });
     const starweave = b.addModule("starweave", .{
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
+        .dependencies = &.{},
     });
 
-    exe.addModule("quantum", quantum);
-    exe.addModule("crystal", crystal);
-    exe.addModule("starweave", starweave);
+    exe.root_module.addImport("quantum", quantum);
+    exe.root_module.addImport("crystal", crystal);
+    exe.root_module.addImport("starweave", starweave);
 
     b.installArtifact(exe);
 }
