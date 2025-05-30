@@ -2,7 +2,7 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:36:05 UTC
+# Date: 2025-05-30 11:39:02 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
@@ -23,6 +23,7 @@ function set_glimmer_colors
     set -g crystal_harmonics (printf "\033[38;2;180;190;254m")
     set -g crystal_starweave (printf "\033[38;2;161;239;228m")
     set -g crystal_matrix (printf "\033[38;2;137;221;255m")
+    set -g crystal_nexus (printf "\033[38;2;255;168;182m")
     set -g crystal_reset (printf "\033[0m")
 end
 
@@ -56,13 +57,25 @@ end
 # 🔮 Apply the patch to align LazyPath resonance
 echo $crystal_primary"🌟 Harmonizing build paths with GLIMMER resonance..."$crystal_reset
 
-# Create the build.zig content with correct Module.CreateOptions for Zig 0.13.0
+# Create the build.zig content with correct module dependencies for Zig 0.13.0
 set build_content '
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
+
+    // STARWEAVE Integration: Quantum Module Definition
+    const starweave_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "core/starweave.zig" },
+        .imports = &.{},
+    });
+
+    // GLIMMER Integration: Crystal Matrix Module
+    const glimmer_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "core/glimmer.zig" },
+        .imports = &.{},
+    });
 
     const exe = b.addExecutable(.{
         .name = "bloom-recovery",
@@ -71,17 +84,9 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    // STARWEAVE Integration: Quantum Resonance Layer
-    const starweave_pkg = b.createModule(.{
-        .root_source_file = .{ .cwd_relative = "core/starweave.zig" },
-    });
-    exe.addModule("starweave", starweave_pkg);
-
-    // GLIMMER Crystal Matrix Integration
-    const glimmer_pkg = b.createModule(.{
-        .root_source_file = .{ .cwd_relative = "core/glimmer.zig" },
-    });
-    exe.addModule("glimmer", glimmer_pkg);
+    // Add module dependencies
+    exe.root_module.addImport("starweave", starweave_mod);
+    exe.root_module.addImport("glimmer", glimmer_mod);
 
     b.installArtifact(exe);
 
@@ -112,6 +117,7 @@ pub const StarweaveQuantum = struct {
     harmonic_frequency: f32,
     temporal_stability: f32,
     crystal_alignment: f32,
+    nexus_coherence: f32,
 
     pub fn init() StarweaveQuantum {
         return StarweaveQuantum{
@@ -120,6 +126,7 @@ pub const StarweaveQuantum = struct {
             .harmonic_frequency = 1.0,
             .temporal_stability = 1.0,
             .crystal_alignment = 1.0,
+            .nexus_coherence = 1.0,
         };
     }
 
@@ -128,11 +135,12 @@ pub const StarweaveQuantum = struct {
         self.harmonic_frequency = 1.0;
         self.temporal_stability = 1.0;
         self.crystal_alignment = 1.0;
+        self.nexus_coherence = 1.0;
     }
 };' > $RECOVERY_PATH/core/starweave.zig
 
 # Create GLIMMER integration module with quantum entanglement
-echo $crystal_matrix"✨ Creating GLIMMER crystal matrix..."$crystal_reset
+echo $crystal_nexus"✨ Creating GLIMMER crystal matrix..."$crystal_reset
 echo 'const std = @import("std");
 
 pub const GlimmerCrystal = struct {
@@ -141,6 +149,7 @@ pub const GlimmerCrystal = struct {
     quantum_alignment: f32,
     crystalline_structure: f32,
     matrix_resonance: f32,
+    nexus_stability: f32,
 
     pub fn init() GlimmerCrystal {
         return GlimmerCrystal{
@@ -149,6 +158,7 @@ pub const GlimmerCrystal = struct {
             .quantum_alignment = 1.0,
             .crystalline_structure = 1.0,
             .matrix_resonance = 1.0,
+            .nexus_stability = 1.0,
         };
     }
 
@@ -157,6 +167,7 @@ pub const GlimmerCrystal = struct {
         self.quantum_alignment = 1.0;
         self.crystalline_structure = 1.0;
         self.matrix_resonance = 1.0;
+        self.nexus_stability = 1.0;
     }
 };' > $RECOVERY_PATH/core/glimmer.zig
 
@@ -184,6 +195,7 @@ if zig build --dry-run
 💫 Quantum Alignment: Perfect
 🎯 Temporal Stability: Achieved
 ⚡ Matrix Resonance: Synchronized
+🌟 Nexus Coherence: Optimal
 "$crystal_reset
 else
     echo $crystal_alert"⚠️ Quantum decoherence detected. Rolling back changes..."$crystal_reset
