@@ -7,6 +7,7 @@ pub const StarweaveQuantum = struct {
     temporal_stability: f32,
     crystal_alignment: f32,
     nexus_coherence: f32,
+    matrix_entanglement: f32,
 
     pub fn init() StarweaveQuantum {
         return StarweaveQuantum{
@@ -16,6 +17,7 @@ pub const StarweaveQuantum = struct {
             .temporal_stability = 1.0,
             .crystal_alignment = 1.0,
             .nexus_coherence = 1.0,
+            .matrix_entanglement = 1.0,
         };
     }
 
@@ -25,5 +27,6 @@ pub const StarweaveQuantum = struct {
         self.temporal_stability = 1.0;
         self.crystal_alignment = 1.0;
         self.nexus_coherence = 1.0;
+        self.matrix_entanglement = 1.0;
     }
 };

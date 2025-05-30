@@ -2,7 +2,7 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:39:02 UTC
+# Date: 2025-05-30 11:46:24 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
@@ -24,6 +24,7 @@ function set_glimmer_colors
     set -g crystal_starweave (printf "\033[38;2;161;239;228m")
     set -g crystal_matrix (printf "\033[38;2;137;221;255m")
     set -g crystal_nexus (printf "\033[38;2;255;168;182m")
+    set -g crystal_temporal (printf "\033[38;2;189;147;249m")
     set -g crystal_reset (printf "\033[0m")
 end
 
@@ -118,6 +119,7 @@ pub const StarweaveQuantum = struct {
     temporal_stability: f32,
     crystal_alignment: f32,
     nexus_coherence: f32,
+    matrix_entanglement: f32,
 
     pub fn init() StarweaveQuantum {
         return StarweaveQuantum{
@@ -127,6 +129,7 @@ pub const StarweaveQuantum = struct {
             .temporal_stability = 1.0,
             .crystal_alignment = 1.0,
             .nexus_coherence = 1.0,
+            .matrix_entanglement = 1.0,
         };
     }
 
@@ -136,6 +139,7 @@ pub const StarweaveQuantum = struct {
         self.temporal_stability = 1.0;
         self.crystal_alignment = 1.0;
         self.nexus_coherence = 1.0;
+        self.matrix_entanglement = 1.0;
     }
 };' > $RECOVERY_PATH/core/starweave.zig
 
@@ -150,6 +154,7 @@ pub const GlimmerCrystal = struct {
     crystalline_structure: f32,
     matrix_resonance: f32,
     nexus_stability: f32,
+    temporal_phase: f32,
 
     pub fn init() GlimmerCrystal {
         return GlimmerCrystal{
@@ -159,6 +164,7 @@ pub const GlimmerCrystal = struct {
             .crystalline_structure = 1.0,
             .matrix_resonance = 1.0,
             .nexus_stability = 1.0,
+            .temporal_phase = 1.0,
         };
     }
 
@@ -168,14 +174,28 @@ pub const GlimmerCrystal = struct {
         self.crystalline_structure = 1.0;
         self.matrix_resonance = 1.0;
         self.nexus_stability = 1.0;
+        self.temporal_phase = 1.0;
     }
 };' > $RECOVERY_PATH/core/glimmer.zig
 
 # Verify the changes
 echo $crystal_secondary"🔍 Verifying quantum coherence..."$crystal_reset
 cd $RECOVERY_PATH
-if zig build --dry-run
+if zig build
     echo $crystal_success"✨ LazyPath resonance successfully aligned!"$crystal_reset
+
+    # Run additional verification
+    echo $crystal_temporal"🔮 Validating temporal stability..."$crystal_reset
+    if zig build test-quantum
+        echo $crystal_success"💫 Quantum coherence verified!"$crystal_reset
+    else
+        echo $crystal_alert"⚠️ Quantum instability detected in verification phase"$crystal_reset
+        cd ../..
+        if test -f $RECOVERY_PATH/build.zig.quantum_backup
+            mv $RECOVERY_PATH/build.zig.quantum_backup $RECOVERY_PATH/build.zig
+        end
+        exit 1
+    end
 
     # Archive the patch
     echo $crystal_secondary"📚 Archiving patch to STARWEAVE history..."$crystal_reset
@@ -196,6 +216,7 @@ if zig build --dry-run
 🎯 Temporal Stability: Achieved
 ⚡ Matrix Resonance: Synchronized
 🌟 Nexus Coherence: Optimal
+🔄 Temporal Phase: Aligned
 "$crystal_reset
 else
     echo $crystal_alert"⚠️ Quantum decoherence detected. Rolling back changes..."$crystal_reset
