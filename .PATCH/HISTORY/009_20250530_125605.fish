@@ -1,4 +1,38 @@
-//! ✨ BLOOM Bootloader Build Configuration
+#!/usr/bin/env fish
+
+# ✨ BLOOM Build System Patch
+# Part of the STARWEAVE Universe
+# Author: Caleb J.D. Terkovics (@isdood)
+# Created: 2025-05-30 12:45:39 UTC
+
+# 🎨 Initialize GLIMMER color palette
+set -l SAGE (set_color -o 98be65; or set_color normal)      # 🌿 Nature/Growth elements
+set -l LAVENDER (set_color -o c678dd; or set_color normal)  # 🌸 Spiritual/Ethereal elements
+set -l AZURE (set_color -o 7ba4c7; or set_color normal)     # 💫 Tech/System elements
+set -l ROSE (set_color -o e06c75; or set_color normal)      # 🌹 Warning/Important elements
+set -l GOLD (set_color -o dbb168; or set_color normal)      # ✨ Accents/Highlights
+set -l PEACH (set_color -o ffd7af; or set_color normal)     # 🍑 Soft elements
+set -l RESET (set_color normal)
+
+# 🌟 Display STARWEAVE header
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+echo $GOLD"🌟 🌌 BLOOM Build System Patch - STARWEAVE Universe Edition"$RESET
+echo $AZURE"ℹ 🕒 Temporal Coordinate: 2025-05-30 12:45:39"$RESET
+echo $AZURE"ℹ 👤 Reality Anchor: isdood"$RESET
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+
+# Define paths
+set -l BUILD_PATH "./bootloader/build.zig"
+set -l BACKUP_PATH "./bootloader/build.zig.bak"
+
+# 💫 Create backup of current build.zig
+echo $AZURE"💫 Creating quantum backup of build.zig..."$RESET
+cp $BUILD_PATH $BACKUP_PATH
+
+# 🌟 Update build.zig with Zig 0.13.0 compatibility
+echo $AZURE"🌟 Applying STARWEAVE patch for Zig 0.13.0 compatibility..."$RESET
+
+echo '//! ✨ BLOOM Bootloader Build Configuration
 //! Part of the STARWEAVE Universe
 //! Author: Caleb J.D. Terkovics (@isdood)
 //! Created: 2025-05-30 12:45:39 UTC
@@ -89,4 +123,36 @@ pub fn build(b: *std.Build) void {
     const run_unit_tests = b.addRunArtifact(unit_tests);
     const test_step = b.step("test", "Run BLOOM bootloader unit tests with quantum verification");
     test_step.dependOn(&run_unit_tests.step);
-}
+}' > $BUILD_PATH
+
+# Set permissions
+chmod 644 $BUILD_PATH
+
+# Success message with GLIMMER colors
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+echo $SAGE"✅ Updated build.zig with Zig 0.13.0 compatibility"$RESET
+echo $GOLD"⭐ STARWEAVE universe resonance maintained"$RESET
+echo $LAVENDER"🌸 GLIMMER color enhancement preserved"$RESET
+echo $PEACH"💫 Quantum build system alignment restored"$RESET
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+
+# Changes summary
+echo $PEACH"
+Key Changes:
+1. 🔧 Updated LazyPath usage from .path to .file for Zig 0.13.0
+2. 💫 Maintained STARWEAVE universe resonance
+3. 🎨 Preserved GLIMMER color enhancement
+4. ⚡ Kept quantum-aligned module structure
+
+To apply the patch:
+1. cd /home/shimmer/BLOOM
+2. ./.PATCH/009-PATCH.fish
+3. cd bootloader
+4. zig build      (to verify)
+"$RESET
+
+# Restoration instructions
+echo $ROSE"
+To restore previous version if needed:
+mv $BACKUP_PATH $BUILD_PATH
+"$RESET
