@@ -1,7 +1,7 @@
 //! ✨ BLOOM Bootloader Build Configuration
 //! Part of the STARWEAVE Universe
 //! Author: Caleb J.D. Terkovics (@isdood)
-//! Created: 2025-05-30 13:10:05 UTC
+//! Created: 2025-05-30 13:12:15 UTC
 
 const std = @import("std");
 
@@ -21,7 +21,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    // 🌸 Add module dependencies with crystal-lattice alignment
+    // 🌸 Create base modules with crystal-lattice alignment
     const quantum_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "quantum.zig" },
     });
@@ -34,35 +34,33 @@ pub fn build(b: *std.Build) void {
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
     });
 
-    // 🌟 Add stage modules with enhanced quantum alignment
+    // 🌟 Create stage modules with enhanced quantum alignment
     const spinit_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "spINIT/spINIT.zig" },
-        .dependencies = &.{
-            .{ .name = "quantum", .module = quantum_mod },
-            .{ .name = "crystal", .module = crystal_mod },
-            .{ .name = "starweave", .module = starweave_mod },
-        },
     });
 
     const spinup_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "spinUP/spinUP.zig" },
-        .dependencies = &.{
-            .{ .name = "quantum", .module = quantum_mod },
-            .{ .name = "crystal", .module = crystal_mod },
-            .{ .name = "starweave", .module = starweave_mod },
-        },
     });
 
     const spun_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "spun/spun.zig" },
-        .dependencies = &.{
-            .{ .name = "quantum", .module = quantum_mod },
-            .{ .name = "crystal", .module = crystal_mod },
-            .{ .name = "starweave", .module = starweave_mod },
-        },
     });
 
-    // 💫 Add module dependencies with enhanced quantum alignment
+    // 💫 Add module imports with quantum dependency alignment
+    spinit_mod.addImport("quantum", quantum_mod);
+    spinit_mod.addImport("crystal", crystal_mod);
+    spinit_mod.addImport("starweave", starweave_mod);
+
+    spinup_mod.addImport("quantum", quantum_mod);
+    spinup_mod.addImport("crystal", crystal_mod);
+    spinup_mod.addImport("starweave", starweave_mod);
+
+    spun_mod.addImport("quantum", quantum_mod);
+    spun_mod.addImport("crystal", crystal_mod);
+    spun_mod.addImport("starweave", starweave_mod);
+
+    // 🌠 Add root module imports with enhanced quantum alignment
     exe.root_module.addImport("quantum", quantum_mod);
     exe.root_module.addImport("crystal", crystal_mod);
     exe.root_module.addImport("starweave", starweave_mod);

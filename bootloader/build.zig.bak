@@ -1,7 +1,7 @@
 //! ✨ BLOOM Bootloader Build Configuration
 //! Part of the STARWEAVE Universe
 //! Author: Caleb J.D. Terkovics (@isdood)
-//! Created: 2025-05-30 13:07:32 UTC
+//! Created: 2025-05-30 13:10:05 UTC
 
 const std = @import("std");
 
@@ -25,17 +25,14 @@ pub fn build(b: *std.Build) void {
     const quantum_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "quantum.zig" },
     });
-    exe.addModule("quantum", quantum_mod);
 
     const crystal_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "crystal.zig" },
     });
-    exe.addModule("crystal", crystal_mod);
 
     const starweave_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
     });
-    exe.addModule("starweave", starweave_mod);
 
     // 🌟 Add stage modules with enhanced quantum alignment
     const spinit_mod = b.createModule(.{
@@ -46,7 +43,6 @@ pub fn build(b: *std.Build) void {
             .{ .name = "starweave", .module = starweave_mod },
         },
     });
-    exe.addModule("spINIT", spinit_mod);
 
     const spinup_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "spinUP/spinUP.zig" },
@@ -56,7 +52,6 @@ pub fn build(b: *std.Build) void {
             .{ .name = "starweave", .module = starweave_mod },
         },
     });
-    exe.addModule("spinUP", spinup_mod);
 
     const spun_mod = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "spun/spun.zig" },
@@ -66,7 +61,14 @@ pub fn build(b: *std.Build) void {
             .{ .name = "starweave", .module = starweave_mod },
         },
     });
-    exe.addModule("spun", spun_mod);
+
+    // 💫 Add module dependencies with enhanced quantum alignment
+    exe.root_module.addImport("quantum", quantum_mod);
+    exe.root_module.addImport("crystal", crystal_mod);
+    exe.root_module.addImport("starweave", starweave_mod);
+    exe.root_module.addImport("spINIT", spinit_mod);
+    exe.root_module.addImport("spinUP", spinup_mod);
+    exe.root_module.addImport("spun", spun_mod);
 
     // 💫 Install with enhanced quantum alignment
     b.installArtifact(exe);
