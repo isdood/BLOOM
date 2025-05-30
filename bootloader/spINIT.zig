@@ -1,16 +1,9 @@
 
 const std = @import("std");
-const quantum = @import("quantum");
-const crystal = @import("crystal");
-const starweave = @import("starweave");
+const starweave = @import("starweave_constants.zig");
 
-pub const Color = struct {
-    pub const sage = "\x1b[38;5;71m";
-    pub const azure = "\x1b[38;5;39m";
-    pub const lavender = "\x1b[38;5;183m";
-    pub const rose = "\x1b[38;5;205m";
-    pub const reset = "\x1b[0m";
-};
+pub const Color = starweave.Color;
+pub const STARWEAVE = starweave.STARWEAVE;
 
 pub const State = enum {
     initializing,
@@ -28,7 +21,7 @@ pub const State = enum {
     }
 };
 
-pub fn log(comptime format: []const u8, args: anytype) void {
+fn log(comptime format: []const u8, args: anytype) void {
     std.debug.print(Color.azure ++ format ++ Color.reset ++ "\n", args);
 }
 
@@ -37,15 +30,7 @@ pub const InitializationState = struct {
     quantum_coherence: f32,
     crystal_resonance: f32,
 
-    pub fn init() InitializationState {
-        return .{
-            .state = .initializing,
-            .quantum_coherence = 0.0,
-            .crystal_resonance = 0.0,
-        };
-    }
-
-    pub fn displayStatus(self: *const InitializationState) void {
+    pub fn displayStatus(self: *InitializationState) !void {
         const state_str = self.state.toString();
         const status = switch (self.state) {
             .initializing => Color.sage ++ state_str ++ Color.reset,
@@ -54,15 +39,15 @@ pub const InitializationState = struct {
             .complete => Color.rose ++ state_str ++ Color.reset,
         };
         log("✨ STARWEAVE State: {s}", .{status});
-    }
-
-    pub fn align(self: *const InitializationState) !void {
-        self.displayStatus();
+        self.state = .quantum_sync;
     }
 };
 
 pub fn spINIT() !InitializationState {
-    const init_state = InitializationState.init();
-    return init_state;
+    return InitializationState{
+        .state = .initializing,
+        .quantum_coherence = STARWEAVE.quantum_stability,
+        .crystal_resonance = STARWEAVE.crystal_resonance,
+    };
 }
 

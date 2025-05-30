@@ -1,25 +1,19 @@
 
 const std = @import("std");
-const quantum = @import("quantum");
-const crystal = @import("crystal");
-const starweave = @import("starweave");
+const starweave = @import("starweave_constants.zig");
+const spINIT = @import("spINIT.zig");
 
-pub const Color = struct {
-    pub const azure = "\x1b[38;5;39m";
-    pub const reset = "\x1b[0m";
-};
+pub const Color = starweave.Color;
+pub const STARWEAVE = starweave.STARWEAVE;
 
-pub fn log(comptime format: []const u8, args: anytype) void {
+fn log(comptime format: []const u8, args: anytype) void {
     std.debug.print(Color.azure ++ format ++ Color.reset ++ "\n", args);
 }
 
-pub const StarweaveMetrics = struct {
-    pub const quantum_stability: f32 = 1.0;
-    pub const crystal_alignment: f32 = 1.0;
-    pub const universe_sync: bool = true;
-};
-
-pub fn spun() !void {
-    log("🌟 STARWEAVE State Initialized - Quantum Stability: {d:.2}", .{StarweaveMetrics.quantum_stability});
+pub fn spun(state: *spINIT.InitializationState) !void {
+    log("🌟 STARWEAVE State Initialized", .{});
+    log("⟡ Quantum Coherence: {d:.2}", .{state.quantum_coherence});
+    log("⟡ Crystal Resonance: {d:.2}", .{state.crystal_resonance});
+    state.state = .complete;
 }
 
