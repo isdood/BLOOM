@@ -35,6 +35,11 @@
 ├── 023-HAL-1.fish
 ├── 023-HAL-2.fish
 ├── 023-HAL-3.fish
+├── 023-HAL-4.fish
+├── 023-HAL-5.fish
+├── 023-HAL-6.fish
+├── 024-MOBILE-QUANTUM-1.fish
+├── 024-MOBILE-QUANTUM-2.fish
 ├── bootloader
 │   ├── bloom_bootloader.zig
 │   ├── bloom_bootloader.zig.bak
@@ -142,4 +147,4 @@
 │               └── bloom-recovery
 └── tree.txt
 
-38 directories, 105 files
+38 directories, 110 files
