@@ -19,6 +19,15 @@ pub const State = enum {
             .complete => "complete",
         };
     }
+
+    pub fn getColor(self: State) []const u8 {
+        return switch (self) {
+            .initializing => Color.sage,
+            .quantum_sync => Color.azure,
+            .crystal_form => Color.lavender,
+            .complete => Color.rose,
+        };
+    }
 };
 
 fn log(comptime format: []const u8, args: anytype) void {
@@ -32,13 +41,12 @@ pub const InitializationState = struct {
 
     pub fn displayStatus(self: *InitializationState) !void {
         const state_str = self.state.toString();
-        const status = switch (self.state) {
-            .initializing => Color.sage ++ state_str ++ Color.reset,
-            .quantum_sync => Color.azure ++ state_str ++ Color.reset,
-            .crystal_form => Color.lavender ++ state_str ++ Color.reset,
-            .complete => Color.rose ++ state_str ++ Color.reset,
-        };
-        log("✨ STARWEAVE State: {s}", .{status});
+        const state_color = self.state.getColor();
+        log("✨ STARWEAVE State: {s}{s}{s}", .{
+            state_color,
+            state_str,
+            Color.reset
+        });
         self.state = .quantum_sync;
     }
 };
