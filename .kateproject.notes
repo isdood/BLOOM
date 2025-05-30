@@ -1,0 +1,39 @@
+REBOOT PC
+
+*** Need to debug current zig build output from bootloader/build.zig - Current output:
+ ~/B/bootloader►zig version && zig build     (main) 09:32
+0.13.0
+install
+└─ install bloom_bootloader
+   └─ zig build-exe bloom_bootloader Debug native 6 errors
+spun/spun.zig:66:24: error: expected error union type, found 'void'
+    try std.debug.print("🌟 STARWEAVE State Initialized\n", .{});
+        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+referenced by:
+    main: bloom_bootloader.zig:80:13
+    callMain: /usr/lib/zig/std/start.zig:524:32
+    remaining reference traces hidden; use '-freference-trace' to see all reference traces
+spINIT/spINIT.zig:57:35: error: expected error union type, found 'void'
+    std.debug.print(format, args) catch |err| {
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+spINIT/spINIT.zig:47:44: error: unable to resolve comptime value
+            .initializing => Color.sage ++ @tagName(self.state) ++ Color.reset,
+                                           ^~~~~~~~~~~~~~~~~~~~
+spINIT/spINIT.zig:47:44: note: slice value being concatenated must be comptime-known
+spINIT/spINIT.zig:57:35: error: expected error union type, found 'void'
+    std.debug.print(format, args) catch |err| {
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+spINIT/spINIT.zig:57:35: error: expected error union type, found 'void'
+    std.debug.print(format, args) catch |err| {
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+spINIT/spINIT.zig:57:35: error: expected error union type, found 'void'
+    std.debug.print(format, args) catch |err| {
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+error: the following command failed with 6 compilation errors:
+/usr/bin/zig build-exe -ODebug --dep quantum --dep crystal --dep starweave --dep spINIT --dep spinUP --dep spun -Mroot=/home/shimmer/BLOOM/bootloader/bloom_bootloader.zig -Mquantum=/home/shimmer/BLOOM/bootloader/quantum.zig -Mcrystal=/home/shimmer/BLOOM/bootloader/crystal.zig -Mstarweave=/home/shimmer/BLOOM/bootloader/starweave.zig --dep quantum --dep crystal --dep starweave -MspINIT=/home/shimmer/BLOOM/bootloader/spINIT/spINIT.zig --dep quantum --dep crystal --dep starweave -MspinUP=/home/shimmer/BLOOM/bootloader/spinUP/spinUP.zig --dep quantum --dep crystal --dep starweave -Mspun=/home/shimmer/BLOOM/bootloader/spun/spun.zig --cache-dir /home/shimmer/BLOOM/bootloader/.zig-cache --global-cache-dir /home/shimmer/.cache/zig --name bloom_bootloader --listen=- 
+Build Summary: 0/3 steps succeeded; 1 failed (disable with --summary none)
+install transitive failure
+└─ install bloom_bootloader transitive failure
+   └─ zig build-exe bloom_bootloader Debug native 6 errors
+error: the following build command failed with exit code 1:
+/home/shimmer/BLOOM/bootloader/.zig-cache/o/e1daa71de909a022754c8041a07164b6/build /usr/bin/zig /home/shimmer/BLOOM/bootloader /home/shimmer/BLOOM/bootloader/.zig-cache /home/shimmer/.cache/zig --seed 0x50ac9f40 -Z8690878b663fc3e0
