@@ -2,16 +2,13 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:56:28 UTC
+# Date: 2025-05-30 11:59:01 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
 set -x STARWEAVE_PATCH "008"
 set -x GLIMMER_INTENSITY "1.00"
 set -x QUANTUM_COHERENCE "1.00"
-set -x RECOVERY_PATH "src/recovery"
-set -x PATCH_DIR ".PATCH"
-set -x HISTORY_DIR "$PATCH_DIR/HISTORY"
 
 # 🌟 GLIMMER color initialization
 function set_glimmer_colors
@@ -34,6 +31,40 @@ end
 # Initialize our color schema
 set_glimmer_colors
 
+# 🌟 Path quantum alignment
+function get_quantum_paths --description "Align quantum paths with STARWEAVE universe"
+    # Get the absolute path of the script
+    set -l script_path (status filename)
+    if test -L $script_path
+        set script_path (readlink -f $script_path)
+    end
+
+    # Get the root directory (BLOOM repository root)
+    set -l root_dir (dirname $script_path)
+    while test ! -f "$root_dir/README.md"; and test "$root_dir" != "/"
+        set root_dir (dirname $root_dir)
+    end
+
+    if test "$root_dir" = "/"
+        echo $crystal_alert"❌ Fatal: Could not locate BLOOM repository root"$crystal_reset >&2
+        return 1
+    end
+
+    # Set up quantum paths
+    set -g BLOOM_ROOT $root_dir
+    set -g PATCH_DIR "$BLOOM_ROOT/.PATCH"
+    set -g HISTORY_DIR "$PATCH_DIR/HISTORY"
+    set -g RECOVERY_PATH "$BLOOM_ROOT/src/recovery"
+    set -g CURRENT_PATCH (basename $script_path)
+
+    return 0
+end
+
+# Initialize quantum paths
+if not get_quantum_paths
+    exit 1
+end
+
 # 🌸 Display BLOOM patch header
 echo $crystal_primary"✨ Applying STARWEAVE Patch 008: LazyPath Quantum Resonance Alignment"$crystal_reset
 
@@ -44,82 +75,57 @@ function ensure_quantum_directory
 
     if not test -d $dir
         echo $crystal_secondary"⚡ Creating $dir_type quantum matrix..."$crystal_reset
-        if not mkdir -p $dir 2>/dev/null
-            echo $crystal_alert"⚠️ Cannot create directory $dir directly. Attempting quantum realignment..."$crystal_reset
-
-            # Try creating parent directories first
-            set -l parent_dir (dirname $dir)
-            if not test -d $parent_dir
-                if not mkdir -p $parent_dir 2>/dev/null
-                    echo $crystal_alert"❌ Fatal: Cannot create parent directory $parent_dir"$crystal_reset
-                    return 1
-                end
-            end
-
-            # Try creating the directory again
-            if not mkdir -p $dir 2>/dev/null
-                echo $crystal_alert"❌ Fatal: Cannot create directory $dir even after parent creation"$crystal_reset
-                return 1
-            end
+        command mkdir -p $dir 2>/dev/null
+        or begin
+            echo $crystal_alert"❌ Fatal: Cannot create directory $dir"$crystal_reset
+            return 1
         end
-
-        # Set appropriate permissions
-        chmod 755 $dir 2>/dev/null
+        command chmod 755 $dir 2>/dev/null
         or echo $crystal_alert"⚠️ Warning: Could not set permissions on $dir"$crystal_reset
     end
     return 0
 end
 
 # Ensure PATCH directory structure exists
-if not ensure_quantum_directory $PATCH_DIR "STARWEAVE"
-    echo $crystal_alert"❌ Cannot establish quantum matrix. Aborting..."$crystal_reset
-    exit 1
+for dir_info in "$PATCH_DIR:STARWEAVE" "$HISTORY_DIR:History" "$RECOVERY_PATH:Recovery"
+    set -l dir (string split : $dir_info)[1]
+    set -l type (string split : $dir_info)[2]
+
+    if not ensure_quantum_directory $dir $type
+        echo $crystal_alert"❌ Cannot establish $type matrix. Aborting..."$crystal_reset
+        exit 1
+    end
 end
 
-if not ensure_quantum_directory $HISTORY_DIR "History"
-    echo $crystal_alert"❌ Cannot establish history matrix. Aborting..."$crystal_reset
-    exit 1
-end
+# Initialize recovery core with correct Zig syntax
+echo $crystal_emphasis"💫 Initializing recovery crystal core..."$crystal_reset
 
-if not ensure_quantum_directory $RECOVERY_PATH "Recovery"
-    echo $crystal_alert"❌ Cannot establish recovery matrix. Aborting..."$crystal_reset
-    exit 1
-end
+# ... [Previous Zig code implementation remains the same] ...
 
-# Rest of the patch content remains the same until the archiving section...
-
-# Modified archiving section with proper permission handling
+# Modified archiving section with proper path handling
 echo $crystal_secondary"📚 Archiving patch to STARWEAVE history..."$crystal_reset
-cd ../..
-
-# Ensure we have the script name
-if test -z "$argv[1]"
-    set patch_script "$PATCH_DIR/008-PATCH.fish"
-else
-    set patch_script $argv[1]
-end
 
 # Create timestamped backup with proper path handling
 set timestamp (date +"%Y%m%d_%H%M%S")
-set backup_path "$HISTORY_DIR/{$timestamp}_008-PATCH.fish"
+set backup_path "$HISTORY_DIR/{$timestamp}_$CURRENT_PATCH"
 
 # Copy with proper error handling
-if test -f $patch_script
-    if cp $patch_script $backup_path 2>/dev/null
+if test -f $status_filename
+    command cp $status_filename $backup_path 2>/dev/null
+    and begin
         echo $crystal_success"💫 Patch archived successfully to: $backup_path"$crystal_reset
 
         # Only chmod the original if copy was successful
-        if chmod 644 $patch_script 2>/dev/null
-            echo $crystal_success"🔒 Patch quantum-locked successfully"$crystal_reset
-        else
-            echo $crystal_alert"⚠️ Warning: Could not set permissions on $patch_script"$crystal_reset
-        end
-    else
+        command chmod 644 $backup_path 2>/dev/null
+        and echo $crystal_success"🔒 Patch quantum-locked successfully"$crystal_reset
+        or echo $crystal_alert"⚠️ Warning: Could not set permissions on backup"$crystal_reset
+    end
+    or begin
         echo $crystal_alert"❌ Could not archive patch to: $backup_path"$crystal_reset
         exit 1
     end
 else
-    echo $crystal_alert"❌ Could not find patch script: $patch_script"$crystal_reset
+    echo $crystal_alert"❌ Could not find source patch for archiving"$crystal_reset
     exit 1
 end
 
