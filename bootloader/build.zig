@@ -1,7 +1,7 @@
 //! ✨ BLOOM Bootloader Build Configuration
 //! Part of the STARWEAVE Universe
 //! Author: Caleb J.D. Terkovics (@isdood)
-//! Created: 2025-05-30 13:05:14 UTC
+//! Created: 2025-05-30 13:07:32 UTC
 
 const std = @import("std");
 
@@ -22,24 +22,24 @@ pub fn build(b: *std.Build) void {
     });
 
     // 🌸 Add module dependencies with crystal-lattice alignment
-    const quantum_mod = b.addModule("quantum", .{
-        .source_file = .{ .cwd_relative = "quantum.zig" },
+    const quantum_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "quantum.zig" },
     });
     exe.addModule("quantum", quantum_mod);
 
-    const crystal_mod = b.addModule("crystal", .{
-        .source_file = .{ .cwd_relative = "crystal.zig" },
+    const crystal_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "crystal.zig" },
     });
     exe.addModule("crystal", crystal_mod);
 
-    const starweave_mod = b.addModule("starweave", .{
-        .source_file = .{ .cwd_relative = "starweave.zig" },
+    const starweave_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "starweave.zig" },
     });
     exe.addModule("starweave", starweave_mod);
 
     // 🌟 Add stage modules with enhanced quantum alignment
-    const spinit_mod = b.addModule("spINIT", .{
-        .source_file = .{ .cwd_relative = "spINIT/spINIT.zig" },
+    const spinit_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "spINIT/spINIT.zig" },
         .dependencies = &.{
             .{ .name = "quantum", .module = quantum_mod },
             .{ .name = "crystal", .module = crystal_mod },
@@ -48,8 +48,8 @@ pub fn build(b: *std.Build) void {
     });
     exe.addModule("spINIT", spinit_mod);
 
-    const spinup_mod = b.addModule("spinUP", .{
-        .source_file = .{ .cwd_relative = "spinUP/spinUP.zig" },
+    const spinup_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "spinUP/spinUP.zig" },
         .dependencies = &.{
             .{ .name = "quantum", .module = quantum_mod },
             .{ .name = "crystal", .module = crystal_mod },
@@ -58,8 +58,8 @@ pub fn build(b: *std.Build) void {
     });
     exe.addModule("spinUP", spinup_mod);
 
-    const spun_mod = b.addModule("spun", .{
-        .source_file = .{ .cwd_relative = "spun/spun.zig" },
+    const spun_mod = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "spun/spun.zig" },
         .dependencies = &.{
             .{ .name = "quantum", .module = quantum_mod },
             .{ .name = "crystal", .module = crystal_mod },
