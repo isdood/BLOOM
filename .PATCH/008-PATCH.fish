@@ -2,13 +2,13 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:06:23 UTC
+# Date: 2025-05-30 11:08:35 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
 set -x STARWEAVE_PATCH "008"
-set -x GLIMMER_INTENSITY "0.99"
-set -x QUANTUM_COHERENCE "0.99"
+set -x GLIMMER_INTENSITY "1.00"
+set -x QUANTUM_COHERENCE "1.00"
 set -x RECOVERY_PATH "src/recovery"
 
 # 🌟 GLIMMER color initialization
@@ -19,6 +19,7 @@ function set_glimmer_colors
     set -g crystal_success (printf "\033[38;2;158;206;106m")
     set -g crystal_emphasis (printf "\033[38;2;187;154;247m")
     set -g crystal_info (printf "\033[38;2;224;175;104m")
+    set -g crystal_quantum (printf "\033[38;2;139;233;253m")
     set -g crystal_reset (printf "\033[0m")
 end
 
@@ -52,7 +53,7 @@ end
 # 🔮 Apply the patch to align LazyPath resonance
 echo $crystal_primary"🌟 Harmonizing build paths with GLIMMER resonance..."$crystal_reset
 
-# Create the build.zig content with proper string escaping and enhanced STARWEAVE integration
+# Create the build.zig content with correct LazyPath union field
 set build_content '
 const std = @import("std");
 
@@ -62,20 +63,20 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "bloom-recovery",
-        .root_source_file = .{ .path = "core/recovery_main.zig" },
+        .root_source_file = .{ .path_relative_to_build_root = "core/recovery_main.zig" },
         .target = target,
         .optimize = optimize,
     });
 
     // STARWEAVE Integration: Quantum Resonance Layer
     const starweave_pkg = b.addModule("starweave", .{
-        .source_file = .{ .path = "core/starweave.zig" },
+        .source_file = .{ .path_relative_to_build_root = "core/starweave.zig" },
     });
     exe.addModule("starweave", starweave_pkg);
 
     // GLIMMER Crystal Matrix Integration
     const glimmer_pkg = b.addModule("glimmer", .{
-        .source_file = .{ .path = "core/glimmer.zig" },
+        .source_file = .{ .path_relative_to_build_root = "core/glimmer.zig" },
     });
     exe.addModule("glimmer", glimmer_pkg);
 
@@ -98,18 +99,43 @@ pub fn build(b: *std.Build) void {
 # Write the new build configuration
 echo $build_content > $RECOVERY_PATH/build.zig
 
-# Create placeholder files for STARWEAVE and GLIMMER integration
-echo $crystal_info"🌌 Creating STARWEAVE integration points..."$crystal_reset
-echo 'pub const StarweaveQuantum = struct {
-    pub fn init() void {
-        // STARWEAVE quantum initialization
+# Create STARWEAVE integration module
+echo $crystal_quantum"🌌 Creating STARWEAVE quantum matrix..."$crystal_reset
+echo 'const std = @import("std");
+
+pub const StarweaveQuantum = struct {
+    quantum_state: f32,
+    resonance_level: f32,
+
+    pub fn init() StarweaveQuantum {
+        return StarweaveQuantum{
+            .quantum_state = 1.0,
+            .resonance_level = 0.99,
+        };
+    }
+
+    pub fn alignResonance(self: *StarweaveQuantum) void {
+        self.resonance_level = 1.0;
     }
 };' > $RECOVERY_PATH/core/starweave.zig
 
-echo $crystal_info"✨ Creating GLIMMER crystal matrix..."$crystal_reset
-echo 'pub const GlimmerCrystal = struct {
-    pub fn init() void {
-        // GLIMMER crystal initialization
+# Create GLIMMER integration module
+echo $crystal_quantum"✨ Creating GLIMMER crystal matrix..."$crystal_reset
+echo 'const std = @import("std");
+
+pub const GlimmerCrystal = struct {
+    intensity: f32,
+    harmony_level: f32,
+
+    pub fn init() GlimmerCrystal {
+        return GlimmerCrystal{
+            .intensity = 1.0,
+            .harmony_level = 0.99,
+        };
+    }
+
+    pub fn amplifyGlimmer(self: *GlimmerCrystal) void {
+        self.intensity = 1.0;
     }
 };' > $RECOVERY_PATH/core/glimmer.zig
 
@@ -133,7 +159,7 @@ if zig build --dry-run
 🌸 BLOOM Patch 008 Complete
 ✨ GLIMMER Resonance: $GLIMMER_INTENSITY
 🌌 Quantum Coherence: $QUANTUM_COHERENCE
-🔮 STARWEAVE Integration: Enhanced
+🔮 STARWEAVE Integration: Maximum Resonance
 "$crystal_reset
 else
     echo $crystal_alert"⚠️ Quantum decoherence detected. Rolling back changes..."$crystal_reset
