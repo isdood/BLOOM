@@ -2,13 +2,13 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:01:15 UTC
+# Date: 2025-05-30 11:03:36 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
 set -x STARWEAVE_PATCH "008"
-set -x GLIMMER_INTENSITY "0.95"
-set -x QUANTUM_COHERENCE "0.98"
+set -x GLIMMER_INTENSITY "0.97"
+set -x QUANTUM_COHERENCE "0.99"
 set -x RECOVERY_PATH "src/recovery"
 
 # 🌟 GLIMMER color initialization
@@ -36,10 +36,10 @@ end
 # Initialize recovery core if needed
 if not test -f $RECOVERY_PATH/core/recovery_main.zig
     echo $crystal_emphasis"💫 Initializing recovery crystal core..."$crystal_reset
-    echo "pub fn main() !void {
+    echo 'pub fn main() !void {
     // STARWEAVE Recovery Module
     // Integration point: BLOOM<->GLIMMER
-}" > $RECOVERY_PATH/core/recovery_main.zig
+}' > $RECOVERY_PATH/core/recovery_main.zig
 end
 
 # Backup existing build file if it exists
@@ -51,23 +51,24 @@ end
 # 🔮 Apply the patch to align LazyPath resonance
 echo $crystal_primary"🌟 Harmonizing build paths with GLIMMER resonance..."$crystal_reset
 
-# Update build.zig with correct LazyPath handling for Zig 0.13.0
-set build_content "const std = @import(\"std\");
+# Create the build.zig content with proper string escaping
+set build_content 'const std = @import("std");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
     const exe = b.addExecutable(.{
-        .name = \"bloom-recovery\",
-        .root_source_file = .{ .generated = &b.addWriteFiles().add(\"recovery_main.zig\",
-            \\const std = @import(\"std\");
+        .name = "bloom-recovery",
+        .root_source_file = b.addWriteFiles().add(
+            "recovery_main.zig",
+            \\const std = @import("std");
             \\
             \\pub fn main() !void {
             \\    // STARWEAVE Recovery Module
             \\    // Integration point: BLOOM<->GLIMMER
             \\}
-        ) },
+        ),
         .target = target,
         .optimize = optimize,
     });
@@ -77,16 +78,16 @@ pub fn build(b: *std.Build) void {
     const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
 
-    const run_step = b.step(\"run\", \"Execute the recovery module\");
+    const run_step = b.step("run", "Execute the recovery module");
     run_step.dependOn(&run_cmd.step);
 
     // STARWEAVE integration point
     const quantum_test = b.step(
-        \"test-quantum\",
-        \"Verify quantum coherence in recovery module\"
+        "test-quantum",
+        "Verify quantum coherence in recovery module"
     );
     quantum_test.dependOn(&exe.step);
-}"
+}'
 
 # Write the new build configuration
 echo $build_content > $RECOVERY_PATH/build.zig
