@@ -1,0 +1,145 @@
+.
+├── 000-GROW.sh
+├── 001-DOCS.fish
+├── 002-API-1.fish
+├── 002-API-2.fish
+├── 003-ARCH.fish
+├── 004-BOOTLOADER.fish
+├── 005-CONTRIBUTING.fish
+├── 006-CRYSTAL.fish
+├── 007-EMULATION.fish
+├── 008-BLACKBERRY.fish
+├── 009-QUANTUM.fish
+├── 010-RECOVERY.fish
+├── 011-MOBILE.fish
+├── 012-QUANTUM-ARCH.fish
+├── 013-INIT-BOOTLOADER.fish
+├── 014-spINIT.fish
+├── 015-spinUP-1.fish
+├── 015-spinUP-2.fish
+├── 016-spun-1.fish
+├── 016-spun-2.fish
+├── 017-BLOOM-BOOTLOADER.fish
+├── 018-INIT-RECOVERY.fish
+├── 019-RECOVERY-1.fish
+├── 019-RECOVERY-2.fish
+├── 019-RECOVERY-3.fish
+├── 019-RECOVERY-4.fish
+├── 019-RECOVERY-5.fish
+├── 020-BUILD-RECOVERY.fish
+├── 021-BUILD-BOOTLOADER-1.fish
+├── 021-BUILD-BOOTLOADER-2.fish
+├── 021-BUILD-BOOTLOADER-3.fish
+├── 021-BUILD-BOOTLOADER-4.fish
+├── 022-INIT-MOBILE-CORE.fish
+├── 023-HAL-1.fish
+├── 023-HAL-2.fish
+├── 023-HAL-3.fish
+├── bootloader
+│   ├── bloom_bootloader.zig
+│   ├── bloom_bootloader.zig.bak
+│   ├── build.zig
+│   ├── build.zig.bak
+│   ├── common.zig
+│   ├── crystal.zig
+│   ├── quantum.zig
+│   ├── spINIT
+│   │   └── spINIT.zig
+│   ├── spINIT.zig
+│   ├── spinUP
+│   │   └── spinUP.zig
+│   ├── spun
+│   │   └── spun.zig
+│   ├── spun.zig
+│   ├── starweave_constants.zig
+│   ├── starweave.zig
+│   └── zig-out
+│       └── bin
+│           └── bloom_bootloader
+├── docs
+│   ├── api
+│   │   └── REFERENCE.md
+│   ├── architecture
+│   │   └── QUANTUM-CRYSTAL-INTERFACE.md
+│   ├── bootloader
+│   │   └── DESIGN.md
+│   ├── contributing
+│   │   └── GUIDELINES.md
+│   ├── crystal
+│   │   └── ARCHITECTURE.md
+│   ├── emulation
+│   │   └── SETUP.md
+│   ├── mobile
+│   │   └── BLACKBERRY-PASSPORT.md
+│   ├── MOBILE-INTEGRATION.md
+│   ├── quantum
+│   │   └── OVERVIEW.md
+│   ├── QUANTUM-ARCHITECTURE.md
+│   ├── recovery
+│   │   └── SYSTEM.md
+│   └── tutorials
+├── ISSUES
+│   ├── 001-issue.md
+│   └── 002-issue.md
+├── LICENSE
+├── PATCH.fish
+├── README.md
+├── src
+│   ├── mobile
+│   │   ├── build.zig
+│   │   ├── hal
+│   │   │   ├── display.zig
+│   │   │   ├── keyboard.zig
+│   │   │   ├── passport.zig
+│   │   │   ├── sensors.zig
+│   │   │   └── touch.zig
+│   │   ├── input
+│   │   │   ├── gesture.zig
+│   │   │   ├── keyboard_matrix.zig
+│   │   │   ├── quantum_touch.zig
+│   │   │   └── reality_input.zig
+│   │   ├── quantum
+│   │   │   ├── coherence.zig
+│   │   │   ├── entanglement.zig
+│   │   │   ├── resonance.zig
+│   │   │   └── starweave_sync.zig
+│   │   ├── README.md
+│   │   ├── state
+│   │   │   ├── quantum_state.zig
+│   │   │   ├── reality_anchor.zig
+│   │   │   ├── temporal_sync.zig
+│   │   │   └── universe_state.zig
+│   │   ├── test
+│   │   │   ├── hal_test.zig
+│   │   │   ├── input_test.zig
+│   │   │   ├── quantum_test.zig
+│   │   │   └── ui_test.zig
+│   │   └── ui
+│   │       ├── animations.zig
+│   │       ├── crystal_effects.zig
+│   │       ├── elements.zig
+│   │       ├── glimmer.zig
+│   │       └── quantum_widgets.zig
+│   └── recovery
+│       ├── build.zig
+│       ├── core
+│       │   ├── glimmer.zig
+│       │   ├── recovery_main.zig
+│       │   └── starweave.zig
+│       ├── crystal
+│       │   └── crystal.zig
+│       ├── device
+│       │   └── passport
+│       │       └── passport.zig
+│       ├── drivers
+│       ├── quantum
+│       │   └── quantum.zig
+│       ├── tests
+│       │   └── main_test.zig
+│       ├── ui
+│       └── zig-out
+│           └── bin
+│               └── bloom-recovery
+└── tree.txt
+
+38 directories, 105 files
