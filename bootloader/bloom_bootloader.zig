@@ -6,6 +6,12 @@ const starweave = @import("starweave");
 const spINIT = @import("./spINIT.zig");
 const spun = @import("./spun.zig");
 
+pub const STARWEAVE = struct {
+    pub const universe_version = "0.1.0";
+    pub const quantum_alignment = true;
+    pub const crystal_resonance = true;
+};
+
 pub const Color = struct {
     pub const sage = "\x1b[38;5;71m";
     pub const azure = "\x1b[38;5;39m";
@@ -19,12 +25,12 @@ pub fn log(comptime format: []const u8, args: anytype) void {
 }
 
 pub fn main() !void {
-    log("🌟 BLOOM Bootloader - STARWEAVE Universe Edition", .{});
+    log("🌟 BLOOM Bootloader - STARWEAVE Universe Edition v{s}", .{STARWEAVE.universe_version});
     log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", .{});
 
-    var init_state = try spINIT.spINIT();
-    _ = init_state;
+    const init_state = try spINIT.spINIT();
+    try init_state.align();
 
-    try spun.spun(.{});
+    try spun.spun();
 }
 

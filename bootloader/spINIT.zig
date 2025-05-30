@@ -33,11 +33,19 @@ pub fn log(comptime format: []const u8, args: anytype) void {
 }
 
 pub const InitializationState = struct {
-    state: State = .initializing,
-    quantum_coherence: f32 = 0.0,
-    crystal_resonance: f32 = 0.0,
+    state: State,
+    quantum_coherence: f32,
+    crystal_resonance: f32,
 
-    pub fn displayStatus(self: *InitializationState) void {
+    pub fn init() InitializationState {
+        return .{
+            .state = .initializing,
+            .quantum_coherence = 0.0,
+            .crystal_resonance = 0.0,
+        };
+    }
+
+    pub fn displayStatus(self: *const InitializationState) void {
         const state_str = self.state.toString();
         const status = switch (self.state) {
             .initializing => Color.sage ++ state_str ++ Color.reset,
@@ -47,11 +55,14 @@ pub const InitializationState = struct {
         };
         log("✨ STARWEAVE State: {s}", .{status});
     }
+
+    pub fn align(self: *const InitializationState) !void {
+        self.displayStatus();
+    }
 };
 
 pub fn spINIT() !InitializationState {
-    var init_state = InitializationState{};
-    init_state.displayStatus();
+    const init_state = InitializationState.init();
     return init_state;
 }
 
