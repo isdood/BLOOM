@@ -13,17 +13,14 @@ pub fn build(b: *std.Build) void {
     });
 
     // Add module dependencies
-    const quantum = b.addModule("quantum", .{
+    const quantum = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "quantum.zig" },
-        .dependencies = &.{},
     });
-    const crystal = b.addModule("crystal", .{
+    const crystal = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "crystal.zig" },
-        .dependencies = &.{},
     });
-    const starweave = b.addModule("starweave", .{
+    const starweave = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
-        .dependencies = &.{},
     });
 
     exe.root_module.addImport("quantum", quantum);
