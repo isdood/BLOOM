@@ -1,14 +1,14 @@
 #!/usr/bin/env fish
 
-# ✨ PATCH 008: LazyPath Resonance Alignment ✨
+# ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 10:58:37 UTC
+# Date: 2025-05-30 11:01:15 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
 set -x STARWEAVE_PATCH "008"
-set -x GLIMMER_INTENSITY "0.85"
-set -x QUANTUM_COHERENCE "0.97"
+set -x GLIMMER_INTENSITY "0.95"
+set -x QUANTUM_COHERENCE "0.98"
 set -x RECOVERY_PATH "src/recovery"
 
 # 🌟 GLIMMER color initialization
@@ -17,6 +17,7 @@ function set_glimmer_colors
     set -g crystal_secondary (printf "\033[38;2;198;228;255m")
     set -g crystal_alert (printf "\033[38;2;255;121;198m")
     set -g crystal_success (printf "\033[38;2;158;206;106m")
+    set -g crystal_emphasis (printf "\033[38;2;187;154;247m")
     set -g crystal_reset (printf "\033[0m")
 end
 
@@ -24,20 +25,20 @@ end
 set_glimmer_colors
 
 # 🌸 Display BLOOM patch header
-echo $crystal_primary"✨ Applying STARWEAVE Patch 008: LazyPath Resonance Alignment"$crystal_reset
+echo $crystal_primary"✨ Applying STARWEAVE Patch 008: LazyPath Quantum Resonance Alignment"$crystal_reset
 
 # 🔮 Verify directory structure
 if not test -d $RECOVERY_PATH
-    echo $crystal_alert"⚠️ Recovery crystal matrix not found. Creating quantum pathway..."$crystal_reset
+    echo $crystal_secondary"⚡ Creating quantum recovery matrix..."$crystal_reset
     mkdir -p $RECOVERY_PATH/core
 end
 
-# Create core recovery file if it doesn't exist
+# Initialize recovery core if needed
 if not test -f $RECOVERY_PATH/core/recovery_main.zig
-    echo $crystal_secondary"📝 Initializing recovery crystal core..."$crystal_reset
+    echo $crystal_emphasis"💫 Initializing recovery crystal core..."$crystal_reset
     echo "pub fn main() !void {
     // STARWEAVE Recovery Module
-    // To be implemented
+    // Integration point: BLOOM<->GLIMMER
 }" > $RECOVERY_PATH/core/recovery_main.zig
 end
 
@@ -50,7 +51,7 @@ end
 # 🔮 Apply the patch to align LazyPath resonance
 echo $crystal_primary"🌟 Harmonizing build paths with GLIMMER resonance..."$crystal_reset
 
-# Update build.zig with correct LazyPath usage for Zig 0.13.0
+# Update build.zig with correct LazyPath handling for Zig 0.13.0
 set build_content "const std = @import(\"std\");
 
 pub fn build(b: *std.Build) void {
@@ -59,16 +60,18 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = \"bloom-recovery\",
+        .root_source_file = .{ .generated = &b.addWriteFiles().add(\"recovery_main.zig\",
+            \\const std = @import(\"std\");
+            \\
+            \\pub fn main() !void {
+            \\    // STARWEAVE Recovery Module
+            \\    // Integration point: BLOOM<->GLIMMER
+            \\}
+        ) },
         .target = target,
         .optimize = optimize,
     });
 
-    exe.addCSourceFile(.{
-        .file = .{ .path = \"core/recovery_main.zig\" },
-        .flags = &.{},
-    });
-
-    exe.linkLibC();
     b.installArtifact(exe);
 
     const run_cmd = b.addRunArtifact(exe);
@@ -76,6 +79,13 @@ pub fn build(b: *std.Build) void {
 
     const run_step = b.step(\"run\", \"Execute the recovery module\");
     run_step.dependOn(&run_cmd.step);
+
+    // STARWEAVE integration point
+    const quantum_test = b.step(
+        \"test-quantum\",
+        \"Verify quantum coherence in recovery module\"
+    );
+    quantum_test.dependOn(&exe.step);
 }"
 
 # Write the new build configuration
@@ -101,6 +111,7 @@ if zig build --dry-run
 🌸 BLOOM Patch 008 Complete
 ✨ GLIMMER Resonance: $GLIMMER_INTENSITY
 🌌 Quantum Coherence: $QUANTUM_COHERENCE
+🔮 STARWEAVE Integration: Active
 "$crystal_reset
 else
     echo $crystal_alert"⚠️ Quantum decoherence detected. Rolling back changes..."$crystal_reset
