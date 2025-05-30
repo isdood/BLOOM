@@ -3,13 +3,13 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌟 BLOOM PATCH-021: STARWEAVE Component Integration
 # Author: isdood
-# Created: 2025-05-30 19:12:39 UTC
+# Created: 2025-05-30 19:22:18 UTC
 # Part of the STARWEAVE Universe
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Define STARWEAVE universe constants
 set -l HORIZONTAL_LINE "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-set -l TIME_UTC "2025-05-30 19:12:39"
+set -l TIME_UTC "2025-05-30 19:22:18"
 
 # Define GLIMMER-inspired colors
 set -l RESET (set_color normal)
@@ -33,7 +33,7 @@ set -l HAMMER "🔨"
 echo $HORIZONTAL_LINE
 echo "$AZURE$STAR $GALAXY BLOOM PATCH Manager - STARWEAVE Universe Edition$RESET"
 echo "$LAVENDER$INFO $CLOCK Temporal Coordinate: $TIME_UTC$RESET"
-echo "$LAVENDER$INFO $USER_ICON Reality Anchor: shimmer (isdood)$RESET"
+echo "$LAVENDER$INFO $USER_ICON Reality Anchor: isdood$RESET"
 echo "$LAVENDER$INFO $LOCATION Current Directory: "(pwd)$RESET
 echo $HORIZONTAL_LINE
 
@@ -42,18 +42,85 @@ set -l BOOTLOADER_PATH "/home/shimmer/BLOOM/bootloader"
 
 echo "$AZURE$QUANTUM Creating STARWEAVE components...$RESET"
 
+# Create common.zig first
+echo "$AZURE$SPARKLES Creating common module...$RESET"
+echo '
+pub const Color = struct {
+    pub const sage = "\x1b[38;5;71m";
+    pub const azure = "\x1b[38;5;39m";
+    pub const lavender = "\x1b[38;5;183m";
+    pub const rose = "\x1b[38;5;205m";
+    pub const reset = "\x1b[0m";
+};
+
+pub const STARWEAVE = struct {
+    pub const universe_version = "0.1.0";
+    pub const temporal_coordinate = "2025-05-30 19:22:18";
+    pub const reality_anchor = "isdood";
+    pub const quantum_stability = 1.0;
+    pub const crystal_resonance = 1.0;
+    pub const universe_sync = true;
+};
+' > $BOOTLOADER_PATH/common.zig
+
+# Create quantum.zig
+echo '
+const common = @import("common");
+pub const Color = common.Color;
+
+pub const version = common.STARWEAVE.universe_version;
+pub const universe = "STARWEAVE";
+
+pub const quantum_state = struct {
+    pub const coherent = true;
+    pub const entangled = true;
+    pub const stability = common.STARWEAVE.quantum_stability;
+};
+' > $BOOTLOADER_PATH/quantum.zig
+
+# Create crystal.zig
+echo '
+const common = @import("common");
+pub const Color = common.Color;
+
+pub const version = common.STARWEAVE.universe_version;
+pub const universe = "STARWEAVE";
+
+pub const crystal_state = struct {
+    pub const resonating = true;
+    pub const aligned = true;
+    pub const harmony = common.STARWEAVE.crystal_resonance;
+};
+' > $BOOTLOADER_PATH/crystal.zig
+
+# Create starweave.zig
+echo '
+const common = @import("common");
+pub const Color = common.Color;
+pub const STARWEAVE = common.STARWEAVE;
+
+pub const version = STARWEAVE.universe_version;
+pub const universe = "STARWEAVE";
+
+pub const weave_state = struct {
+    pub const connected = STARWEAVE.universe_sync;
+    pub const synchronized = true;
+    pub const flow = 1.0;
+};
+' > $BOOTLOADER_PATH/starweave.zig
+
 # Create bloom_bootloader.zig
 echo "$AZURE$SPARKLES Creating main bootloader...$RESET"
 echo '
 const std = @import("std");
-const starweave = @import("starweave_constants");
+const common = @import("common");
 const quantum = @import("quantum");
 const crystal = @import("crystal");
 const spINIT = @import("spINIT");
 const spun = @import("spun");
 
-pub const Color = starweave.Color;
-pub const STARWEAVE = starweave.STARWEAVE;
+pub const Color = common.Color;
+pub const STARWEAVE = common.STARWEAVE;
 
 fn log(comptime format: []const u8, args: anytype) void {
     std.debug.print(Color.azure ++ format ++ Color.reset ++ "\n", args);
@@ -75,10 +142,10 @@ pub fn main() !void {
 echo "$AZURE$QUANTUM Creating spINIT component...$RESET"
 echo '
 const std = @import("std");
-const starweave = @import("starweave_constants");
+const common = @import("common");
 
-pub const Color = starweave.Color;
-pub const STARWEAVE = starweave.STARWEAVE;
+pub const Color = common.Color;
+pub const STARWEAVE = common.STARWEAVE;
 
 pub const State = enum {
     initializing,
@@ -131,11 +198,11 @@ pub fn spINIT() !InitializationState {
 echo "$AZURE$STAR Creating spun component...$RESET"
 echo '
 const std = @import("std");
-const starweave = @import("starweave_constants");
+const common = @import("common");
 const spINIT = @import("spINIT");
 
-pub const Color = starweave.Color;
-pub const STARWEAVE = starweave.STARWEAVE;
+pub const Color = common.Color;
+pub const STARWEAVE = common.STARWEAVE;
 
 fn log(comptime format: []const u8, args: anytype) void {
     std.debug.print(Color.azure ++ format ++ Color.reset ++ "\n", args);
@@ -149,7 +216,7 @@ pub fn spun(state: *spINIT.InitializationState) !void {
 }
 ' > $BOOTLOADER_PATH/spun.zig
 
-# Update build.zig with correct module handling
+# Update build.zig
 echo "$AZURE$HAMMER Updating build configuration...$RESET"
 echo '
 const std = @import("std");
@@ -166,27 +233,53 @@ pub fn build(b: *std.Build) void {
     });
 
     // Create modules
-    const starweave_constants = b.createModule(.{
-        .root_source_file = .{ .cwd_relative = "starweave_constants.zig" },
+    const common = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "common.zig" },
     });
 
     const quantum = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "quantum.zig" },
+        .imports = &.{
+            .{ .name = "common", .module = common },
+        },
     });
 
     const crystal = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "crystal.zig" },
+        .imports = &.{
+            .{ .name = "common", .module = common },
+        },
     });
 
     const starweave = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
+        .imports = &.{
+            .{ .name = "common", .module = common },
+        },
+    });
+
+    const spINIT = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "spINIT.zig" },
+        .imports = &.{
+            .{ .name = "common", .module = common },
+        },
+    });
+
+    const spun = b.createModule(.{
+        .root_source_file = .{ .cwd_relative = "spun.zig" },
+        .imports = &.{
+            .{ .name = "common", .module = common },
+            .{ .name = "spINIT", .module = spINIT },
+        },
     });
 
     // Add module imports
-    exe.root_module.addImport("starweave_constants", starweave_constants);
+    exe.root_module.addImport("common", common);
     exe.root_module.addImport("quantum", quantum);
     exe.root_module.addImport("crystal", crystal);
     exe.root_module.addImport("starweave", starweave);
+    exe.root_module.addImport("spINIT", spINIT);
+    exe.root_module.addImport("spun", spun);
 
     b.installArtifact(exe);
 }

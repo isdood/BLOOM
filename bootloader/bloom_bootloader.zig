@@ -1,13 +1,13 @@
 
 const std = @import("std");
-const starweave = @import("starweave_constants");
+const common = @import("common");
 const quantum = @import("quantum");
 const crystal = @import("crystal");
 const spINIT = @import("spINIT");
 const spun = @import("spun");
 
-pub const Color = starweave.Color;
-pub const STARWEAVE = starweave.STARWEAVE;
+pub const Color = common.Color;
+pub const STARWEAVE = common.STARWEAVE;
 
 fn log(comptime format: []const u8, args: anytype) void {
     std.debug.print(Color.azure ++ format ++ Color.reset ++ "\n", args);

@@ -1,7 +1,7 @@
 
-const constants = @import("starweave_constants.zig");
-pub const STARWEAVE = constants.STARWEAVE;
-pub const Color = constants.Color;
+const common = @import("common");
+pub const Color = common.Color;
+pub const STARWEAVE = common.STARWEAVE;
 
 pub const version = STARWEAVE.universe_version;
 pub const universe = "STARWEAVE";
