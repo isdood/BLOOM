@@ -1,4 +1,34 @@
-//! ✨ BLOOM STARWEAVE Pattern Implementation
+#!/usr/bin/env fish
+
+# ✨ BLOOM STARWEAVE Pattern Generator
+# Part of the STARWEAVE Universe
+# Author: Caleb J.D. Terkovics (@isdood)
+# Created: 2025-05-30 12:41:33 UTC
+
+# 🎨 Initialize GLIMMER color palette
+set -l SAGE (set_color -o 98be65; or set_color normal)      # 🌿 Nature/Growth elements
+set -l LAVENDER (set_color -o c678dd; or set_color normal)  # 🌸 Spiritual/Ethereal elements
+set -l AZURE (set_color -o 7ba4c7; or set_color normal)     # 💫 Tech/System elements
+set -l ROSE (set_color -o e06c75; or set_color normal)      # 🌹 Warning/Important elements
+set -l GOLD (set_color -o dbb168; or set_color normal)      # ✨ Accents/Highlights
+set -l PEACH (set_color -o ffd7af; or set_color normal)     # 🍑 Soft elements
+set -l RESET (set_color normal)
+
+# 🌟 Display STARWEAVE header
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+echo $GOLD"🌟 🌌 BLOOM STARWEAVE Generator - Universe Edition"$RESET
+echo $AZURE"ℹ 🕒 Temporal Coordinate: 2025-05-30 12:41:33"$RESET
+echo $AZURE"ℹ 👤 Reality Anchor: isdood"$RESET
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+
+# Define paths
+set -l STARWEAVE_PATH "./bootloader/starweave.zig"
+
+# 💫 Create starweave.zig with enhanced universe resonance
+echo $AZURE"💫 Channeling STARWEAVE universe energy..."$RESET
+
+# Generate starweave.zig content
+echo '//! ✨ BLOOM STARWEAVE Pattern Implementation
 //! Part of the STARWEAVE Universe
 //! Author: Caleb J.D. Terkovics (@isdood)
 //! Created: 2025-05-30 12:41:33 UTC
@@ -230,4 +260,29 @@ pub fn createPattern() !Pattern {
 /// Create a new star pattern with custom configuration
 pub fn createPatternWithConfig(config: Config) !Pattern {
     return Pattern.init(config);
-}
+}' > $STARWEAVE_PATH
+
+# Set permissions
+chmod 644 $STARWEAVE_PATH
+
+# Success message with GLIMMER colors
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+echo $SAGE"✅ Generated starweave.zig with enhanced universe resonance"$RESET
+echo $GOLD"⭐ Added complete STARWEAVE pattern weaving"$RESET
+echo $LAVENDER"🌸 Enhanced with GLIMMER color schemes"$RESET
+echo $PEACH"💫 Pattern weaving and harmony measurement ready"$RESET
+echo $AZURE"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"$RESET
+
+# Usage instructions
+echo $PEACH"
+STARWEAVE Pattern Usage:
+1. Import in your Zig code: const starweave = @import(\"starweave.zig\");
+2. Create a pattern: var pattern = try starweave.createPattern();
+3. Weave the pattern: try pattern.weave();
+4. Apply colors:
+   try pattern.applyColors(.{
+       .primary = starweave.GlimmerColors.azure,
+       .secondary = starweave.GlimmerColors.gold,
+   });
+5. Check harmony: const harmony = try pattern.measureHarmony();
+"$RESET
