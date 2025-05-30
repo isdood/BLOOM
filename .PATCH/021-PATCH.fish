@@ -3,13 +3,13 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌟 BLOOM PATCH-021: STARWEAVE Component Integration
 # Author: isdood
-# Created: 2025-05-30 15:48:12 UTC
+# Created: 2025-05-30 19:12:39 UTC
 # Part of the STARWEAVE Universe
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Define STARWEAVE universe constants
 set -l HORIZONTAL_LINE "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-set -l TIME_UTC "2025-05-30 15:48:12"
+set -l TIME_UTC "2025-05-30 19:12:39"
 
 # Define GLIMMER-inspired colors
 set -l RESET (set_color normal)
@@ -33,7 +33,7 @@ set -l HAMMER "🔨"
 echo $HORIZONTAL_LINE
 echo "$AZURE$STAR $GALAXY BLOOM PATCH Manager - STARWEAVE Universe Edition$RESET"
 echo "$LAVENDER$INFO $CLOCK Temporal Coordinate: $TIME_UTC$RESET"
-echo "$LAVENDER$INFO $USER_ICON Reality Anchor: isdood$RESET"
+echo "$LAVENDER$INFO $USER_ICON Reality Anchor: shimmer (isdood)$RESET"
 echo "$LAVENDER$INFO $LOCATION Current Directory: "(pwd)$RESET
 echo $HORIZONTAL_LINE
 
@@ -46,11 +46,11 @@ echo "$AZURE$QUANTUM Creating STARWEAVE components...$RESET"
 echo "$AZURE$SPARKLES Creating main bootloader...$RESET"
 echo '
 const std = @import("std");
-const starweave = @import("starweave_constants.zig");
-const quantum = @import("quantum.zig");
-const crystal = @import("crystal.zig");
-const spINIT = @import("spINIT.zig");
-const spun = @import("spun.zig");
+const starweave = @import("starweave_constants");
+const quantum = @import("quantum");
+const crystal = @import("crystal");
+const spINIT = @import("spINIT");
+const spun = @import("spun");
 
 pub const Color = starweave.Color;
 pub const STARWEAVE = starweave.STARWEAVE;
@@ -75,7 +75,7 @@ pub fn main() !void {
 echo "$AZURE$QUANTUM Creating spINIT component...$RESET"
 echo '
 const std = @import("std");
-const starweave = @import("starweave_constants.zig");
+const starweave = @import("starweave_constants");
 
 pub const Color = starweave.Color;
 pub const STARWEAVE = starweave.STARWEAVE;
@@ -131,8 +131,8 @@ pub fn spINIT() !InitializationState {
 echo "$AZURE$STAR Creating spun component...$RESET"
 echo '
 const std = @import("std");
-const starweave = @import("starweave_constants.zig");
-const spINIT = @import("spINIT.zig");
+const starweave = @import("starweave_constants");
+const spINIT = @import("spINIT");
 
 pub const Color = starweave.Color;
 pub const STARWEAVE = starweave.STARWEAVE;
@@ -149,7 +149,7 @@ pub fn spun(state: *spINIT.InitializationState) !void {
 }
 ' > $BOOTLOADER_PATH/spun.zig
 
-# Update build.zig
+# Update build.zig with correct module handling
 echo "$AZURE$HAMMER Updating build configuration...$RESET"
 echo '
 const std = @import("std");
@@ -165,6 +165,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+    // Create modules
     const starweave_constants = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "starweave_constants.zig" },
     });
@@ -181,10 +182,11 @@ pub fn build(b: *std.Build) void {
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
     });
 
-    exe.addModule("starweave_constants", starweave_constants);
-    exe.addModule("quantum", quantum);
-    exe.addModule("crystal", crystal);
-    exe.addModule("starweave", starweave);
+    // Add module imports
+    exe.root_module.addImport("starweave_constants", starweave_constants);
+    exe.root_module.addImport("quantum", quantum);
+    exe.root_module.addImport("crystal", crystal);
+    exe.root_module.addImport("starweave", starweave);
 
     b.installArtifact(exe);
 }

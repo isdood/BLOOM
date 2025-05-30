@@ -1,6 +1,6 @@
 
 const std = @import("std");
-const starweave = @import("starweave_constants.zig");
+const starweave = @import("starweave_constants");
 
 pub const Color = starweave.Color;
 pub const STARWEAVE = starweave.STARWEAVE;

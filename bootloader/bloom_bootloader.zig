@@ -1,10 +1,10 @@
 
 const std = @import("std");
-const starweave = @import("starweave_constants.zig");
-const quantum = @import("quantum.zig");
-const crystal = @import("crystal.zig");
-const spINIT = @import("spINIT.zig");
-const spun = @import("spun.zig");
+const starweave = @import("starweave_constants");
+const quantum = @import("quantum");
+const crystal = @import("crystal");
+const spINIT = @import("spINIT");
+const spun = @import("spun");
 
 pub const Color = starweave.Color;
 pub const STARWEAVE = starweave.STARWEAVE;

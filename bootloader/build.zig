@@ -12,6 +12,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+    // Create modules
     const starweave_constants = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "starweave_constants.zig" },
     });
@@ -28,10 +29,11 @@ pub fn build(b: *std.Build) void {
         .root_source_file = .{ .cwd_relative = "starweave.zig" },
     });
 
-    exe.addModule("starweave_constants", starweave_constants);
-    exe.addModule("quantum", quantum);
-    exe.addModule("crystal", crystal);
-    exe.addModule("starweave", starweave);
+    // Add module imports
+    exe.root_module.addImport("starweave_constants", starweave_constants);
+    exe.root_module.addImport("quantum", quantum);
+    exe.root_module.addImport("crystal", crystal);
+    exe.root_module.addImport("starweave", starweave);
 
     b.installArtifact(exe);
 }
