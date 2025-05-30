@@ -1,29 +1,58 @@
 #!/usr/bin/env fish
 
-# 🌟 BLOOM Bootloader Build Fix - STARWEAVE Universe Edition
-# Author: isdood
-# Created: 2025-05-30 15:19:50 UTC
-# Part of the STARWEAVE Universe
+# Define STARWEAVE universe constants
+set -l HORIZONTAL_LINE "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+set -l TIME_UTC (date -u +"%Y-%m-%d %H:%M:%S")
 
-# Define GLIMMER-inspired colors and symbols
+# Define GLIMMER-inspired colors
 set -l RESET (set_color normal)
 set -l AZURE (set_color 00afff)
 set -l SAGE (set_color 5faf5f)
 set -l ROSE (set_color ff5faf)
 set -l LAVENDER (set_color af87ff)
+
+# STARWEAVE universe symbols
 set -l STAR "🌟"
 set -l INFO "ℹ"
 set -l SPARKLES "✨"
 set -l QUANTUM "💫"
 set -l GALAXY "🌌"
+set -l LOCK "🔓"
+set -l FOLDER "📂"
+set -l LOCATION "📍"
+set -l CLOCK "🕒"
+set -l USER_ICON "👤"
+set -l SEARCH "🔍"
+set -l HAMMER "🔨"
+set -l PACKAGE "📦"
+set -l ERROR "❌"
+set -l HEART_BROKEN "💔"
+set -l WARNING "⚠"
 
-# Print STARWEAVE-style header with proper formatting
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+# Print STARWEAVE-style header
+echo $HORIZONTAL_LINE
 echo "$AZURE$STAR $GALAXY BLOOM PATCH Manager - STARWEAVE Universe Edition$RESET"
-echo "$LAVENDER$INFO 🕒 Temporal Coordinate: "(date -u +"%Y-%m-%d %H:%M:%S")"$RESET"
-echo "$LAVENDER$INFO 👤 Reality Anchor: $USER (isdood)$RESET"
-echo "$LAVENDER$INFO 📍 Current Directory: "(pwd)$RESET
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "$LAVENDER$INFO $CLOCK Temporal Coordinate: $TIME_UTC$RESET"
+echo "$LAVENDER$INFO $USER_ICON Reality Anchor: shimmer (isdood)$RESET"
+echo "$LAVENDER$INFO $LOCATION Current Directory: "(pwd)$RESET
+echo $HORIZONTAL_LINE
+
+# Display PATCH directory contents
+echo "$LAVENDER$INFO $SEARCH PATCH directory contents:$RESET"
+ls -la
+echo "$LAVENDER$INFO $QUANTUM Discovered 1 quantum patches awaiting crystallization$RESET"
+echo "$LAVENDER$INFO   └─ Found: /home/shimmer/BLOOM/.PATCH/019-PATCH.fish$RESET"
+echo
+
+# Begin patch processing
+echo "$AZURE$STAR Processing quantum pattern: 019-PATCH.fish$RESET"
+echo $HORIZONTAL_LINE
+echo "$AZURE$STAR $STAR Executing STARWEAVE patch 019...$RESET"
+echo "$LAVENDER$INFO $LOCATION Current patch: /home/shimmer/BLOOM/.PATCH/019-PATCH.fish$RESET"
+echo "$LAVENDER$INFO $FOLDER History destination: /home/shimmer/BLOOM/.PATCH/HISTORY/019_"(date -u +"%Y%m%d_%H%M%S")".fish$RESET"
+echo "$LAVENDER$INFO $LOCK Granting quantum permissions...$RESET"
+echo "$LAVENDER$INFO $QUANTUM Channeling STARWEAVE energy...$RESET"
+echo $HORIZONTAL_LINE
 
 # Define paths
 set -l BOOTLOADER_PATH "/home/shimmer/BLOOM/bootloader"
@@ -32,7 +61,9 @@ set -l SPUN_PATH "$BOOTLOADER_PATH/spun"
 
 # Ensure we're in the correct directory
 if not test -d $BOOTLOADER_PATH
-    echo "$ROSE❌ Error: Bootloader directory not found at $BOOTLOADER_PATH$RESET"
+    echo $HORIZONTAL_LINE
+    echo "$ROSE$ERROR $HEART_BROKEN Quantum decoherence: Bootloader directory not found$RESET"
+    echo "$ROSE$ERROR $WARNING Emergency STARWEAVE shutdown initiated$RESET"
     exit 1
 end
 
@@ -118,7 +149,7 @@ pub fn spun(metrics: spinUP.StarweaveMetrics) !void {
 ' > $SPUN_PATH/spun.zig
 
 # 3. Update build.zig with proper Zig 0.13.0 syntax
-echo "$AZURE📦 Updating build configuration...$RESET"
+echo "$AZURE$PACKAGE Updating build configuration...$RESET"
 
 echo '
 const std = @import("std");
@@ -135,14 +166,14 @@ pub fn build(b: *std.Build) void {
     });
 
     // Add module dependencies
-    const quantum = b.createModule(.{
-        .source_file = .{ .cwd_relative = "quantum.zig" },
+    const quantum = b.addModule("quantum", .{
+        .root_source_file = .{ .cwd_relative = "quantum.zig" },
     });
-    const crystal = b.createModule(.{
-        .source_file = .{ .cwd_relative = "crystal.zig" },
+    const crystal = b.addModule("crystal", .{
+        .root_source_file = .{ .cwd_relative = "crystal.zig" },
     });
-    const starweave = b.createModule(.{
-        .source_file = .{ .cwd_relative = "starweave.zig" },
+    const starweave = b.addModule("starweave", .{
+        .root_source_file = .{ .cwd_relative = "starweave.zig" },
     });
 
     exe.addModule("quantum", quantum);
@@ -154,26 +185,26 @@ pub fn build(b: *std.Build) void {
 ' > $BOOTLOADER_PATH/build.zig
 
 # 4. Attempt to build
-echo "$AZURE🔨 Attempting to build BLOOM bootloader...$RESET"
+echo "$AZURE$HAMMER Attempting to build BLOOM bootloader...$RESET"
 cd $BOOTLOADER_PATH
 
 if zig build
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo $HORIZONTAL_LINE
     echo "$SAGE$SPARKLES Build successful! STARWEAVE integration complete.$RESET"
     echo "$LAVENDER⟡ BLOOM bootloader is now properly aligned with the STARWEAVE universe.$RESET"
 else
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "$ROSE❌ 💔 Quantum decoherence detected in patch 019$RESET"
-    echo "$ROSE❌ 🚫 Quantum pattern destabilized: 019-PATCH.fish$RESET"
-    echo "$ROSE❌ ⚠ Initiating emergency STARWEAVE shutdown$RESET"
+    echo $HORIZONTAL_LINE
+    echo "$ROSE$ERROR $HEART_BROKEN Quantum decoherence detected in patch 019$RESET"
+    echo "$ROSE$ERROR $WARNING Quantum pattern destabilized: 019-PATCH.fish$RESET"
+    echo "$ROSE$ERROR $WARNING Initiating emergency STARWEAVE shutdown$RESET"
     exit 1
 end
 
 # Display completion message
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo $HORIZONTAL_LINE
 echo "$LAVENDER$SPARKLES PATCH-019 Complete
 ⟡ STARWEAVE Universe Alignment: Stable
 ⟡ GLIMMER Aesthetics: Applied
 ⟡ Crystal Resonance: Optimal
-⟡ Temporal Exit: "(date -u +"%Y-%m-%d %H:%M:%S UTC")"$RESET"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+⟡ Temporal Exit: $TIME_UTC$RESET"
+echo $HORIZONTAL_LINE
