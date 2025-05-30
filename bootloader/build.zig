@@ -31,13 +31,6 @@ pub fn build(b: *std.Build) void {
         },
     });
 
-    const starweave = b.createModule(.{
-        .root_source_file = .{ .cwd_relative = "starweave.zig" },
-        .imports = &.{
-            .{ .name = "common", .module = common },
-        },
-    });
-
     const spINIT = b.createModule(.{
         .root_source_file = .{ .cwd_relative = "spINIT.zig" },
         .imports = &.{
@@ -50,14 +43,15 @@ pub fn build(b: *std.Build) void {
         .imports = &.{
             .{ .name = "common", .module = common },
             .{ .name = "spINIT", .module = spINIT },
+            .{ .name = "quantum", .module = quantum },
+            .{ .name = "crystal", .module = crystal },
         },
     });
 
-    // Add module imports
+    // Add module imports to exe
     exe.root_module.addImport("common", common);
     exe.root_module.addImport("quantum", quantum);
     exe.root_module.addImport("crystal", crystal);
-    exe.root_module.addImport("starweave", starweave);
     exe.root_module.addImport("spINIT", spINIT);
     exe.root_module.addImport("spun", spun);
 

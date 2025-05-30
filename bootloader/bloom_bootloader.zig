@@ -18,9 +18,12 @@ pub fn main() !void {
     log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", .{});
     log("⟡ Reality Anchor: {s}", .{STARWEAVE.reality_anchor});
     log("⟡ Temporal Coordinate: {s}", .{STARWEAVE.temporal_coordinate});
+    log("⟡ Universe Sync: {}", .{STARWEAVE.universe_sync});
 
     var state = try spINIT.spINIT();
     try state.displayStatus();
     try spun.spun(&state);
+
+    log("✨ STARWEAVE Universe Alignment Complete", .{});
 }
 
