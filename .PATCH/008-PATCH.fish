@@ -2,7 +2,7 @@
 
 # ✨ PATCH 008: LazyPath Quantum Resonance Alignment ✨
 # Author: Caleb J.D. Terkovics (@isdood)
-# Date: 2025-05-30 11:59:01 UTC
+# Date: 2025-05-30 12:01:01 UTC
 # STARWEAVE Universe: BLOOM<->GLIMMER Harmony Enhancement
 
 # 🌌 Set up our crystalline environment
@@ -32,6 +32,12 @@ end
 set_glimmer_colors
 
 # 🌟 Path quantum alignment
+function normalize_quantum_path --description "Normalize paths within the STARWEAVE universe"
+    set -l path $argv[1]
+    # Remove any duplicate .PATCH segments
+    string replace -r '(^|/)\.PATCH/\.PATCH/' '$1.PATCH/' $path
+end
+
 function get_quantum_paths --description "Align quantum paths with STARWEAVE universe"
     # Get the absolute path of the script
     set -l script_path (status filename)
@@ -40,28 +46,35 @@ function get_quantum_paths --description "Align quantum paths with STARWEAVE uni
     end
 
     # Get the root directory (BLOOM repository root)
-    set -l root_dir (dirname $script_path)
-    while test ! -f "$root_dir/README.md"; and test "$root_dir" != "/"
-        set root_dir (dirname $root_dir)
+    set -g BLOOM_ROOT (realpath (dirname $script_path))
+    while test ! -f "$BLOOM_ROOT/README.md"; and test "$BLOOM_ROOT" != "/"
+        set BLOOM_ROOT (dirname $BLOOM_ROOT)
     end
 
-    if test "$root_dir" = "/"
+    if test "$BLOOM_ROOT" = "/"
         echo $crystal_alert"❌ Fatal: Could not locate BLOOM repository root"$crystal_reset >&2
         return 1
     end
 
-    # Set up quantum paths
-    set -g BLOOM_ROOT $root_dir
-    set -g PATCH_DIR "$BLOOM_ROOT/.PATCH"
-    set -g HISTORY_DIR "$PATCH_DIR/HISTORY"
+    # Set up quantum paths with normalization
+    set -g PATCH_DIR (normalize_quantum_path "$BLOOM_ROOT/.PATCH")
+    set -g HISTORY_DIR (normalize_quantum_path "$PATCH_DIR/HISTORY")
     set -g RECOVERY_PATH "$BLOOM_ROOT/src/recovery"
     set -g CURRENT_PATCH (basename $script_path)
+
+    # Debug path information
+    echo $crystal_info"🔮 Quantum Path Alignment:"$crystal_reset
+    echo $crystal_secondary" ├─ BLOOM Root: $BLOOM_ROOT"$crystal_reset
+    echo $crystal_secondary" ├─ PATCH Dir: $PATCH_DIR"$crystal_reset
+    echo $crystal_secondary" ├─ History Dir: $HISTORY_DIR"$crystal_reset
+    echo $crystal_secondary" └─ Recovery Path: $RECOVERY_PATH"$crystal_reset
 
     return 0
 end
 
 # Initialize quantum paths
 if not get_quantum_paths
+    echo $crystal_alert"❌ Failed to align quantum paths. Initiating emergency shutdown..."$crystal_reset
     exit 1
 end
 
@@ -100,22 +113,21 @@ end
 # Initialize recovery core with correct Zig syntax
 echo $crystal_emphasis"💫 Initializing recovery crystal core..."$crystal_reset
 
-# ... [Previous Zig code implementation remains the same] ...
-
-# Modified archiving section with proper path handling
-echo $crystal_secondary"📚 Archiving patch to STARWEAVE history..."$crystal_reset
-
 # Create timestamped backup with proper path handling
 set timestamp (date +"%Y%m%d_%H%M%S")
 set backup_path "$HISTORY_DIR/{$timestamp}_$CURRENT_PATCH"
+set backup_path (normalize_quantum_path $backup_path)
+
+echo $crystal_secondary"📚 Archiving patch to STARWEAVE history..."$crystal_reset
+echo $crystal_info"💫 Target quantum state: $backup_path"$crystal_reset
 
 # Copy with proper error handling
-if test -f $status_filename
-    command cp $status_filename $backup_path 2>/dev/null
+if test -f $script_path
+    command cp $script_path $backup_path 2>/dev/null
     and begin
-        echo $crystal_success"💫 Patch archived successfully to: $backup_path"$crystal_reset
+        echo $crystal_success"✨ Patch archived successfully to: $backup_path"$crystal_reset
 
-        # Only chmod the original if copy was successful
+        # Only chmod the backup if copy was successful
         command chmod 644 $backup_path 2>/dev/null
         and echo $crystal_success"🔒 Patch quantum-locked successfully"$crystal_reset
         or echo $crystal_alert"⚠️ Warning: Could not set permissions on backup"$crystal_reset
