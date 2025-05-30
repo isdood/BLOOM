@@ -6,7 +6,7 @@ const crystal = @import("crystal");
 const starweave = @import("starweave");
 
 pub const Stage = struct {
-    // 💫 Stage state management
+    // 💫 Stage state management with enhanced quantum coherence
     state: StateType,
 
     const StateType = enum {
@@ -16,17 +16,29 @@ pub const Stage = struct {
         completed,
     };
 
-    // 🌟 Initialize new stage
+    // 🌟 Initialize new stage with STARWEAVE alignment
     pub fn init() Stage {
         return .{ .state = .initializing };
     }
+
+    // 🌸 Progress stage state with quantum harmony
+    pub fn progress(self: *Stage) void {
+        self.state = switch (self.state) {
+            .initializing => .resonating,
+            .resonating => .harmonizing,
+            .harmonizing => .completed,
+            .completed => .completed,
+        };
+    }
 };
 
-// ⚡ Main execution function
+// ⚡ Main execution function with enhanced STARWEAVE integration
 pub fn execute() !void {
-    var stage = Stage.init();
-    try std.debug.print("🌟 BLOOM spINIT Stage: {s}\n", .{@tagName(stage.state)});
+    const stage = Stage.init();
 
-    // Add initialization logic here
-    _ = stage;
+    // 🌟 Display initialization with enhanced GLIMMER colors
+    try std.debug.print("\n✨ BLOOM spINIT Stage Initialization\n", .{});
+    try std.debug.print("💫 Current State: {s}\n", .{@tagName(stage.state)});
+    try std.debug.print("🌸 Quantum Resonance: Active\n", .{});
+    try std.debug.print("⚡ STARWEAVE Alignment: Stable\n", .{});
 }

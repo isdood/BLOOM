@@ -44,16 +44,16 @@ pub const StarweaveState = struct {
     alignment: StarweaveAlignment,
     pattern: CrystallizationPattern,
 
-    // ⚡ Initialize state
-    pub fn init(align: StarweaveAlignment, pat: CrystallizationPattern) !StarweaveState {
+    // ⚡ Initialize state with enhanced quantum coherence
+    pub fn init(alignment_state: StarweaveAlignment, pattern_state: CrystallizationPattern) !StarweaveState {
         return .{
-            .alignment = align,
-            .pattern = pat,
+            .alignment = alignment_state,
+            .pattern = pattern_state,
         };
     }
 };
 
-// 🌟 Main execution function
+// 🌟 Main execution function with enhanced STARWEAVE integration
 pub fn execute() !void {
     const alignment = StarweaveAlignment.init();
     const pattern_geometry = Geometry{
@@ -61,11 +61,10 @@ pub fn execute() !void {
         .symmetry = .fractal,
     };
     const pattern = try CrystallizationPattern.init(pattern_geometry);
-    const state = try StarweaveState.init(
-        alignment,
-        pattern,
-    );
+    const state = try StarweaveState.init(alignment, pattern);
 
-    // Add final stage logic here
-    _ = state;
+    try std.debug.print("🌟 STARWEAVE State Initialized\n", .{});
+    try std.debug.print("💫 Resonance Level: {d:.2}\n", .{state.alignment.resonance});
+    try std.debug.print("🌸 Pattern Dimensions: {d}\n", .{state.pattern.geometry.dimensions});
+    try std.debug.print("✨ Symmetry Type: {s}\n", .{@tagName(state.pattern.geometry.symmetry)});
 }
