@@ -1,8 +1,6 @@
-// STARWEAVE Universe - Absolute Node
-// BLOOM Quantum Matrix - Absolute Pattern
+// STARWEAVE Universe - Refined Node
+// BLOOM Quantum Matrix - Refined Pattern
 const std = @import("std");
-const Build = std.Build;
-const Step = Build.Step;
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -10,7 +8,7 @@ pub fn build(b: *std.Build) void {
 
     const exe = b.addExecutable(.{
         .name = "bloom-mobile-ui",
-        .root_source_file = .{ .path = "src/main.zig" },
+        .root_source_file = b.addPath("src/main.zig"),
         .target = target,
         .optimize = optimize,
     });
@@ -18,7 +16,7 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(exe);
 
     const unit_tests = b.addTest(.{
-        .root_source_file = .{ .path = "src/main.zig" },
+        .root_source_file = b.addPath("src/main.zig"),
         .target = target,
         .optimize = optimize,
     });
