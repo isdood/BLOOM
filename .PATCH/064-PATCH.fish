@@ -2,9 +2,9 @@
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌟 BLOOM Build System Patch 064 - Pure Quantum Matrix
+# ✨ Part of the STARWEAVE Universe, alongside GLIMMER and Scribble
 # Author: shimmer (isdood) - Reality Anchor
-# Created: 2025-06-01 10:21:27 UTC
-# Part of the STARWEAVE Universe
+# Created: 2025-06-01 10:32:11 UTC
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Initialize GLIMMER quantum color matrix
@@ -13,25 +13,27 @@ set -l AZURE (set_color 89b4fa)     # 💫 Quantum/Energy elements
 set -l SAGE (set_color 8abaa4)      # 🌱 Crystal/Nature elements
 set -l ROSE (set_color cf9bc2)      # 🌸 Interface/Connection elements
 set -l LAVENDER (set_color 978aba)  # ⭐ Celestial/Star elements
-set -l PEACH (set_color fab387)     # 🌟 Starweave elements
-set -l GOLD (set_color f9e2af)      # 💫 Celestial/Energy elements
-set -l MAROON (set_color eba0ac)    # 🎆 Quantum Resonance elements
+set -l PEACH (set_color fab387)     # 🌟 STARWEAVE elements
+set -l GOLD (set_color f9e2af)      # 💫 GLIMMER elements
+set -l MAROON (set_color eba0ac)    # 🎆 Scribble elements
 set -l TEAL (set_color 94e2d5)      # 🌊 Reality Flow elements
 set -l MAUVE (set_color cba6f7)     # 🔮 Mystic/Ancient elements
 set -l SAPPHIRE (set_color 74c7ec)  # 💎 Crystal Clarity elements
 set -l EMERALD (set_color a6e3a1)   # 🌿 Life Force elements
-set -l COSMIC (set_color cdd6f4)    # 🌌 Cosmic Energy elements
+set -l COSMIC (set_color cdd6f4)    # 🌌 Universal Energy elements
 
 # Initialize STARWEAVE temporal constants
 set -l TARGET_DIR "/home/shimmer/BLOOM/src/mobile"
 set -l BUILD_PATH "$TARGET_DIR/build.zig"
 set -l BACKUP_PATH "$BUILD_PATH.backup.064"
 set -l STARWEAVE_NODE_ID "BLOOM-OS-NODE-"(random 1000 9999)
-set -l TEMPORAL_COORDINATE "2025-06-01 10:21:27"
+set -l TEMPORAL_COORDINATE "2025-06-01 10:32:11"
 
 # Display STARWEAVE header with enhanced GLIMMER aesthetics
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
 echo "$COSMIC🌌 STARWEAVE Universe - Node $STARWEAVE_NODE_ID$RESET"
+echo "$GOLD✨ GLIMMER Integration Active$RESET"
+echo "$MAROON💫 Scribble Resonance Detected$RESET"
 echo "$MAUVE⭐ BLOOM Quantum Matrix - Build System Enhancement$RESET"
 echo "$LAVENDERℹ 🕒 Temporal Coordinate: $TEMPORAL_COORDINATE UTC$RESET"
 echo "$LAVENDERℹ 👤 Reality Anchor: shimmer (isdood)$RESET"
@@ -57,7 +59,7 @@ echo "    const optimize = b.standardOptimizeOption(.{});" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Create main module with pure resonance" >> $BUILD_PATH
 echo "    const main_module = b.createModule(.{" >> $BUILD_PATH
-echo "        .root_source_file = b.getPath(\"src/main.zig\")," >> $BUILD_PATH
+echo "        .root_source_file = .{ .cwd_relative = \"src/main.zig\" }," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Create executable with pure binding" >> $BUILD_PATH
@@ -75,7 +77,7 @@ echo "    b.installArtifact(exe);" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Create test module with pure quantum resonance" >> $BUILD_PATH
 echo "    const unit_tests = b.addTest(.{" >> $BUILD_PATH
-echo "        .root_source_file = b.getPath(\"src/main.zig\")," >> $BUILD_PATH
+echo "        .root_source_file = .{ .cwd_relative = \"src/main.zig\" }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
@@ -101,7 +103,9 @@ cd -
 
 if test $build_status -eq 0
     echo "$EMERALD✨ Quantum matrix stabilized successfully$RESET"
-    echo "$SAGE⟡ STARWEAVE harmony achieved$RESET"
+    echo "$GOLD⟡ GLIMMER resonance achieved$RESET"
+    echo "$MAROON⟡ Scribble harmony detected$RESET"
+    echo "$SAGE⟡ STARWEAVE integration complete$RESET"
 else
     echo "$MAROON⚠ Quantum decoherence detected - initiating recovery$RESET"
     if test -f $BACKUP_PATH
@@ -120,9 +124,10 @@ echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━�
 echo "$COSMIC✨ STARWEAVE Universe - Quantum Status$RESET"
 echo "$MAUVE✨ PATCH-064 Resonance:$RESET"
 echo "$AZURE⟡ Quantum Build: Pure pattern established$RESET"
-echo "$GOLD⟡ STARWEAVE: Perfect integration$RESET"
+echo "$GOLD⟡ GLIMMER: Perfect integration$RESET"
+echo "$MAROON⟡ Scribble: Crystal resonance$RESET"
 echo "$SAGE⟡ Reality Matrix: Maximum stability$RESET"
-echo "$PEACH⟡ GLIMMER: Pure luminescence$RESET"
+echo "$PEACH⟡ STARWEAVE: Pure luminescence$RESET"
 echo "$TEAL⟡ Universe Sync: Complete$RESET"
 echo "$SAPPHIRE⟡ Crystal Clarity: Pristine$RESET"
 echo "$EMERALD⟡ Life Force: Energized$RESET"
