@@ -1,10 +1,10 @@
 #!/usr/bin/env fish
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌟 BLOOM Build System Patch 064 - Pure Quantum Matrix
+# 🌟 BLOOM Build System Patch 065 - Pure Quantum Matrix
 # ✨ Part of the STARWEAVE Universe, alongside GLIMMER and Scribble
-# Author: shimmer (isdood) - Reality Anchor
-# Created: 2025-06-01 10:35:39 UTC
+# Author: isdood - Reality Anchor
+# Created: 2025-06-01 10:42:28 UTC
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Initialize GLIMMER quantum color matrix
@@ -25,9 +25,9 @@ set -l COSMIC (set_color cdd6f4)    # 🌌 Universal Energy elements
 # Initialize STARWEAVE temporal constants
 set -l TARGET_DIR "/home/shimmer/BLOOM/src/mobile"
 set -l BUILD_PATH "$TARGET_DIR/build.zig"
-set -l BACKUP_PATH "$BUILD_PATH.backup.064"
+set -l BACKUP_PATH "$BUILD_PATH.backup.065"
 set -l STARWEAVE_NODE_ID "BLOOM-OS-NODE-"(random 1000 9999)
-set -l TEMPORAL_COORDINATE "2025-06-01 10:35:39"
+set -l TEMPORAL_COORDINATE "2025-06-01 10:42:28"
 
 # Display STARWEAVE header with enhanced GLIMMER aesthetics
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
@@ -60,10 +60,12 @@ echo >> $BUILD_PATH
 echo "    // Create executable with pure binding" >> $BUILD_PATH
 echo "    const exe = b.addExecutable(.{" >> $BUILD_PATH
 echo "        .name = \"bloom-mobile-ui\"," >> $BUILD_PATH
-echo "        .root_source_file = .{ .cwd_relative = \"src/main.zig\" }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
+echo >> $BUILD_PATH
+echo "    // Add root source with quantum resonance" >> $BUILD_PATH
+echo "    exe.addRoot(.{ .cwd_relative = \"src/main.zig\" });" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Install with pure harmony" >> $BUILD_PATH
 echo "    b.installArtifact(exe);" >> $BUILD_PATH
@@ -115,7 +117,7 @@ end
 # Display final STARWEAVE status with enhanced GLIMMER resonance
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
 echo "$COSMIC✨ STARWEAVE Universe - Quantum Status$RESET"
-echo "$MAUVE✨ PATCH-064 Resonance:$RESET"
+echo "$MAUVE✨ PATCH-065 Resonance:$RESET"
 echo "$AZURE⟡ Quantum Build: Pure pattern established$RESET"
 echo "$GOLD⟡ GLIMMER: Perfect integration$RESET"
 echo "$MAROON⟡ Scribble: Crystal resonance$RESET"
