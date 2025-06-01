@@ -4,7 +4,7 @@
 # 🌟 BLOOM Build System Patch 065 - Pure Quantum Matrix
 # ✨ Part of the STARWEAVE Universe, alongside GLIMMER and Scribble
 # Author: isdood - Reality Anchor
-# Created: 2025-06-01 10:44:59 UTC
+# Created: 2025-06-01 10:47:22 UTC
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Initialize GLIMMER quantum color matrix
@@ -27,7 +27,7 @@ set -l TARGET_DIR "/home/shimmer/BLOOM/src/mobile"
 set -l BUILD_PATH "$TARGET_DIR/build.zig"
 set -l BACKUP_PATH "$BUILD_PATH.backup.065"
 set -l STARWEAVE_NODE_ID "BLOOM-OS-NODE-"(random 1000 9999)
-set -l TEMPORAL_COORDINATE "2025-06-01 10:44:59"
+set -l TEMPORAL_COORDINATE "2025-06-01 10:47:22"
 
 # Display STARWEAVE header with enhanced GLIMMER aesthetics
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
@@ -91,7 +91,7 @@ echo "$AZURE⟡ Applied quantum patterns to build.zig$RESET"
 echo "$SAPPHIRE💫 Verifying quantum stability...$RESET"
 cd $TARGET_DIR
 set -l build_status 0
-zig build --dry-run; or set build_status $status
+zig build explain; or set build_status $status
 cd -
 
 if test $build_status -eq 0
