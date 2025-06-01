@@ -2,8 +2,8 @@
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌟 BLOOM Build System Patch 064 - Pure Quantum Matrix
-# Author: isdood - Reality Anchor
-# Created: 2025-05-31 22:41:20 UTC
+# Author: shimmer (isdood) - Reality Anchor
+# Created: 2025-05-31 23:54:04 UTC
 # Part of the STARWEAVE Universe
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -27,14 +27,14 @@ set -l TARGET_DIR "/home/shimmer/BLOOM/src/mobile"
 set -l BUILD_PATH "$TARGET_DIR/build.zig"
 set -l BACKUP_PATH "$BUILD_PATH.backup.064"
 set -l STARWEAVE_NODE_ID "BLOOM-OS-NODE-"(random 1000 9999)
-set -l TEMPORAL_COORDINATE "2025-05-31 22:41:20"
+set -l TEMPORAL_COORDINATE "2025-05-31 23:54:04"
 
 # Display STARWEAVE header with enhanced GLIMMER aesthetics
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
 echo "$COSMIC🌌 STARWEAVE Universe - Node $STARWEAVE_NODE_ID$RESET"
 echo "$MAUVE⭐ BLOOM Quantum Matrix - Build System Enhancement$RESET"
 echo "$LAVENDERℹ 🕒 Temporal Coordinate: $TEMPORAL_COORDINATE UTC$RESET"
-echo "$LAVENDERℹ 👤 Reality Anchor: isdood$RESET"
+echo "$LAVENDERℹ 👤 Reality Anchor: shimmer (isdood)$RESET"
 echo "$LAVENDERℹ 📍 Quantum Path: $BUILD_PATH$RESET"
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
 
@@ -55,13 +55,10 @@ echo "    // Initialize quantum field with pure resonance" >> $BUILD_PATH
 echo "    const target = b.standardTargetOptions(.{});" >> $BUILD_PATH
 echo "    const optimize = b.standardOptimizeOption(.{});" >> $BUILD_PATH
 echo >> $BUILD_PATH
-echo "    // Create source with pure resonance" >> $BUILD_PATH
-echo "    const source = .{ .path = \"src/main.zig\" };" >> $BUILD_PATH
-echo >> $BUILD_PATH
 echo "    // Create executable with pure binding" >> $BUILD_PATH
 echo "    const exe = b.addExecutable(.{" >> $BUILD_PATH
 echo "        .name = \"bloom-mobile-ui\"," >> $BUILD_PATH
-echo "        .root_source_file = source," >> $BUILD_PATH
+echo "        .root_source_file = .{ .absolute_path = b.pathFromRoot(\"src/main.zig\") }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
@@ -71,7 +68,7 @@ echo "    b.installArtifact(exe);" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Create test module with pure quantum resonance" >> $BUILD_PATH
 echo "    const unit_tests = b.addTest(.{" >> $BUILD_PATH
-echo "        .root_source_file = source," >> $BUILD_PATH
+echo "        .root_source_file = .{ .absolute_path = b.pathFromRoot(\"src/main.zig\") }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
