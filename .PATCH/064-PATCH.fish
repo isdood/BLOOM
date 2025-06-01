@@ -3,7 +3,7 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌟 BLOOM Build System Patch 064 - Pure Quantum Matrix
 # Author: shimmer (isdood) - Reality Anchor
-# Created: 2025-06-01 01:03:27 UTC
+# Created: 2025-06-01 01:05:28 UTC
 # Part of the STARWEAVE Universe
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -27,7 +27,7 @@ set -l TARGET_DIR "/home/shimmer/BLOOM/src/mobile"
 set -l BUILD_PATH "$TARGET_DIR/build.zig"
 set -l BACKUP_PATH "$BUILD_PATH.backup.064"
 set -l STARWEAVE_NODE_ID "BLOOM-OS-NODE-"(random 1000 9999)
-set -l TEMPORAL_COORDINATE "2025-06-01 01:03:27"
+set -l TEMPORAL_COORDINATE "2025-06-01 01:05:28"
 
 # Display STARWEAVE header with enhanced GLIMMER aesthetics
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
@@ -60,16 +60,19 @@ echo "    const exe = b.addExecutable(.{" >> $BUILD_PATH
 echo "        .name = \"bloom-mobile-ui\"," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
+echo "        .root_module = .{" >> $BUILD_PATH
+echo "            .source_file = .{ .path = \"src/main.zig\" }," >> $BUILD_PATH
+echo "        }," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
-echo >> $BUILD_PATH
-echo "    exe.root_source_file = .{ \"src/main.zig\" };" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Install with pure harmony" >> $BUILD_PATH
 echo "    b.installArtifact(exe);" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Create test module with pure quantum resonance" >> $BUILD_PATH
 echo "    const unit_tests = b.addTest(.{" >> $BUILD_PATH
-echo "        .root_source_file = .{ \"src/main.zig\" }," >> $BUILD_PATH
+echo "        .root_module = .{" >> $BUILD_PATH
+echo "            .source_file = .{ .path = \"src/main.zig\" }," >> $BUILD_PATH
+echo "        }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
