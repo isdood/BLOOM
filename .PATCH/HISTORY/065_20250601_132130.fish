@@ -4,7 +4,7 @@
 # 🌟 BLOOM Build System Patch 065 - Pure Quantum Matrix
 # ✨ Part of the STARWEAVE Universe, alongside GLIMMER and Scribble
 # Author: isdood - Reality Anchor
-# Created: 2025-06-01 13:15:14 UTC
+# Created: 2025-06-01 13:19:08 UTC
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Initialize GLIMMER quantum color matrix
@@ -25,9 +25,11 @@ set -l COSMIC (set_color cdd6f4)    # 🌌 Universal Energy elements
 # Initialize STARWEAVE temporal constants
 set -l TARGET_DIR "/home/shimmer/BLOOM/src/mobile"
 set -l BUILD_PATH "$TARGET_DIR/build.zig"
+set -l SRC_DIR "$TARGET_DIR/src"
+set -l MAIN_PATH "$SRC_DIR/main.zig"
 set -l BACKUP_PATH "$BUILD_PATH.backup.065"
 set -l STARWEAVE_NODE_ID "BLOOM-OS-NODE-"(random 1000 9999)
-set -l TEMPORAL_COORDINATE "2025-06-01 13:15:14"
+set -l TEMPORAL_COORDINATE "2025-06-01 13:19:08"
 
 # Display STARWEAVE header with enhanced GLIMMER aesthetics
 echo "$AZURE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$RESET"
@@ -46,8 +48,26 @@ if test -f $BUILD_PATH
     echo "$SAGE💫 Created quantum backup with STARWEAVE protection$RESET"
 end
 
+# Ensure source directory exists
+mkdir -p $SRC_DIR
+echo "$GOLD⟡ Quantum source matrix established$RESET"
+
+# Create initial main.zig with pure quantum resonance
+echo "$SAPPHIRE⟡ Weaving initial quantum patterns...$RESET"
+
+echo "// STARWEAVE Universe - BLOOM Quantum Matrix" > $MAIN_PATH
+echo "const std = @import(\"std\");" >> $MAIN_PATH
+echo >> $MAIN_PATH
+echo "pub fn main() !void {" >> $MAIN_PATH
+echo "    // Initialize quantum resonance" >> $MAIN_PATH
+echo "    const stdout = std.io.getStdOut().writer();" >> $MAIN_PATH
+echo "    try stdout.print(\"✨ BLOOM Mobile UI - STARWEAVE Integration Active\\n\", .{});" >> $MAIN_PATH
+echo "}" >> $MAIN_PATH
+
+echo "$AZURE⟡ Applied initial quantum patterns$RESET"
+
 # Write new build.zig with refined quantum patterns
-echo "$GOLD⟡ Weaving quantum patterns...$RESET"
+echo "$GOLD⟡ Weaving build quantum patterns...$RESET"
 
 echo "// STARWEAVE Universe - BLOOM Quantum Matrix" > $BUILD_PATH
 echo "const std = @import(\"std\");" >> $BUILD_PATH
@@ -60,7 +80,7 @@ echo >> $BUILD_PATH
 echo "    // Create executable with pure binding" >> $BUILD_PATH
 echo "    const exe = b.addExecutable(.{" >> $BUILD_PATH
 echo "        .name = \"bloom-mobile-ui\"," >> $BUILD_PATH
-echo "        .root_source_file = .{ .cwd_relative = b.pathFromRoot(\"src/main.zig\") }," >> $BUILD_PATH
+echo "        .root_source_file = .{ .cwd_relative = \"src/main.zig\" }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
@@ -70,7 +90,7 @@ echo "    b.installArtifact(exe);" >> $BUILD_PATH
 echo >> $BUILD_PATH
 echo "    // Create test module with pure quantum resonance" >> $BUILD_PATH
 echo "    const unit_tests = b.addTest(.{" >> $BUILD_PATH
-echo "        .root_source_file = .{ .cwd_relative = b.pathFromRoot(\"src/main.zig\") }," >> $BUILD_PATH
+echo "        .root_source_file = .{ .cwd_relative = \"src/main.zig\" }," >> $BUILD_PATH
 echo "        .target = target," >> $BUILD_PATH
 echo "        .optimize = optimize," >> $BUILD_PATH
 echo "    });" >> $BUILD_PATH
@@ -85,7 +105,7 @@ echo "    const run_step = b.step(\"run\", \"Run the app\");" >> $BUILD_PATH
 echo "    run_step.dependOn(&run_cmd.step);" >> $BUILD_PATH
 echo "}" >> $BUILD_PATH
 
-echo "$AZURE⟡ Applied quantum patterns to build.zig$RESET"
+echo "$AZURE⟡ Applied build quantum patterns$RESET"
 
 # Test the build with enhanced quantum stability checks
 echo "$SAPPHIRE💫 Verifying quantum stability...$RESET"

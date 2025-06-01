@@ -2,24 +2,22 @@
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
-    // Initialize quantum field with pure resonance
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    // Create executable with pure binding
+    const source = .{ .path = "src/main.zig" };
+
     const exe = b.addExecutable(.{
         .name = "bloom-mobile-ui",
-        .root_source_file = .{ .cwd_relative = "src/main.zig" },
+        .root_source_file = source,
         .target = target,
         .optimize = optimize,
     });
 
-    // Install with pure harmony
     b.installArtifact(exe);
 
-    // Create test module with pure quantum resonance
     const unit_tests = b.addTest(.{
-        .root_source_file = .{ .cwd_relative = "src/main.zig" },
+        .root_source_file = source,
         .target = target,
         .optimize = optimize,
     });
