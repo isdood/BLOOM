@@ -1,0 +1,3 @@
+src/quantum/interactions/tests/touch_test.zig:15:39: error: expected ';' after statement
+    const handler = try touch.handlers.{[string.pascalCase(touch)]}Handler.init(allocator);
+                                      ^

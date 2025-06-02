@@ -1,0 +1,3 @@
+src/quantum/interactions/tests/focus_test.zig:15:39: error: expected ';' after statement
+    const handler = try focus.handlers.{[string.pascalCase(focus)]}Handler.init(allocator);
+                                      ^

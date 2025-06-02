@@ -1,0 +1,3 @@
+src/quantum/interactions/tests/gesture_test.zig:15:41: error: expected ';' after statement
+    const handler = try gesture.handlers.{[string.pascalCase(gesture)]}Handler.init(allocator);
+                                        ^

@@ -1,0 +1,3 @@
+src/quantum/interactions/tests/core_test.zig:15:38: error: expected ';' after statement
+    const handler = try core.handlers.{[string.pascalCase(core)]}Handler.init(allocator);
+                                     ^

@@ -1,0 +1,5 @@
+src/quantum/interactions/tests/integration_test.zig:10:25: error: import of file outside module path: '../../../quantum/interactions/mod.zig'
+const quantum = @import("../../../quantum/interactions/mod.zig");
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+referenced by:
+    test.full interaction flow: src/quantum/interactions/tests/integration_test.zig:17:22

@@ -1,0 +1,3 @@
+src/quantum/interactions/tests/hover_test.zig:15:39: error: expected ';' after statement
+    const handler = try hover.handlers.{[string.pascalCase(hover)]}Handler.init(allocator);
+                                      ^
