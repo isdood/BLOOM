@@ -3,18 +3,18 @@ const std = @import("std");
 // 🌟 BLOOM UI Quantum Build System
 // ✨ Part of the STARWEAVE Universe
 // Reality Anchor: isdood
-// Temporal Coordinate: 2025-06-03 03:13:55 UTC
+// Temporal Coordinate: 2025-06-03 03:17:02 UTC
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
     const quantum_mod = b.addModule("quantum", .{
-        .source_file = .{ .path = "../mod.zig" },
+        .source = .{ .path = "../mod.zig" },
     });
 
     const glimmer_mod = b.addModule("glimmer", .{
-        .source_file = .{ .path = "../../glimmer/mod.zig" },
+        .source = .{ .path = "../../glimmer/mod.zig" },
     });
 
     const tests = b.addTest(.{
