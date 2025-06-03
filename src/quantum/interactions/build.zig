@@ -3,18 +3,22 @@ const std = @import("std");
 // 🌟 BLOOM UI Quantum Build System
 // ✨ Part of the STARWEAVE Universe
 // Reality Anchor: isdood
-// Temporal Coordinate: 2025-06-03 03:17:02 UTC
+// Temporal Coordinate: 2025-06-03 03:20:00 UTC
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
     const quantum_mod = b.addModule("quantum", .{
-        .source = .{ .path = "../mod.zig" },
+        .root_source_file = .{ .path = "../mod.zig" },
+        .target = target,
+        .optimize = optimize,
     });
 
     const glimmer_mod = b.addModule("glimmer", .{
-        .source = .{ .path = "../../glimmer/mod.zig" },
+        .root_source_file = .{ .path = "../../glimmer/mod.zig" },
+        .target = target,
+        .optimize = optimize,
     });
 
     const tests = b.addTest(.{
@@ -23,9 +27,9 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    tests.addModule("quantum", quantum_mod);
-    tests.addModule("glimmer", glimmer_mod);
+    tests.root_module.addImport("quantum", quantum_mod);
+    tests.root_module.addImport("glimmer", glimmer_mod);
 
     const test_step = b.step("test", "Run quantum interaction tests");
-    test_step.dependOn(&tests.step);
+    test_step.dependOn(&b.addRunArtifact(tests).step);
 }
