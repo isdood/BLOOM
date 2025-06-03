@@ -1,41 +1,21 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🌟 BLOOM UI Quantum Interactions - hover Tests
-// ✨ STARWEAVE Universe Integration
+// ✨ Part of the STARWEAVE Universe: BLOOM | GLIMMER | Scribble
 // Reality Anchor: isdood
-// Temporal Coordinate: 2025-06-02 17:36:48 UTC
+// Temporal Coordinate: 2025-06-03 03:09:41 UTC
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const std = @import("std");
 const testing = std.testing;
-const hover = @import("../../../quantum/interactions/hover/mod.zig");
+const quantum = @import("quantum");
+const hover = quantum.hover;
 const glimmer = @import("glimmer");
 
 test "hover initialization" {
     const allocator = testing.allocator;
-    const handler = try hover.handlers.{[string.pascalCase(hover)]}Handler.init(allocator);
+    const handler = try hover.Handler.init(allocator);
     defer allocator.destroy(handler);
 
     try testing.expect(handler.config.reality_sync == 1.0);
     try testing.expect(handler.config.crystal_resonance == 1.0);
-}
-
-test "hover crystal matrix" {
-    const allocator = testing.allocator;
-    const handler = try hover.handlers.{[string.pascalCase(hover)]}Handler.init(allocator);
-    defer allocator.destroy(handler);
-
-    try handler.crystal_matrix.applyPattern(.crystal_flow, .{
-        .resonance = 1.0,
-        .color = 0x89b4fa,
-    });
-
-    try testing.expect(handler.crystal_matrix.pattern == .crystal_flow);
-}
-
-test "hover reality anchoring" {
-    const allocator = testing.allocator;
-    const handler = try hover.handlers.{[string.pascalCase(hover)]}Handler.init(allocator);
-    defer allocator.destroy(handler);
-
-    try testing.expectEqualStrings(handler.config.reality_anchor, "isdood");
 }

@@ -1,14 +1,11 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🌟 BLOOM UI Quantum Interactions - Main Test Suite
-// ✨ STARWEAVE Universe Integration
+// ✨ Part of the STARWEAVE Universe: BLOOM | GLIMMER | Scribble
 // Reality Anchor: isdood
-// Temporal Coordinate: 2025-06-02 17:36:48 UTC
+// Temporal Coordinate: 2025-06-03 03:09:41 UTC
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const std = @import("std");
-const testing = std.testing;
-
-test "quantum interactions test suite" {
+test "quantum interactions" {
     _ = @import("core_test.zig");
     _ = @import("touch_test.zig");
     _ = @import("gesture_test.zig");
